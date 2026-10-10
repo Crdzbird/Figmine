@@ -1,5 +1,5 @@
-import 'package:figmine/src/codegen/collection_writer.dart';
 import 'package:figmine/src/codegen/dart_source.dart';
+import 'package:figmine/src/codegen/token_dart_types.dart';
 import 'package:figmine/src/codegen/token_index.dart';
 import 'package:figmine/src/lock/lock_symbol.dart';
 
@@ -11,7 +11,7 @@ abstract final class SymbolTable {
       '${entry.address.className}.${entry.address.member}': (
         token: '${entry.collection.name}/${entry.token.name}',
         mode: entry.collection.multiMode ? entry.mode : null,
-        type: CollectionWriter.dartTypes[entry.token.type]!,
+        type: TokenDartTypes.of[entry.token.type]!,
         value: DartSource.value(entry.token.values[entry.mode]!.value),
         id: entry.token.variableId,
       ),

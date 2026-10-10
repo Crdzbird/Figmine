@@ -3,37 +3,16 @@ import 'package:figmine/src/codegen/codegen_context.dart';
 import 'package:figmine/src/codegen/deprecated_members.dart';
 import 'package:figmine/src/codegen/doc_comment.dart';
 import 'package:figmine/src/codegen/token_address.dart';
+import 'package:figmine/src/codegen/token_dart_types.dart';
 import 'package:figmine/src/codegen/token_index.dart';
 import 'package:figmine/src/codegen/value_expressions.dart';
 import 'package:figmine/src/lock/lock_symbol.dart';
 import 'package:figmine/src/tokens/token_collection.dart';
-import 'package:figmine/src/tokens/token_type.dart';
 import 'package:figmine/src/tokens/token_value.dart';
 
 /// Writes one library per collection: a class per group with a constant
 /// per token, followed by the catalogue lists.
 abstract final class CollectionWriter {
-  /// Dart type of each token type.
-  static const Map<TokenType, String> dartTypes = {
-    TokenType.color: 'Color',
-    TokenType.number: 'double',
-    TokenType.string: 'String',
-    TokenType.shadow: 'List<BoxShadow>',
-    TokenType.gradient: 'Gradient',
-    TokenType.boolean: 'bool',
-    TokenType.duration: 'Duration',
-    TokenType.curve: 'Curve',
-    TokenType.fontWeight: 'FontWeight',
-  };
-
-  /// Types that need no Flutter import.
-  static const Set<TokenType> coreTypes = {
-    TokenType.number,
-    TokenType.string,
-    TokenType.boolean,
-    TokenType.duration,
-  };
-
   /// Returns the library source of [collection].
   static String write(
     CodegenContext context,
@@ -47,7 +26,7 @@ abstract final class CollectionWriter {
     final imports = <String>{'package:figmine/figmine.dart'};
     for (final entry in entries) {
       classes.putIfAbsent(entry.address.className, () => []).add(entry);
-      if (!coreTypes.contains(entry.token.type)) {
+      if (!TokenDartTypes.core.contains(entry.token.type)) {
         imports.add(context.materialImport);
       }
       final file = ValueExpressions.of(index, _value(entry)).file;
@@ -86,7 +65,7 @@ abstract final class CollectionWriter {
     )..writeln('abstract final class $className {');
     for (final entry in entries) {
       final value = _value(entry);
-      final type = dartTypes[entry.token.type];
+      final type = TokenDartTypes.of[entry.token.type];
       final expression = ValueExpressions.of(index, value).code;
       buffer
         ..write(_doc(entry))

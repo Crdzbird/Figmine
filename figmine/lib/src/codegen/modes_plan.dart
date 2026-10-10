@@ -1,6 +1,6 @@
 import 'package:figmine/src/codegen/codegen_context.dart';
-import 'package:figmine/src/codegen/collection_writer.dart';
 import 'package:figmine/src/codegen/mode_breakpoints.dart';
+import 'package:figmine/src/codegen/token_dart_types.dart';
 import 'package:figmine/src/codegen/token_index.dart';
 import 'package:figmine/src/naming/dart_identifier.dart';
 import 'package:figmine/src/naming/unique_namer.dart';
@@ -44,7 +44,7 @@ abstract final class ModesPlanner {
       getter: DartIdentifier.camel([context.prefix, segment]),
       fields: [
         for (final t in c.tokens)
-          if (CollectionWriter.dartTypes[t.type] case final type?)
+          if (TokenDartTypes.of[t.type] case final type?)
             (
               name: names.claim(DartIdentifier.camel(t.path)),
               token: t,

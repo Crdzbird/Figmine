@@ -39,6 +39,13 @@ jobs:
         working-directory: figmine
         run: flutter analyze
 
+      - name: Keep files at 100 lines or fewer
+        working-directory: figmine
+        run: |
+          long=$(find lib bin test example/lib example/test -name '*.dart' ! -name '*.g.dart' \
+            -exec awk 'END { if (NR > 100) print FILENAME ": " NR " lines" }' {} \;)
+          if [ -n "$long" ]; then echo "$long"; exit 1; fi
+
       - name: Test package
         working-directory: figmine
         run: flutter test --coverage

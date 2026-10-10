@@ -1,7 +1,7 @@
 import 'package:figmine/src/codegen/codegen_context.dart';
-import 'package:figmine/src/codegen/collection_writer.dart';
 import 'package:figmine/src/codegen/dart_source.dart';
 import 'package:figmine/src/codegen/doc_comment.dart';
+import 'package:figmine/src/codegen/token_dart_types.dart';
 import 'package:figmine/src/codegen/token_index.dart';
 import 'package:figmine/src/naming/dart_identifier.dart';
 import 'package:figmine/src/tokens/token_collection.dart';
@@ -35,7 +35,7 @@ abstract final class CatalogueWriter {
           .where((e) => e.collection == collection && e.token.type == type)
           .toList();
       if (entries.isEmpty) continue;
-      final dartType = CollectionWriter.dartTypes[type]!;
+      final dartType = TokenDartTypes.of[type]!;
       final summary =
           'Every ${type.name} token of the Figma collection '
           '`${collection.name}`, for galleries and checks against Figma.';
