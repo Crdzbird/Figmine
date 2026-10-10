@@ -1,4 +1,4 @@
-const TYPES = { COLOR: 'color', FLOAT: 'number', STRING: 'string' };
+const TYPES = { COLOR: 'color', FLOAT: 'number', STRING: 'string', BOOLEAN: 'boolean' };
 const WEIGHTS = [
   ['thin', 100], ['extra light', 200], ['extralight', 200], ['semi bold', 600],
   ['semibold', 600], ['extra bold', 800], ['extrabold', 800], ['light', 300],
@@ -67,7 +67,9 @@ async function variableLeaf(variable, type, modes) {
   }
   const first = values[modes[0].name];
   if (first === undefined) return null;
-  const leaf = { $type: type, $value: first };
+  const scopes = variable.scopes || [];
+  const weight = type === 'number' && scopes.length === 1 && scopes[0] === 'FONT_WEIGHT';
+  const leaf = { $type: weight ? 'fontWeight' : type, $value: first };
   if (variable.description) leaf.$description = variable.description;
   leaf.$extensions = { figmine: { values, aliases, resolved, variableId: variable.id } };
   return leaf;

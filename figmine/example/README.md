@@ -9,11 +9,13 @@ edit, and `lib/app` shows the result.
 `design-tokens.json` is the kind of file the figmine exporter plugin writes
 from a Figma file. It holds:
 
-- Primitives: color ramps, a font family and a base size.
+- Primitives: color ramps, a font family, font weights and a base size.
 - Semantic: light and dark colors that alias the primitives.
 - Spacing: page margin, gutter and section gap in Mobile, Tablet and Desktop
   modes.
 - Effects: a card shadow and a brand gradient.
+- Motion: durations, an easing curve and an alias between them.
+- Flags: a boolean feature flag.
 - Text styles: a display, headline, title, body and label scale.
 
 `figmine.yaml` reads that file through `tokens.files`, so no Figma token or

@@ -46,6 +46,7 @@ void main() {
       const config = TokensConfig(stripPrefix: 'color/');
       final semantic = (await _fetch(config)).last;
       expect(semantic.tokens.map((t) => t.name), [
+        'flag',
         'on-primary',
         'primary',
         'success',

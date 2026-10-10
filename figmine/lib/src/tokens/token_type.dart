@@ -13,13 +13,28 @@ enum TokenType {
   shadow,
 
   /// A gradient, from a fill style.
-  gradient;
+  gradient,
+
+  /// A flag, from a `BOOLEAN` variable.
+  boolean,
+
+  /// A duration, from a number named for a duration or a DTCG `duration`.
+  duration,
+
+  /// An easing curve, from a `cubic-bezier()` string or a DTCG
+  /// `cubicBezier`.
+  curve,
+
+  /// A font weight, from a number named for a font weight or a DTCG
+  /// `fontWeight`.
+  fontWeight;
 
   /// Maps a Figma `resolvedType`, or returns null when unsupported.
   static TokenType? fromFigma(Object? resolvedType) => switch (resolvedType) {
     'COLOR' => color,
     'FLOAT' => number,
     'STRING' => string,
+    'BOOLEAN' => boolean,
     _ => null,
   };
 }

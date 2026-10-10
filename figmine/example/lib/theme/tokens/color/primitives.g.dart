@@ -13,6 +13,15 @@ abstract final class AppPrimitivesFont {
   static const String family = 'Inter';
 }
 
+/// Figma group `font/weight`.
+abstract final class AppPrimitivesFontWeight {
+  /// Figma `font/weight/bold`.
+  static const FontWeight bold = FontWeight.w700;
+
+  /// Figma `font/weight/regular`.
+  static const FontWeight regular = FontWeight.w400;
+}
+
 /// Figma group `palette`.
 abstract final class AppPrimitivesPalette {
   /// Figma `palette/black`.
@@ -264,5 +273,20 @@ const List<FigmineTokenEntry<String>> appPrimitivesStringTokens = [
     collection: 'Primitives',
     path: 'font/family',
     value: AppPrimitivesFont.family,
+  ),
+];
+
+/// Every fontWeight token of the Figma collection `Primitives`, for galleries
+/// and checks against Figma.
+const List<FigmineTokenEntry<FontWeight>> appPrimitivesFontWeightTokens = [
+  FigmineTokenEntry(
+    collection: 'Primitives',
+    path: 'font/weight/bold',
+    value: AppPrimitivesFontWeight.bold,
+  ),
+  FigmineTokenEntry(
+    collection: 'Primitives',
+    path: 'font/weight/regular',
+    value: AppPrimitivesFontWeight.regular,
   ),
 ];

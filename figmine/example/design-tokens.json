@@ -870,6 +870,36 @@
             "variableId": "VariableID:1:1027"
           }
         }
+      },
+      "weight": {
+        "regular": {
+          "$type": "number",
+          "$value": 400,
+          "$extensions": {
+            "figmine": {
+              "values": {
+                "Value": 400
+              },
+              "aliases": {},
+              "resolved": {},
+              "variableId": "VariableID:1:1029"
+            }
+          }
+        },
+        "bold": {
+          "$type": "number",
+          "$value": 700,
+          "$extensions": {
+            "figmine": {
+              "values": {
+                "Value": 700
+              },
+              "aliases": {},
+              "resolved": {},
+              "variableId": "VariableID:1:1030"
+            }
+          }
+        }
       }
     },
     "size": {
@@ -885,6 +915,108 @@
             "resolved": {},
             "variableId": "VariableID:1:1028"
           }
+        }
+      }
+    }
+  },
+  "Motion": {
+    "$extensions": {
+      "figmine": {
+        "modes": [
+          "Value"
+        ]
+      }
+    },
+    "duration": {
+      "short": {
+        "$type": "number",
+        "$value": 150,
+        "$extensions": {
+          "figmine": {
+            "values": {
+              "Value": 150
+            },
+            "aliases": {},
+            "resolved": {},
+            "variableId": "VariableID:1:1031"
+          }
+        }
+      },
+      "medium": {
+        "$type": "number",
+        "$value": 300,
+        "$extensions": {
+          "figmine": {
+            "values": {
+              "Value": 300
+            },
+            "aliases": {},
+            "resolved": {},
+            "variableId": "VariableID:1:1032"
+          }
+        }
+      }
+    },
+    "easing": {
+      "standard": {
+        "$type": "string",
+        "$value": "cubic-bezier(0.2, 0, 0, 1)",
+        "$extensions": {
+          "figmine": {
+            "values": {
+              "Value": "cubic-bezier(0.2, 0, 0, 1)"
+            },
+            "aliases": {},
+            "resolved": {},
+            "variableId": "VariableID:1:1033"
+          }
+        },
+        "$description": "Most transitions"
+      }
+    },
+    "transition": {
+      "fast": {
+        "$type": "number",
+        "$value": "{duration.short}",
+        "$description": "Small elements",
+        "$extensions": {
+          "figmine": {
+            "values": {
+              "Value": "{duration.short}"
+            },
+            "aliases": {
+              "Value": {
+                "collection": "Motion"
+              }
+            },
+            "resolved": {
+              "Value": 150
+            },
+            "variableId": "VariableID:1:1034"
+          }
+        }
+      }
+    }
+  },
+  "Flags": {
+    "$extensions": {
+      "figmine": {
+        "modes": [
+          "Value"
+        ]
+      }
+    },
+    "new checkout": {
+      "$type": "boolean",
+      "$value": true,
+      "$extensions": {
+        "figmine": {
+          "values": {
+            "Value": true
+          },
+          "aliases": {},
+          "resolved": {},
+          "variableId": "VariableID:1:1035"
         }
       }
     }
@@ -937,7 +1069,7 @@
               "hex": "#D9DFFF"
             }
           },
-          "variableId": "VariableID:1:1029"
+          "variableId": "VariableID:1:1036"
         }
       }
     },
@@ -980,7 +1112,7 @@
               "hex": "#152476"
             }
           },
-          "variableId": "VariableID:1:1030"
+          "variableId": "VariableID:1:1037"
         }
       }
     },
@@ -1023,7 +1155,7 @@
               "hex": "#121215"
             }
           },
-          "variableId": "VariableID:1:1031"
+          "variableId": "VariableID:1:1038"
         }
       }
     },
@@ -1066,7 +1198,7 @@
               "hex": "#F7F7F8"
             }
           },
-          "variableId": "VariableID:1:1032"
+          "variableId": "VariableID:1:1039"
         }
       }
     },
@@ -1109,7 +1241,7 @@
               "hex": "#A9A9B4"
             }
           },
-          "variableId": "VariableID:1:1033"
+          "variableId": "VariableID:1:1040"
         }
       }
     },
@@ -1152,7 +1284,7 @@
               "hex": "#C4EED9"
             }
           },
-          "variableId": "VariableID:1:1034"
+          "variableId": "VariableID:1:1041"
         }
       }
     },
@@ -1195,7 +1327,7 @@
               "hex": "#FFD7D3"
             }
           },
-          "variableId": "VariableID:1:1035"
+          "variableId": "VariableID:1:1042"
         }
       }
     }
@@ -1222,7 +1354,7 @@
           },
           "aliases": {},
           "resolved": {},
-          "variableId": "VariableID:1:1036"
+          "variableId": "VariableID:1:1043"
         }
       }
     },
@@ -1238,7 +1370,7 @@
           },
           "aliases": {},
           "resolved": {},
-          "variableId": "VariableID:1:1037"
+          "variableId": "VariableID:1:1044"
         }
       }
     },
@@ -1254,7 +1386,7 @@
           },
           "aliases": {},
           "resolved": {},
-          "variableId": "VariableID:1:1038"
+          "variableId": "VariableID:1:1045"
         }
       }
     }

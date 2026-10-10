@@ -23,6 +23,7 @@ abstract final class CollectionDomain {
       'grid',
     },
     'effects': {'effect', 'effects', 'shadow', 'shadows', 'elevation'},
+    'motion': {'motion', 'animation', 'animations', 'duration', 'easing'},
   };
 
   static const Map<String, Set<String>> _generic = {
@@ -30,6 +31,7 @@ abstract final class CollectionDomain {
     'typography': {'typography', 'typo'},
     'units': {'unit', 'units'},
     'effects': {'effect', 'effects'},
+    'motion': {'motion'},
   };
 
   /// The domain named in the collection name, otherwise the domain of most
@@ -48,9 +50,10 @@ abstract final class CollectionDomain {
       (best, e) => best == null || e.value > best.value ? e : best,
     );
     return switch (top?.key) {
-      TokenType.number => 'units',
-      TokenType.string => 'typography',
+      TokenType.number || TokenType.boolean => 'units',
+      TokenType.string || TokenType.fontWeight => 'typography',
       TokenType.shadow || TokenType.gradient => 'effects',
+      TokenType.duration || TokenType.curve => 'motion',
       _ => 'color',
     };
   }

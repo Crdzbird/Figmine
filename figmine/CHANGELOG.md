@@ -135,6 +135,13 @@
 - The contrast audit skips pairs where both colors are Material defaults,
   such as the navigation bar of a design without one.
 - `figmine scaffold` formats the files it writes.
+- Boolean variables become `bool` constants, durations `Duration`,
+  `cubic-bezier()` strings `Curve` and font weights `FontWeight`, from
+  Figma names such as `motion/duration/short` and `font/weight/bold`, the
+  `FONT_WEIGHT` scope, or the DTCG `boolean`, `duration`, `cubicBezier`
+  and `fontWeight` types. Tokens linked by aliases change type together,
+  and motion tokens get a `motion` folder. Numbers named for font weights
+  that were `double` before are now `FontWeight`.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files
   removed on sync.

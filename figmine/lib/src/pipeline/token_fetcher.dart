@@ -10,6 +10,7 @@ import 'package:figmine/src/sources/dtcg/file_tokens.dart';
 import 'package:figmine/src/sources/style_catalog.dart';
 import 'package:figmine/src/sources/style_effects.dart';
 import 'package:figmine/src/sources/style_refs.dart';
+import 'package:figmine/src/sources/token_retyper.dart';
 import 'package:figmine/src/sources/variables_source.dart';
 import 'package:figmine/src/tokens/token_set.dart';
 
@@ -89,7 +90,7 @@ final class TokenFetcher {
         : const <StyleNode>[];
     return TokenAssembler(config: config, log: log).assemble(
       meta: meta,
-      collections: StyleEffects.addTo(collections, loaded),
+      collections: TokenRetyper.apply(StyleEffects.addTo(collections, loaded)),
       styles: config.typography.enabled ? loaded : const [],
       fileTextStyles: fileStyles,
       screens: screens,

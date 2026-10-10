@@ -29,7 +29,14 @@ void main() {
       'ui_colors',
       'Effects',
     ]);
-    expect(tokens.collections[1].tokens, hasLength(2));
+    final ui = tokens.collections[1];
+    expect(ui.tokens, hasLength(3));
+    final flag = ui.find('flag')!.values;
+    expect(
+      {for (final e in flag.entries) e.key: e.value.value},
+      {'Light': true, 'Dark': false},
+    );
+    expect(ui.find('flag')!.type, TokenType.boolean);
     final effects = tokens.collections.last.tokens;
     Object value(TokenType type) =>
         effects.firstWhere((t) => t.type == type).values.values.single.value;

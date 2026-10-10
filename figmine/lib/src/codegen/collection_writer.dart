@@ -20,6 +20,18 @@ abstract final class CollectionWriter {
     TokenType.string: 'String',
     TokenType.shadow: 'List<BoxShadow>',
     TokenType.gradient: 'Gradient',
+    TokenType.boolean: 'bool',
+    TokenType.duration: 'Duration',
+    TokenType.curve: 'Curve',
+    TokenType.fontWeight: 'FontWeight',
+  };
+
+  /// Types that need no Flutter import.
+  static const Set<TokenType> coreTypes = {
+    TokenType.number,
+    TokenType.string,
+    TokenType.boolean,
+    TokenType.duration,
   };
 
   /// Returns the library source of [collection].
@@ -35,8 +47,7 @@ abstract final class CollectionWriter {
     final imports = <String>{'package:figmine/figmine.dart'};
     for (final entry in entries) {
       classes.putIfAbsent(entry.address.className, () => []).add(entry);
-      if (entry.token.type != TokenType.number &&
-          entry.token.type != TokenType.string) {
+      if (!coreTypes.contains(entry.token.type)) {
         imports.add(context.materialImport);
       }
       final file = ValueExpressions.of(index, _value(entry)).file;

@@ -58,7 +58,7 @@ void main() {
 
       final first = await _generator(root.path, '1', logs).run();
       expect(first.status, GenerateStatus.updated);
-      expect(first.report, contains('### Tokens (8)'));
+      expect(first.report, contains('### Tokens (9)'));
       expect(
         File('${root.path}/lib/theme/tokens/color/semantic.g.dart')
             .existsSync(),

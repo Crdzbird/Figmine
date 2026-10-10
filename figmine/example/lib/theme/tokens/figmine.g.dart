@@ -10,6 +10,8 @@ export 'package:figmine_example/theme/tokens/components/component_themes.g.dart'
 export 'package:figmine_example/theme/tokens/components/components.g.dart';
 export 'package:figmine_example/theme/tokens/effects/effects.g.dart';
 export 'package:figmine_example/theme/tokens/icons/icons.g.dart';
+export 'package:figmine_example/theme/tokens/motion/motion.g.dart';
 export 'package:figmine_example/theme/tokens/typography/text_styles.g.dart';
+export 'package:figmine_example/theme/tokens/units/flags.g.dart';
 export 'package:figmine_example/theme/tokens/units/spacing.g.dart';
 export 'package:figmine_example/theme/tokens/units/spacing_modes.g.dart';

@@ -127,7 +127,9 @@ tokens:
   bars, bottom sheets, dialogs, snack bars and tooltips, with every state
   the design shows.
 - `AppComponents` with measured heights, radii and paddings.
-- Shadows as `List<BoxShadow>` and gradients as `Gradient` constants.
+- Shadows as `List<BoxShadow>`, gradients as `Gradient`, durations as
+  `Duration`, easing curves as `Curve`, font weights as `FontWeight` and
+  flags as `bool` constants.
 - A `Modes` enum for collections with modes beyond light and dark. For
   breakpoints, `context.appSpacing` picks the mode for the window width.
 - SVG icons with the `FigmineIcon` widget.

@@ -1,5 +1,9 @@
 import 'package:figmine/src/codegen/effect_source.dart';
+import 'package:figmine/src/codegen/motion_source.dart';
 import 'package:figmine/src/tokens/color_value.dart';
+import 'package:figmine/src/tokens/curve_value.dart';
+import 'package:figmine/src/tokens/duration_value.dart';
+import 'package:figmine/src/tokens/font_weight_value.dart';
 import 'package:figmine/src/tokens/gradient_value.dart';
 import 'package:figmine/src/tokens/shadow_value.dart';
 
@@ -29,6 +33,10 @@ abstract final class DartSource {
     final String text => string(text),
     final ShadowValue shadow => EffectSource.shadows(shadow),
     final GradientValue gradient => EffectSource.gradient(gradient),
+    final bool flag => '$flag',
+    final DurationValue d => MotionSource.duration(d),
+    final CurveValue c => MotionSource.curve(c),
+    final FontWeightValue w => MotionSource.weight(w),
     _ => throw ArgumentError.value(value, 'value', 'Unsupported token value'),
   };
 

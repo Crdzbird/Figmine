@@ -87,5 +87,9 @@ void main() {
     expect(appPrimitivesStringTokens.single.value, 'Inter');
     expect(appSpacingNumberTokens, hasLength(9));
     expect(appEffectsGradientTokens.single.value, AppEffectsGradient.brand);
+    expect(AppMotionTransition.fast, const Duration(milliseconds: 150));
+    expect(AppMotionEasing.standard, const Cubic(0.2, 0, 0, 1));
+    expect(AppPrimitivesFontWeight.bold, FontWeight.w700);
+    expect(AppFlags.newCheckout, isTrue);
   });
 }
