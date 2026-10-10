@@ -30,6 +30,7 @@ void main() {
       'components/components.g.dart',
       'color/theme_context.g.dart',
       'components/component_themes.g.dart',
+      'catalog.g.dart',
       'icons/icons.g.dart',
       'figmine.g.dart',
     ]);
