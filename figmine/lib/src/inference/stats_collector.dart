@@ -1,4 +1,5 @@
 import 'package:figmine/src/inference/backdrop.dart';
+import 'package:figmine/src/inference/node_facts.dart';
 import 'package:figmine/src/inference/node_kind.dart';
 import 'package:figmine/src/inference/paint_recorder.dart';
 import 'package:figmine/src/inference/sample_reader.dart';
@@ -26,6 +27,8 @@ final class StatsCollector {
           (darkShare >= 0.25 && Backdrop.dark(frame.node));
       final stats = isDark ? dark : light;
       stats.frames++;
+      final fill = NodeFacts.fill(frame.node);
+      if (fill != null) UsageStats.count(stats.frameFills, fill);
       _walk(frame.node, stats, inside: false);
     }
   }

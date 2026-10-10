@@ -1,6 +1,7 @@
 import 'package:figmine/src/figma/json.dart';
 import 'package:figmine/src/inference/color_bindings.dart';
 import 'package:figmine/src/inference/component_sample.dart';
+import 'package:figmine/src/inference/text_recorder.dart';
 import 'package:figmine/src/inference/text_usage.dart';
 
 /// Counts how the screens use colors, spacing, radii, text and components.
@@ -49,6 +50,9 @@ final class UsageStats {
   /// Total area of every filled layer.
   double totalArea = 0;
 
+  /// The fill of each analyzed frame itself, with how many frames.
+  final Map<int, int> frameFills = {};
+
   /// Layers filled with each color plus one use per 20 characters of text.
   Map<int, int> get colorUses {
     final uses = {...backgroundLayers};
@@ -63,30 +67,8 @@ final class UsageStats {
       counts[key] = (counts[key] ?? 0) + n;
 
   /// Records a TEXT layer with Figma [style] and [characters].
-  void addText(Map<String, Object?> style, int characters) {
-    final family = style['fontFamily'];
-    final size = style['fontSize'];
-    if (family is! String || size is! num || characters == 0) return;
-    final weight = style['fontWeight'];
-    final lineHeight = style['lineHeightPx'];
-    final spacing = style['letterSpacing'];
-    final intrinsic = style['lineHeightUnit'] == 'INTRINSIC_%';
-    final height = lineHeight is num && !intrinsic && size > 0
-        ? double.parse((lineHeight / size).toStringAsFixed(3))
-        : null;
-    final w = weight is num ? (weight / 100).round().clamp(1, 9) * 100 : 400;
-    final key = '$family|$size|$w|$height';
-    final previous = text[key];
-    text[key] = (
-      family: family,
-      size: size.toDouble(),
-      weight: w,
-      height: height,
-      letterSpacing: spacing is num && spacing != 0 ? spacing.toDouble() : null,
-      characters: (previous?.characters ?? 0) + characters,
-      layers: (previous?.layers ?? 0) + 1,
-    );
-  }
+  void addText(Map<String, Object?> style, int characters) =>
+      TextRecorder.add(text, style, characters);
 
   /// Ranks the keys of [counts] from most to least used.
   static List<int> ranked(Map<int, num> counts) =>

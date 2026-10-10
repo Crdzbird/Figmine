@@ -187,6 +187,12 @@
   documentation pages no longer pass for body text; secondary text may be
   the slightly tinted gray Material uses. When the most used stroke is a
   divider below 2:1, the stroke of resting text fields sets `outline`.
+- The surface may be a background drawn on the frames' own fill, the
+  board, when it is lighter than the board and covers 5% of the area
+  across three screens. Surface containers come from the surface's own
+  palette, a gray for a gray surface or the same hue and tint for a tinted
+  one, sit on the side of the surface away from the text, and are at least
+  1.5 tones apart, so state tints and documentation boards stay out.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files
   removed on sync.
