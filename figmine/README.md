@@ -35,7 +35,9 @@ dart run figmine generate
 ```
 
 `init` writes `figmine.yaml`, the GitHub workflows and the theme layer in
-`lib/theme`. `doctor` tells you which Figma scopes your token has and where
+`lib/theme`. Run without `--file` in a terminal, it asks for the file and
+checks what your token can read there, suggesting the exporter plugin when
+Variables are out of reach. `doctor` tells you which Figma scopes your token has and where
 tokens will come from. `generate` writes the code and the lock file.
 
 Then use the theme:

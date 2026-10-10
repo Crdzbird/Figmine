@@ -157,6 +157,10 @@
 - `FigmineGallery` shows every token of the generated `appTokenCatalog`
   with a preview of its value. It needs only the widgets layer, so it
   works as a debug page or a Widgetbook use case.
+- `figmine init` in a terminal asks for the file and the settings. With
+  `FIGMA_TOKEN` set it checks, with light reads only, whether the file's
+  variables are readable and how many styles it publishes, and suggests
+  the exporter plugin when variables are out of reach.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files
   removed on sync.

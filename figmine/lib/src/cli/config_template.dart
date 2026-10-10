@@ -1,15 +1,22 @@
 /// The `figmine.yaml` written by `figmine init`.
 abstract final class ConfigTemplate {
-  /// Returns the template for the file [key].
-  static String render(String key) =>
+  /// Returns the template for the file [key], reading tokens from
+  /// [source], analyzing screens in [inference] mode, with classes named
+  /// after [prefix]. The `file` source lists `design-tokens.json`.
+  static String render(
+    String key, {
+    String source = 'auto',
+    String inference = 'auto',
+    String prefix = 'App',
+  }) =>
       '''
 figma:
   file_key: $key
   token_env: FIGMA_TOKEN
 
 tokens:
-  source: auto
-  files: []
+  source: $source
+  files: [${source == 'file' ? 'design-tokens.json' : ''}]
   collections: {}
   strip_prefix: ""
   light_mode: light
@@ -25,7 +32,7 @@ typography:
   roles: {}
 
 inference:
-  mode: auto
+  mode: ${inference == 'off' ? '"off"' : inference}
   pages: []
   node_ids: []
 
@@ -40,7 +47,7 @@ icons:
 output:
   directory: lib/theme/tokens
   theme_directory: lib/theme
-  class_prefix: App
+  class_prefix: $prefix
   layout: domain
 
 components: {}
