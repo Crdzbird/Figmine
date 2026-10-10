@@ -1,0 +1,9 @@
+{
+  "palette": {
+    "$type": "color",
+    "blue": { "$value": "#3567F6", "$description": "Energy blue." },
+    "white": { "$value": "#FFF" }
+  },
+  "radius": { "m": { "$type": "dimension", "$value": { "value": 0.5, "unit": "rem" } } },
+  "font": { "body": { "$type": "fontFamily", "$value": ["Ambit", "sans-serif"] } }
+}

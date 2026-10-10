@@ -1,0 +1,126 @@
+<style>
+  body { font: 12px Inter, system-ui, sans-serif; margin: 16px; color: #1a1a1a; }
+  h2 { font-size: 12px; margin: 16px 0 4px; }
+  label { display: block; margin-top: 8px; color: #555; }
+  input { box-sizing: border-box; width: 100%; margin-top: 2px; padding: 6px; border: 1px solid #ccc; border-radius: 4px; font: inherit; }
+  button { margin-top: 12px; padding: 8px 12px; border: 0; border-radius: 6px; background: #0d99ff; color: #fff; font: inherit; }
+  button:disabled { background: #b3b3b3; }
+  .row { display: flex; gap: 8px; }
+  .row label { flex: 1; }
+  .note { color: #777; margin-top: 4px; }
+  a { color: #0d99ff; }
+</style>
+<p id="status">Reading variables and text styles...</p>
+<button id="download" disabled>Download design-tokens.json</button>
+<h2>Send to GitHub</h2>
+<label>Repository<input id="repo" placeholder="owner/app"></label>
+<div class="row">
+  <label>Base branch<input id="base" value="main"></label>
+  <label>File<input id="path" value="design-tokens.json"></label>
+</div>
+<label>Token<input id="token" type="password" placeholder="Fine grained, Contents read and write"></label>
+<p class="note">Saved on this computer only. figmine pushes to the figmine/tokens branch and the figmine tokens workflow opens the pull request.</p>
+<button id="send" disabled>Send to GitHub</button>
+<p id="result"></p>
+<script>
+  const BRANCH = 'figmine/tokens';
+  let json = '';
+  let file = '';
+  const field = (id) => document.getElementById(id);
+  const status = field('status');
+  const result = field('result');
+
+  function settings() {
+    return { repo: field('repo').value.trim(), base: field('base').value.trim(), path: field('path').value.trim(), token: field('token').value.trim() };
+  }
+
+  function sameTokens(a, b) {
+    const strip = (text) => {
+      try {
+        const data = JSON.parse(text);
+        if (data.$extensions && data.$extensions.figmine) delete data.$extensions.figmine.exportedAt;
+        return JSON.stringify(data);
+      } catch (error) {
+        return text;
+      }
+    };
+    return strip(a) === strip(b);
+  }
+
+  function decode(base64) {
+    const bytes = Uint8Array.from(atob(base64.replace(/\n/g, '')), (c) => c.charCodeAt(0));
+    return new TextDecoder().decode(bytes);
+  }
+
+  async function sendToGitHub(options, request) {
+    const { repo, base, path, token, json, file } = options;
+    const api = async (method, route, body, missing) => {
+      const response = await request(`https://api.github.com/repos/${repo}${route}`, {
+        method,
+        headers: { Authorization: `Bearer ${token}`, Accept: 'application/vnd.github+json', 'X-GitHub-Api-Version': '2022-11-28' },
+        body: body ? JSON.stringify(body) : undefined,
+      });
+      if (missing && response.status === 404) return null;
+      if (!response.ok) throw new Error(`GitHub answered ${response.status} to ${method} ${route}`);
+      return await response.json();
+    };
+    const head = await api('GET', `/git/ref/heads/${encodeURI(base)}`);
+    const commit = await api('GET', `/git/commits/${head.object.sha}`);
+    const current = await api('GET', `/contents/${encodeURI(path)}?ref=${encodeURIComponent(base)}`, null, true);
+    if (current && current.content && sameTokens(decode(current.content), json)) {
+      return { changed: false };
+    }
+    const tree = await api('POST', '/git/trees', { base_tree: commit.tree.sha, tree: [{ path, mode: '100644', type: 'blob', content: json }] });
+    const next = await api('POST', '/git/commits', { message: `chore(design): export tokens from ${file}`, tree: tree.sha, parents: [head.object.sha] });
+    const existing = await api('GET', `/git/ref/heads/${BRANCH}`, null, true);
+    if (existing) await api('PATCH', `/git/refs/heads/${BRANCH}`, { sha: next.sha, force: true });
+    if (!existing) await api('POST', '/git/refs', { ref: `refs/heads/${BRANCH}`, sha: next.sha });
+    return { changed: true, url: `https://github.com/${repo}/pulls?q=is%3Apr+head%3A${encodeURIComponent(BRANCH)}` };
+  }
+
+  onmessage = (event) => {
+    const data = event.data.pluginMessage;
+    if (data.error) {
+      status.textContent = 'Export failed: ' + data.error;
+      return;
+    }
+    json = data.json;
+    file = data.file;
+    status.textContent = 'Exported ' + data.count + ' tokens from ' + data.collections + ' collections.';
+    for (const [key, value] of Object.entries(data.github || {})) if (field(key)) field(key).value = value;
+    field('download').disabled = false;
+    field('send').disabled = false;
+  };
+
+  field('download').onclick = () => {
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(new Blob([json], { type: 'application/json' }));
+    link.download = 'design-tokens.json';
+    link.click();
+  };
+
+  field('send').onclick = async () => {
+    const options = settings();
+    if (!/^[\w.-]+\/[\w.-]+$/.test(options.repo) || !options.token || !options.base || !options.path) {
+      result.textContent = 'Enter the repository as owner/name, a base branch, a file path and a token.';
+      return;
+    }
+    parent.postMessage({ pluginMessage: { type: 'save', settings: options } }, '*');
+    field('send').disabled = true;
+    result.textContent = 'Sending...';
+    try {
+      const sent = await sendToGitHub({ ...options, json, file }, fetch);
+      result.textContent = sent.changed ? 'Sent. The pull request opens in a minute: ' : `No token changes since ${options.base}.`;
+      if (sent.changed) {
+        const link = document.createElement('a');
+        link.href = sent.url;
+        link.target = '_blank';
+        link.textContent = 'view on GitHub';
+        result.append(link);
+      }
+    } catch (error) {
+      result.textContent = 'Send failed: ' + error.message;
+    }
+    field('send').disabled = false;
+  };
+</script>
