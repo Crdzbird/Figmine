@@ -162,6 +162,7 @@
   `FIGMA_TOKEN` set it checks, with light reads only, whether the file's
   variables are readable and how many styles it publishes, and suggests
   the exporter plugin when variables are out of reach.
+- The workflows `figmine init` writes use `actions/checkout@v7`.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files
   removed on sync.
