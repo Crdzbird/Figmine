@@ -22,5 +22,6 @@ abstract final class SyncReport {
     versions: versions,
     audit: analysis.audit,
     migration: analysis.migration,
+    fonts: analysis.fonts,
   );
 }

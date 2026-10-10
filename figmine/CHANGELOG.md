@@ -142,6 +142,10 @@
   and `fontWeight` types. Tokens linked by aliases change type together,
   and motion tokens get a `motion` folder. Numbers named for font weights
   that were `double` before are now `FontWeight`.
+- `generate` and the pull request report list font families the text
+  styles use that `pubspec.yaml` does not bundle under `flutter.fonts`,
+  since Flutter would show the platform font instead. Roboto and SF Pro
+  count as bundled.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files
   removed on sync.

@@ -1,6 +1,7 @@
 import 'package:figmine/src/audit/audit_result.dart';
 import 'package:figmine/src/figma/figma_version.dart';
 import 'package:figmine/src/lock/accessibility_section.dart';
+import 'package:figmine/src/lock/font_section.dart';
 import 'package:figmine/src/lock/impact_section.dart';
 import 'package:figmine/src/lock/lock_file.dart';
 import 'package:figmine/src/lock/report_table.dart';
@@ -19,6 +20,7 @@ abstract final class DiffReport {
     List<FigmaVersion> versions = const [],
     AuditResult? audit,
     MigrationPlan migration = Migrations.none,
+    List<MissingFont> fonts = const [],
   }) {
     final link = 'https://www.figma.com/design/${next.fileKey}';
     final buffer = StringBuffer()
@@ -59,6 +61,7 @@ abstract final class DiffReport {
     _icons(buffer, diff.icons);
     ImpactSection.write(buffer, migration);
     AccessibilitySection.write(buffer, audit);
+    FontSection.write(buffer, fonts);
     if (diff.isEmpty) buffer.writeln('No token changes.');
     return _fit(buffer.toString());
   }

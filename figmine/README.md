@@ -214,6 +214,13 @@ light and dark mode. Pairs below WCAG AA get a suggested fix: the closest
 token of your own design that passes, or the same hue at a passing tone, with
 a `color_scheme` snippet ready to paste.
 
+## Fonts
+
+Text styles name their font family, but Flutter only draws families the app
+bundles. Each sync lists the families missing from `flutter.fonts` in
+`pubspec.yaml`, in the terminal and in the pull request, so a design never
+silently falls back to the platform font.
+
 ## Figma API budget
 
 Figma limits API reads, tightly on some seats. figmine caches every read per

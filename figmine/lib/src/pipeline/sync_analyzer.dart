@@ -7,6 +7,7 @@ import 'package:figmine/src/codegen/emit_plan.dart';
 import 'package:figmine/src/codegen/scheme_field_builders.dart';
 import 'package:figmine/src/config/figmine_config.dart';
 import 'package:figmine/src/config/project_info.dart';
+import 'package:figmine/src/lock/font_section.dart';
 import 'package:figmine/src/lock/lock_file.dart';
 import 'package:figmine/src/migrate/code_migrator.dart';
 import 'package:figmine/src/migrate/migrations.dart';
@@ -18,6 +19,7 @@ typedef SyncAnalysis = ({
   LockFile lock,
   AuditResult audit,
   MigrationPlan migration,
+  List<MissingFont> fonts,
 });
 
 /// Audits the new tokens and plans the code migration.
@@ -48,6 +50,7 @@ abstract final class SyncAnalyzer {
       ).withDeprecated(migration.deprecated),
       audit: _audit(plan.fields, tokens, config),
       migration: migration,
+      fonts: FontSection.missing(tokens.textStyles, project.fonts),
     );
   }
 

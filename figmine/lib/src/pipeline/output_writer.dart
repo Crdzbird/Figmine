@@ -1,6 +1,7 @@
 import 'package:figmine/src/codegen/code_emitter.dart';
 import 'package:figmine/src/config/figmine_config.dart';
 import 'package:figmine/src/config/project_info.dart';
+import 'package:figmine/src/lock/font_section.dart';
 import 'package:figmine/src/lock/lock_json.dart';
 import 'package:figmine/src/migrate/code_migrator.dart';
 import 'package:figmine/src/naming/token_naming.dart';
@@ -54,6 +55,7 @@ final class OutputWriter {
     CodeMigrator? migrator,
   }) async {
     final lock = analysis.lock;
+    FontSection.log(analysis.fonts).forEach(log);
     final renamed = analysis.migration.renamed;
     final rewritten = await migrator?.rewrite(renamed) ?? const {};
     if (rewritten.isNotEmpty) log('Renamed tokens in ${rewritten.join(', ')}.');

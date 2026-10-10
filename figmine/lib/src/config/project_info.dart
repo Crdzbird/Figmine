@@ -10,12 +10,14 @@ final class ProjectInfo {
     String materialImport,
     bool modernConstructors,
     String? packageName,
+    Set<String> fonts,
   }) = ProjectInfo._;
 
   const new _({
     this.materialImport = 'package:flutter/material.dart',
     this.modernConstructors = false,
     this.packageName,
+    this.fonts = const {},
   });
 
   /// Reads `pubspec.yaml` in [root]. A configured [materialImport] wins.
@@ -40,7 +42,17 @@ final class ProjectInfo {
           _flutterMaterial,
       modernConstructors: _atLeast(sdk, 3, 13),
       packageName: pubspec['name'] is String ? '${pubspec['name']}' : null,
+      fonts: _fonts(pubspec['flutter']),
     );
+  }
+
+  static Set<String> _fonts(Object? flutter) {
+    final fonts = flutter is Map ? flutter['fonts'] : null;
+    if (fonts is! List) return const {};
+    return {
+      for (final font in fonts.whereType<Map<Object?, Object?>>())
+        if (font['family'] case final String family) family,
+    };
   }
 
   static const String _flutterMaterial = 'package:flutter/material.dart';
@@ -61,4 +73,7 @@ final class ProjectInfo {
 
   /// Whether constructors use the Dart 3.13 `new` and unnamed syntax.
   final bool modernConstructors;
+
+  /// Font families bundled under `flutter.fonts`.
+  final Set<String> fonts;
 }

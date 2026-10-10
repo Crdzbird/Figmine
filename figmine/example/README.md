@@ -25,7 +25,9 @@ network access is needed:
 dart run figmine generate --offline
 ```
 
-The run reports `Heavy Figma reads: 0 sent`. File metadata comes from
+The run reports `Heavy Figma reads: 0 sent`. It also warns that Inter is
+not bundled: the example leaves the font files out to stay small, so it
+shows the platform font. File metadata comes from
 `figmine.lock.json` and the icons from `assets/figmine/icons`.
 
 ## What the app shows
