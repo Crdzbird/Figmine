@@ -182,6 +182,11 @@
   candidates, below 3:1 against the surface, need three screens, so dark
   mode swatches no longer become light accents and the roles are derived
   from primary instead.
+- `onSurface` is the readable text color with the most contrast among
+  those used at least half as much as the top one, so captions on
+  documentation pages no longer pass for body text; secondary text may be
+  the slightly tinted gray Material uses. When the most used stroke is a
+  divider below 2:1, the stroke of resting text fields sets `outline`.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files
   removed on sync.

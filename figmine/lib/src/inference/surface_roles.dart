@@ -25,9 +25,7 @@ abstract final class SurfaceRoles {
       evidence: 'Largest background, $share% of the filled area.',
     );
     final texts = UsageStats.ranked(s.textCharacters);
-    final onSurface =
-        texts.where((c) => ColorMath.contrast(c, surface) >= 4.5).firstOrNull ??
-        texts.firstOrNull;
+    final onSurface = _mainText(texts, s, surface) ?? texts.firstOrNull;
     if (onSurface != null) {
       roles['onSurface'] = (
         argb: onSurface,
@@ -40,7 +38,7 @@ abstract final class SurfaceRoles {
         ? 21
         : ColorMath.contrast(onSurface, surface);
     final variant = texts
-        .where((c) => c != onSurface && isNeutral(c))
+        .where((c) => c != onSurface && _neutralVariant(c))
         .map((c) => (c, ColorMath.contrast(c, surface)))
         .where((e) => e.$2 >= 3 && e.$2 < main)
         .firstOrNull
@@ -54,6 +52,30 @@ abstract final class SurfaceRoles {
     }
     ContainerRoles.infer(roles, s, neutral, surface);
     return surface;
+  }
+
+  /// Whether [argb] is a gray or the slightly tinted gray Material builds
+  /// secondary text from: chroma up to 10.
+  static bool _neutralVariant(int argb) => Hct.fromInt(argb).chroma <= 10;
+
+  /// Among readable text colors used at least half as much as the most
+  /// used one, the one with the most contrast: body text, where the paler
+  /// ones are secondary text, such as captions on documentation pages.
+  static int? _mainText(List<int> texts, UsageStats s, int surface) {
+    final readable = texts
+        .where((c) => ColorMath.contrast(c, surface) >= 4.5)
+        .toList();
+    final top = readable.firstOrNull;
+    if (top == null) return null;
+    final usage = s.textCharacters;
+    return readable
+        .where((c) => usage[c]! * 2 >= usage[top]!)
+        .reduce(
+          (a, b) =>
+              ColorMath.contrast(b, surface) > ColorMath.contrast(a, surface)
+              ? b
+              : a,
+        );
   }
 
   /// The lightest neutral background covering a fifth of the area, or the
