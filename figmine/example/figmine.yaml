@@ -1,0 +1,38 @@
+figma:
+  file_key: ExampleFileKey00000000
+  token_env: FIGMA_TOKEN
+
+tokens:
+  source: auto
+  files: [design-tokens.json]
+  collections: {}
+  strip_prefix: ""
+  light_mode: light
+  dark_mode: dark
+
+color_scheme:
+  collection: Semantic
+  roles: {}
+  extra: {}
+
+typography:
+  enabled: true
+  roles: {}
+
+inference:
+  mode: "off"
+  pages: []
+  node_ids: []
+
+library:
+  file_keys: []
+
+icons:
+  node_ids: ["1:2"]
+  name_prefix: icon/
+  output: assets/figmine/icons
+
+output:
+  directory: lib/theme/tokens
+  theme_directory: lib/theme
+  class_prefix: App

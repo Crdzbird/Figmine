@@ -1,0 +1,403 @@
+{
+  "fileKey": "ExampleFileKey00000000",
+  "version": "1",
+  "lastModified": "2026-10-01T00:00:00Z",
+  "fileName": "figmine example",
+  "tokens": {
+    "Effects/elevation/1": "[BoxShadow(color: Color(0x240C1445), offset: Offset(0, 2), blurRadius: 6)]",
+    "Effects/gradient/brand": "LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [Color(0xFF3D5AFE), Color(0xFF152476)], stops: [0, 1])",
+    "Primitives/font/family": "Inter",
+    "Primitives/palette/black": "0xFF000000",
+    "Primitives/palette/green/20": "0xFFC4EED9",
+    "Primitives/palette/green/50": "0xFF1C875B",
+    "Primitives/palette/neutral/10": "0xFFF7F7F8",
+    "Primitives/palette/neutral/100": "0xFF121215",
+    "Primitives/palette/neutral/20": "0xFFEBEBEE",
+    "Primitives/palette/neutral/30": "0xFFD4D4DA",
+    "Primitives/palette/neutral/40": "0xFFA9A9B4",
+    "Primitives/palette/neutral/50": "0xFF83838F",
+    "Primitives/palette/neutral/60": "0xFF6B6B76",
+    "Primitives/palette/neutral/70": "0xFF4E4E57",
+    "Primitives/palette/neutral/80": "0xFF33333A",
+    "Primitives/palette/neutral/90": "0xFF1F1F24",
+    "Primitives/palette/primary/10": "0xFFEEF1FF",
+    "Primitives/palette/primary/100": "0xFF0C1445",
+    "Primitives/palette/primary/20": "0xFFD9DFFF",
+    "Primitives/palette/primary/30": "0xFFB4C0FF",
+    "Primitives/palette/primary/40": "0xFF8C9EFF",
+    "Primitives/palette/primary/50": "0xFF3D5AFE",
+    "Primitives/palette/primary/60": "0xFF304FFE",
+    "Primitives/palette/primary/70": "0xFF2741D4",
+    "Primitives/palette/primary/80": "0xFF1E32A8",
+    "Primitives/palette/primary/90": "0xFF152476",
+    "Primitives/palette/red/20": "0xFFFFD7D3",
+    "Primitives/palette/red/50": "0xFFC62828",
+    "Primitives/palette/white": "0xFFFFFFFF",
+    "Primitives/size/base": "16",
+    "Semantic/error": "Light=0xFFC62828 Dark=0xFFFFD7D3",
+    "Semantic/onPrimary": "Light=0xFFFFFFFF Dark=0xFF152476",
+    "Semantic/onSurface": "Light=0xFF121215 Dark=0xFFF7F7F8",
+    "Semantic/outline": "Light=0xFF6B6B76 Dark=0xFFA9A9B4",
+    "Semantic/primary": "Light=0xFF304FFE Dark=0xFFD9DFFF",
+    "Semantic/success": "Light=0xFF1C875B Dark=0xFFC4EED9",
+    "Semantic/surface": "Light=0xFFFFFFFF Dark=0xFF121215",
+    "Spacing/gutter": "Mobile=8 Tablet=16 Desktop=24",
+    "Spacing/page margin": "Mobile=16 Tablet=24 Desktop=32",
+    "Spacing/section gap": "Mobile=24 Tablet=32 Desktop=48"
+  },
+  "typography": {
+    "Body/Large": "Inter 16 w400 h1.500",
+    "Body/Medium": "Inter 14 w400 h1.430",
+    "Display/Large": "Inter 57 w400 h1.120",
+    "Headline/Small": "Inter 24 w600 h1.330",
+    "Label/Large": "Inter 14 w600 h1.430",
+    "Title/Medium": "Inter 16 w600 h1.500"
+  },
+  "components": {},
+  "icons": {
+    "arrow_direction_left": "f2de5114a848797b1f3d3f977cb362e669c58dcc67d2e7705b6110d828349c4e",
+    "home": "078e904137bdcd50ec770e71510ef6dde8f992eb9acff2f3187aa0ddcc233e7f"
+  },
+  "symbols": {
+    "AppEffectsElevation.v1": {
+      "token": "Effects/elevation/1",
+      "type": "List<BoxShadow>",
+      "value": "[BoxShadow(color: Color(0x240C1445), offset: Offset(0, 2), blurRadius: 6)]"
+    },
+    "AppEffectsGradient.brand": {
+      "token": "Effects/gradient/brand",
+      "type": "Gradient",
+      "value": "LinearGradient(begin: Alignment.topLeft, end: Alignment.bottomRight, colors: [Color(0xFF3D5AFE), Color(0xFF152476)], stops: [0, 1])"
+    },
+    "AppPrimitivesFont.family": {
+      "token": "Primitives/font/family",
+      "type": "String",
+      "value": "'Inter'",
+      "id": "VariableID:1:1027"
+    },
+    "AppPrimitivesPalette.black": {
+      "token": "Primitives/palette/black",
+      "type": "Color",
+      "value": "Color(0xFF000000)",
+      "id": "VariableID:1:1026"
+    },
+    "AppPrimitivesPalette.white": {
+      "token": "Primitives/palette/white",
+      "type": "Color",
+      "value": "Color(0xFFFFFFFF)",
+      "id": "VariableID:1:1025"
+    },
+    "AppPrimitivesPaletteGreen.v20": {
+      "token": "Primitives/palette/green/20",
+      "type": "Color",
+      "value": "Color(0xFFC4EED9)",
+      "id": "VariableID:1:1022"
+    },
+    "AppPrimitivesPaletteGreen.v50": {
+      "token": "Primitives/palette/green/50",
+      "type": "Color",
+      "value": "Color(0xFF1C875B)",
+      "id": "VariableID:1:1021"
+    },
+    "AppPrimitivesPaletteNeutral.v10": {
+      "token": "Primitives/palette/neutral/10",
+      "type": "Color",
+      "value": "Color(0xFFF7F7F8)",
+      "id": "VariableID:1:1011"
+    },
+    "AppPrimitivesPaletteNeutral.v100": {
+      "token": "Primitives/palette/neutral/100",
+      "type": "Color",
+      "value": "Color(0xFF121215)",
+      "id": "VariableID:1:1020"
+    },
+    "AppPrimitivesPaletteNeutral.v20": {
+      "token": "Primitives/palette/neutral/20",
+      "type": "Color",
+      "value": "Color(0xFFEBEBEE)",
+      "id": "VariableID:1:1012"
+    },
+    "AppPrimitivesPaletteNeutral.v30": {
+      "token": "Primitives/palette/neutral/30",
+      "type": "Color",
+      "value": "Color(0xFFD4D4DA)",
+      "id": "VariableID:1:1013"
+    },
+    "AppPrimitivesPaletteNeutral.v40": {
+      "token": "Primitives/palette/neutral/40",
+      "type": "Color",
+      "value": "Color(0xFFA9A9B4)",
+      "id": "VariableID:1:1014"
+    },
+    "AppPrimitivesPaletteNeutral.v50": {
+      "token": "Primitives/palette/neutral/50",
+      "type": "Color",
+      "value": "Color(0xFF83838F)",
+      "id": "VariableID:1:1015"
+    },
+    "AppPrimitivesPaletteNeutral.v60": {
+      "token": "Primitives/palette/neutral/60",
+      "type": "Color",
+      "value": "Color(0xFF6B6B76)",
+      "id": "VariableID:1:1016"
+    },
+    "AppPrimitivesPaletteNeutral.v70": {
+      "token": "Primitives/palette/neutral/70",
+      "type": "Color",
+      "value": "Color(0xFF4E4E57)",
+      "id": "VariableID:1:1017"
+    },
+    "AppPrimitivesPaletteNeutral.v80": {
+      "token": "Primitives/palette/neutral/80",
+      "type": "Color",
+      "value": "Color(0xFF33333A)",
+      "id": "VariableID:1:1018"
+    },
+    "AppPrimitivesPaletteNeutral.v90": {
+      "token": "Primitives/palette/neutral/90",
+      "type": "Color",
+      "value": "Color(0xFF1F1F24)",
+      "id": "VariableID:1:1019"
+    },
+    "AppPrimitivesPalettePrimary.v10": {
+      "token": "Primitives/palette/primary/10",
+      "type": "Color",
+      "value": "Color(0xFFEEF1FF)",
+      "id": "VariableID:1:1001"
+    },
+    "AppPrimitivesPalettePrimary.v100": {
+      "token": "Primitives/palette/primary/100",
+      "type": "Color",
+      "value": "Color(0xFF0C1445)",
+      "id": "VariableID:1:1010"
+    },
+    "AppPrimitivesPalettePrimary.v20": {
+      "token": "Primitives/palette/primary/20",
+      "type": "Color",
+      "value": "Color(0xFFD9DFFF)",
+      "id": "VariableID:1:1002"
+    },
+    "AppPrimitivesPalettePrimary.v30": {
+      "token": "Primitives/palette/primary/30",
+      "type": "Color",
+      "value": "Color(0xFFB4C0FF)",
+      "id": "VariableID:1:1003"
+    },
+    "AppPrimitivesPalettePrimary.v40": {
+      "token": "Primitives/palette/primary/40",
+      "type": "Color",
+      "value": "Color(0xFF8C9EFF)",
+      "id": "VariableID:1:1004"
+    },
+    "AppPrimitivesPalettePrimary.v50": {
+      "token": "Primitives/palette/primary/50",
+      "type": "Color",
+      "value": "Color(0xFF3D5AFE)",
+      "id": "VariableID:1:1005"
+    },
+    "AppPrimitivesPalettePrimary.v60": {
+      "token": "Primitives/palette/primary/60",
+      "type": "Color",
+      "value": "Color(0xFF304FFE)",
+      "id": "VariableID:1:1006"
+    },
+    "AppPrimitivesPalettePrimary.v70": {
+      "token": "Primitives/palette/primary/70",
+      "type": "Color",
+      "value": "Color(0xFF2741D4)",
+      "id": "VariableID:1:1007"
+    },
+    "AppPrimitivesPalettePrimary.v80": {
+      "token": "Primitives/palette/primary/80",
+      "type": "Color",
+      "value": "Color(0xFF1E32A8)",
+      "id": "VariableID:1:1008"
+    },
+    "AppPrimitivesPalettePrimary.v90": {
+      "token": "Primitives/palette/primary/90",
+      "type": "Color",
+      "value": "Color(0xFF152476)",
+      "id": "VariableID:1:1009"
+    },
+    "AppPrimitivesPaletteRed.v20": {
+      "token": "Primitives/palette/red/20",
+      "type": "Color",
+      "value": "Color(0xFFFFD7D3)",
+      "id": "VariableID:1:1024"
+    },
+    "AppPrimitivesPaletteRed.v50": {
+      "token": "Primitives/palette/red/50",
+      "type": "Color",
+      "value": "Color(0xFFC62828)",
+      "id": "VariableID:1:1023"
+    },
+    "AppPrimitivesSize.base": {
+      "token": "Primitives/size/base",
+      "type": "double",
+      "value": "16",
+      "id": "VariableID:1:1028"
+    },
+    "AppSemanticDark.error": {
+      "token": "Semantic/error",
+      "mode": "Dark",
+      "type": "Color",
+      "value": "Color(0xFFFFD7D3)",
+      "id": "VariableID:1:1035"
+    },
+    "AppSemanticDark.onPrimary": {
+      "token": "Semantic/onPrimary",
+      "mode": "Dark",
+      "type": "Color",
+      "value": "Color(0xFF152476)",
+      "id": "VariableID:1:1030"
+    },
+    "AppSemanticDark.onSurface": {
+      "token": "Semantic/onSurface",
+      "mode": "Dark",
+      "type": "Color",
+      "value": "Color(0xFFF7F7F8)",
+      "id": "VariableID:1:1032"
+    },
+    "AppSemanticDark.outline": {
+      "token": "Semantic/outline",
+      "mode": "Dark",
+      "type": "Color",
+      "value": "Color(0xFFA9A9B4)",
+      "id": "VariableID:1:1033"
+    },
+    "AppSemanticDark.primary": {
+      "token": "Semantic/primary",
+      "mode": "Dark",
+      "type": "Color",
+      "value": "Color(0xFFD9DFFF)",
+      "id": "VariableID:1:1029"
+    },
+    "AppSemanticDark.success": {
+      "token": "Semantic/success",
+      "mode": "Dark",
+      "type": "Color",
+      "value": "Color(0xFFC4EED9)",
+      "id": "VariableID:1:1034"
+    },
+    "AppSemanticDark.surface": {
+      "token": "Semantic/surface",
+      "mode": "Dark",
+      "type": "Color",
+      "value": "Color(0xFF121215)",
+      "id": "VariableID:1:1031"
+    },
+    "AppSemanticLight.error": {
+      "token": "Semantic/error",
+      "mode": "Light",
+      "type": "Color",
+      "value": "Color(0xFFC62828)",
+      "id": "VariableID:1:1035"
+    },
+    "AppSemanticLight.onPrimary": {
+      "token": "Semantic/onPrimary",
+      "mode": "Light",
+      "type": "Color",
+      "value": "Color(0xFFFFFFFF)",
+      "id": "VariableID:1:1030"
+    },
+    "AppSemanticLight.onSurface": {
+      "token": "Semantic/onSurface",
+      "mode": "Light",
+      "type": "Color",
+      "value": "Color(0xFF121215)",
+      "id": "VariableID:1:1032"
+    },
+    "AppSemanticLight.outline": {
+      "token": "Semantic/outline",
+      "mode": "Light",
+      "type": "Color",
+      "value": "Color(0xFF6B6B76)",
+      "id": "VariableID:1:1033"
+    },
+    "AppSemanticLight.primary": {
+      "token": "Semantic/primary",
+      "mode": "Light",
+      "type": "Color",
+      "value": "Color(0xFF304FFE)",
+      "id": "VariableID:1:1029"
+    },
+    "AppSemanticLight.success": {
+      "token": "Semantic/success",
+      "mode": "Light",
+      "type": "Color",
+      "value": "Color(0xFF1C875B)",
+      "id": "VariableID:1:1034"
+    },
+    "AppSemanticLight.surface": {
+      "token": "Semantic/surface",
+      "mode": "Light",
+      "type": "Color",
+      "value": "Color(0xFFFFFFFF)",
+      "id": "VariableID:1:1031"
+    },
+    "AppSpacingDesktop.gutter": {
+      "token": "Spacing/gutter",
+      "mode": "Desktop",
+      "type": "double",
+      "value": "24",
+      "id": "VariableID:1:1037"
+    },
+    "AppSpacingDesktop.pageMargin": {
+      "token": "Spacing/page margin",
+      "mode": "Desktop",
+      "type": "double",
+      "value": "32",
+      "id": "VariableID:1:1036"
+    },
+    "AppSpacingDesktop.sectionGap": {
+      "token": "Spacing/section gap",
+      "mode": "Desktop",
+      "type": "double",
+      "value": "48",
+      "id": "VariableID:1:1038"
+    },
+    "AppSpacingMobile.gutter": {
+      "token": "Spacing/gutter",
+      "mode": "Mobile",
+      "type": "double",
+      "value": "8",
+      "id": "VariableID:1:1037"
+    },
+    "AppSpacingMobile.pageMargin": {
+      "token": "Spacing/page margin",
+      "mode": "Mobile",
+      "type": "double",
+      "value": "16",
+      "id": "VariableID:1:1036"
+    },
+    "AppSpacingMobile.sectionGap": {
+      "token": "Spacing/section gap",
+      "mode": "Mobile",
+      "type": "double",
+      "value": "24",
+      "id": "VariableID:1:1038"
+    },
+    "AppSpacingTablet.gutter": {
+      "token": "Spacing/gutter",
+      "mode": "Tablet",
+      "type": "double",
+      "value": "16",
+      "id": "VariableID:1:1037"
+    },
+    "AppSpacingTablet.pageMargin": {
+      "token": "Spacing/page margin",
+      "mode": "Tablet",
+      "type": "double",
+      "value": "24",
+      "id": "VariableID:1:1036"
+    },
+    "AppSpacingTablet.sectionGap": {
+      "token": "Spacing/section gap",
+      "mode": "Tablet",
+      "type": "double",
+      "value": "32",
+      "id": "VariableID:1:1038"
+    }
+  },
+  "deprecated": {}
+}

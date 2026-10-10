@@ -1,0 +1,191 @@
+{
+  "$extensions": {
+    "figmine": {
+      "format": "collections",
+      "file": "B2C Foundation Design System",
+      "exportedAt": "2026-10-08T11:00:10.637Z"
+    }
+  },
+  "_core_colors": {
+    "$extensions": {
+      "figmine": {
+        "modes": [
+          "Value"
+        ]
+      }
+    },
+    "deep-blue": {
+      "80": {
+        "$type": "color",
+        "$value": {
+          "colorSpace": "srgb",
+          "components": [
+            0.106,
+            0.067,
+            0.361
+          ],
+          "alpha": 1,
+          "hex": "#1B115C"
+        },
+        "$description": "Raw deep-blue, stop 80.",
+        "$extensions": {
+          "figmine": {
+            "values": {
+              "Value": {
+                "colorSpace": "srgb",
+                "components": [
+                  0.106,
+                  0.067,
+                  0.361
+                ],
+                "alpha": 1,
+                "hex": "#1B115C"
+              }
+            },
+            "aliases": {},
+            "resolved": {},
+            "variableId": "V:blue"
+          }
+        }
+      }
+    },
+    "size": {
+      "0_5": {
+        "$type": "number",
+        "$value": 2,
+        "$extensions": {
+          "figmine": {
+            "values": {
+              "Value": 2
+            },
+            "aliases": {},
+            "resolved": {},
+            "variableId": "V:space"
+          }
+        }
+      }
+    }
+  },
+  "ui_colors": {
+    "$extensions": {
+      "figmine": {
+        "modes": [
+          "Light",
+          "Dark"
+        ]
+      }
+    },
+    "text": {
+      "static": {
+        "regular": {
+          "$type": "color",
+          "$value": "{deep-blue.80}",
+          "$description": "Default body text colour.",
+          "$extensions": {
+            "figmine": {
+              "values": {
+                "Light": "{deep-blue.80}",
+                "Dark": {
+                  "colorSpace": "srgb",
+                  "components": [
+                    1,
+                    1,
+                    1
+                  ],
+                  "alpha": 1,
+                  "hex": "#FFFFFF"
+                }
+              },
+              "aliases": {
+                "Light": {
+                  "collection": "_core_colors"
+                }
+              },
+              "resolved": {
+                "Light": {
+                  "colorSpace": "srgb",
+                  "components": [
+                    0.106,
+                    0.067,
+                    0.361
+                  ],
+                  "alpha": 1,
+                  "hex": "#1B115C"
+                }
+              },
+              "variableId": "V:primary"
+            }
+          }
+        }
+      }
+    },
+    "fills": {
+      "brand": {
+        "$type": "color",
+        "$value": "{energy-blue.50}",
+        "$extensions": {
+          "figmine": {
+            "values": {
+              "Light": "{energy-blue.50}",
+              "Dark": "{energy-blue.50}"
+            },
+            "aliases": {
+              "Light": {
+                "collection": "Brand library"
+              },
+              "Dark": {
+                "collection": "Brand library"
+              }
+            },
+            "resolved": {
+              "Light": {
+                "colorSpace": "srgb",
+                "components": [
+                  0.208,
+                  0.404,
+                  0.965
+                ],
+                "alpha": 1,
+                "hex": "#3567F6"
+              },
+              "Dark": {
+                "colorSpace": "srgb",
+                "components": [
+                  0.208,
+                  0.404,
+                  0.965
+                ],
+                "alpha": 1,
+                "hex": "#3567F6"
+              }
+            },
+            "variableId": "V:lib"
+          }
+        }
+      }
+    }
+  },
+  "Text styles": {
+    "$extensions": {
+      "figmine": {
+        "modes": [
+          "Value"
+        ]
+      }
+    },
+    "Body": {
+      "Large": {
+        "$type": "typography",
+        "$value": {
+          "fontFamily": "Ambit",
+          "fontWeight": 600,
+          "fontSize": 16,
+          "lineHeight": 1.5,
+          "letterSpacing": -0.32,
+          "fontStyle": "italic"
+        },
+        "$description": "Body copy"
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+name: figmine
+description: Turn Figma designs into Flutter themes. Generates tokens, ColorScheme, typography, component themes and icons, and opens a pull request when the design changes.
+version: 0.1.0
+homepage: https://github.com/Crdzbird/Figmine
+repository: https://github.com/Crdzbird/Figmine/tree/main/figmine
+issue_tracker: https://github.com/Crdzbird/Figmine/issues
+publish_to: none
+
+topics:
+  - figma
+  - design-tokens
+  - theme
+  - codegen
+  - material-design
+
+environment:
+  sdk: ^3.13.0
+  flutter: ">=3.47.0"
+
+executables:
+  figmine: figmine
+
+dependencies:
+  args: ^2.7.0
+  crypto: ^3.0.6
+  flutter:
+    sdk: flutter
+  flutter_svg: ^2.3.0
+  http: ^1.6.0
+  material_color_utilities: ^0.13.0
+  path: ^1.9.1
+  yaml: ^3.1.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  very_good_analysis: ^11.0.0

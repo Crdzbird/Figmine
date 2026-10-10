@@ -1,0 +1,26 @@
+/// Generated libraries that exist whatever the Figma file holds.
+enum FixedFile {
+  /// The `AppColorScheme` ThemeExtension.
+  colorScheme,
+
+  /// The BuildContext extension.
+  themeContext,
+
+  /// The `AppTypography` text styles.
+  textStyles,
+
+  /// The `AppComponents` dimensions.
+  components,
+
+  /// The `AppComponentThemes` builders.
+  componentThemes,
+
+  /// The `AppIcons` asset paths.
+  icons,
+
+  /// Constants removed from Figma that code still uses.
+  deprecated,
+
+  /// The barrel that exports every generated library.
+  barrel,
+}

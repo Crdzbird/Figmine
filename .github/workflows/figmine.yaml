@@ -1,0 +1,56 @@
+name: figmine
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/figmine.yaml"
+      - "figmine/**"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/figmine.yaml"
+      - "figmine/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.47.7
+          cache: true
+
+      - name: Install dependencies
+        working-directory: figmine
+        run: flutter pub get
+
+      - name: Check formatting
+        working-directory: figmine
+        run: dart format --set-exit-if-changed lib bin test example/lib example/test
+
+      - name: Analyze
+        working-directory: figmine
+        run: flutter analyze
+
+      - name: Test package
+        working-directory: figmine
+        run: flutter test --coverage
+
+      - name: Example matches the generator
+        working-directory: figmine/example
+        run: |
+          flutter pub get
+          dart run figmine generate --offline
+          git status --porcelain -- lib assets figmine.lock.json
+          test -z "$(git status --porcelain -- lib assets figmine.lock.json)"
+
+      - name: Test example
+        working-directory: figmine/example
+        run: flutter test

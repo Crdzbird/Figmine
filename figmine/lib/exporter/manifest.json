@@ -1,0 +1,14 @@
+{
+  "name": "figmine exporter",
+  "id": "figmine-exporter",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": ["figma", "dev"],
+  "capabilities": ["inspect"],
+  "documentAccess": "dynamic-page",
+  "networkAccess": {
+    "allowedDomains": ["https://api.github.com"],
+    "reasoning": "Sends design-tokens.json to the GitHub repository you enter, when you ask it to."
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "color": {
+    "$type": "color",
+    "primary": { "$value": "#8AA7FF" },
+    "surface": { "$value": "#121212" }
+  }
+}
