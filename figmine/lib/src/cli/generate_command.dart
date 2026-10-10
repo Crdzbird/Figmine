@@ -1,13 +1,8 @@
-import 'dart:io';
-
 import 'package:args/command_runner.dart';
 import 'package:figmine/src/cli/cli_support.dart';
+import 'package:figmine/src/cli/generate_run.dart';
+import 'package:figmine/src/cli/token_watcher.dart';
 import 'package:figmine/src/config/config_loader.dart';
-import 'package:figmine/src/config/project_info.dart';
-import 'package:figmine/src/pipeline/figmine_generator.dart';
-import 'package:figmine/src/pipeline/project_files.dart';
-import 'package:figmine/src/pipeline/token_fetcher.dart';
-import 'package:http/http.dart' as http;
 
 /// `figmine generate`: syncs tokens and rewrites code when Figma changed.
 final class GenerateCommand extends Command<int> {
@@ -23,6 +18,11 @@ final class GenerateCommand extends Command<int> {
         'offline',
         negatable: false,
         help: 'Regenerate from the lock file and the cache, without Figma.',
+      )
+      ..addFlag(
+        'watch',
+        negatable: false,
+        help: 'Regenerate offline whenever tokens.files or the config change.',
       )
       ..addFlag(
         'migrate',
@@ -45,51 +45,25 @@ final class GenerateCommand extends Command<int> {
   @override
   Future<int> run() async {
     final args = argResults!;
-    final config = await ConfigLoader.load(
-      args.option('config')!,
+    final configPath = args.option('config')!;
+    final watch = args.flag('watch');
+    Future<void> once() async => await GenerateRun.once(
+      configPath: configPath,
+      offline: watch || args.flag('offline'),
+      force: args.flag('force'),
+      migrate: args.flag('migrate'),
       layout: args.option('layout'),
+      report: args.option('report'),
     );
-    final root = Directory.current.path;
-    final httpClient = http.Client();
-    final offline = args.flag('offline');
-    final client = offline
-        ? CliSupport.offlineClient(root)
-        : CliSupport.client(config, httpClient);
-    final cache = client.cache;
-    try {
-      final outcome = await FigmineGenerator(
-        config: config,
-        fetcher: TokenFetcher(
-          client: client,
-          config: config,
-          log: CliSupport.log,
-          root: root,
-          offline: offline,
-        ),
-        files: ProjectFiles(root),
-        project: await ProjectInfo.read(
-          root,
-          materialImport: config.output.materialImport,
-        ),
-        log: CliSupport.log,
-        migrate: args.flag('migrate'),
-      ).run(force: args.flag('force') || offline);
-      CliSupport.log('Result: ${outcome.status.name}.');
-      final reads = cache;
-      if (reads != null) {
-        CliSupport.log(
-          'Heavy Figma reads: ${reads.fetched} sent, ${reads.reused} from '
-          'the cache.',
-        );
-      }
-      final report = args.option('report');
-      if (report != null && outcome.changed) {
-        await File(report).writeAsString(outcome.report);
-      }
-      await CliSupport.output('changed', '${outcome.changed}');
+    if (!watch) {
+      await once();
       return 0;
-    } finally {
-      httpClient.close();
     }
+    final files = (await ConfigLoader.load(configPath)).tokens.files;
+    if (files.isEmpty) {
+      usageException('--watch follows token files. List them in tokens.files.');
+    }
+    await TokenWatcher.watch([...files, configPath], once, log: CliSupport.log);
+    return 0;
   }
 }

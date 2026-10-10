@@ -94,6 +94,8 @@ tokens:
 ```
 
 `dart run figmine generate --offline` then works with no Figma token at all.
+While designing, `dart run figmine generate --watch` regenerates on every new
+export, and a hot reload shows it in the running app.
 
 ## Commands
 
@@ -101,7 +103,7 @@ tokens:
 | --- | --- |
 | `init` | Writes `figmine.yaml`, the workflows and the theme layer. |
 | `doctor` | Checks the token's scopes and explains how tokens will be read. |
-| `generate` | Reads Figma and writes the code, the lock file and a change report. `--offline` uses the lock file and cache only. |
+| `generate` | Reads Figma and writes the code, the lock file and a change report. `--offline` uses the lock file and cache only, `--watch` regenerates whenever the token files change. |
 | `scaffold` | Writes the theme class and component themes once. `--force` updates them to the current templates. |
 | `adopt` | Finds hard coded colors, spacings and radii that match tokens. `--apply` replaces them, `--since <ref>` checks only new lines. |
 | `score` | Grades the theme against reference values, for tuning and CI. |

@@ -147,8 +147,13 @@
   since Flutter would show the platform font instead. Roboto and SF Pro
   count as bundled.
 - CI renders the example theme in light and dark mode and uploads the
-  images, and `tool/corpus.dart` scores local design files against their references
-  and fails when inference regresses below the committed baseline.
+  images, and `tool/corpus.dart` scores local design files against their
+  references and fails when inference regresses below the committed
+  baseline.
+- `figmine generate --watch` regenerates offline whenever the token files
+  or `figmine.yaml` change, so a new export from the plugin reaches the
+  running app with a hot reload. A file read halfway through a save is
+  logged and skipped.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files
   removed on sync.
