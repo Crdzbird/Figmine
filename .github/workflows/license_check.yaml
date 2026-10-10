@@ -20,7 +20,22 @@ on:
 
 jobs:
   license_check:
-    uses: VeryGoodOpenSource/very_good_workflows/.github/workflows/license_check.yml@v1
-    with:
-      allowed: "MIT,BSD-3-Clause,BSD-2-Clause,Apache-2.0"
-      working_directory: figmine
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.47.7
+          cache: true
+
+      - name: Install dependencies
+        working-directory: figmine
+        run: flutter pub get
+
+      - name: Install Very Good CLI
+        run: dart pub global activate very_good_cli
+
+      - name: Check licenses
+        working-directory: figmine
+        run: very_good packages check licenses --allowed="MIT,BSD-3-Clause,BSD-2-Clause,Apache-2.0"
