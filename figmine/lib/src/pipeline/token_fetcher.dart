@@ -64,7 +64,8 @@ final class TokenFetcher {
 
   /// Fetches collections, styles, screens and icons, and assembles them.
   ///
-  /// Heavy reads are cached for the version in [meta].
+  /// Heavy reads are cached for the version in [meta]. Token files carry
+  /// their own text styles, so the file's styles are then not read.
   Future<TokenSet> fetch(FigmaFileMeta meta) async {
     final key = config.fileKey;
     await client.cache?.pin(key, meta.version);
@@ -85,9 +86,8 @@ final class TokenFetcher {
           log: log,
         ).fetch(key);
     final fileStyles = files?.textStyles ?? const [];
-    final loaded = config.typography.enabled || pending != null
-        ? await styles()
-        : const <StyleNode>[];
+    final read = config.typography.enabled && files == null;
+    final loaded = read || pending != null ? await styles() : <StyleNode>[];
     return TokenAssembler(config: config, log: log).assemble(
       meta: meta,
       collections: TokenRetyper.apply(StyleEffects.addTo(collections, loaded)),

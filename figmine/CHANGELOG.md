@@ -166,6 +166,13 @@
 - Offline syncs skip screen inference when no screens were cached for the
   version, instead of failing, and modes classes of plain values no
   longer import Flutter.
+- Component metrics prefer the component named just for its kind, such as
+  `Button` over `Split button`, and the size variant the screens use most
+  instead of always `medium`, since design systems such as Material 3
+  Expressive make a smaller size the default. Side sheets no longer count
+  as bottom sheets, and `type=modal` no longer makes a component a dialog.
+- When tokens come from exported files, the file's styles are not read
+  from Figma, saving heavy API reads.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files
   removed on sync.

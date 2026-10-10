@@ -6,5 +6,9 @@
   "figmine_sds": {
     "generated": 100.0,
     "inferred": 75.9
+  },
+  "figmine_m3": {
+    "generated": 100.0,
+    "inferred": 59.2
   }
 }

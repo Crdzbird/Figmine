@@ -1,7 +1,7 @@
 import 'package:figmine/src/inference/button_variant.dart';
 import 'package:figmine/src/inference/component_kind.dart';
 import 'package:figmine/src/inference/component_sample.dart';
-import 'package:figmine/src/inference/usage_stats.dart';
+import 'package:figmine/src/inference/sample_usage.dart';
 
 /// A preference among samples: an adjective or a noun for the label, the
 /// test a sample must pass, and how many measured samples must pass it.
@@ -23,17 +23,18 @@ abstract final class ComponentSamples {
 
   static final RegExp _mobile = RegExp(r'\b(mobile|phone)\b');
 
-  static final RegExp _medium = RegExp(r'size\s*=\s*(m|md|medium)\b');
-
   /// Samples of [kind], without parts of larger components such as list
   /// items and labels; buttons also need a label and a fill. Narrower
   /// groups are preferred in turn while at least three of their samples
   /// are [measured]: components and then names that say the kind
   /// outright, such as a `Tooltip` set over an icon layer called tooltip,
+  /// with a component named just for the kind, such as `Button`, before
+  /// variations such as `Split button`,
   /// component instances
   /// over lookalike layers, the most used component, the resting state,
   /// mobile variants (even a single one, as the app targets phones), the
-  /// primary hierarchy of buttons and the medium size. With [states], every
+  /// primary hierarchy of buttons and the size the screens use most, as
+  /// systems disagree on which size is the default. With [states], every
   /// interaction state stays, for reading state colors. Buttons are of the
   /// [variant] style, filled by default.
   static ({List<ComponentSample> samples, String label}) select(
@@ -52,11 +53,14 @@ abstract final class ComponentSamples {
         .where((s) => !_part.hasMatch(s.instance ? s.family : s.name))
         .toList();
     String? main;
+    String? size;
     final strong = RegExp(kind.strong);
+    final exact = RegExp('^(?:${kind.strong})\$');
     var noun = button ? 'labelled, filled buttons' : '${kind.name} samples';
     final words = <String>[];
     for (final (word, name, keep, least) in <Narrowing>[
       (null, null, (s) => strong.hasMatch(s.family), 3),
+      (null, null, (s) => exact.hasMatch(s.family.trim()), 3),
       (null, null, (s) => strong.hasMatch(s.name), 3),
       (null, 'component instances', (s) => s.instance, 3),
       (null, '`main` instances', (s) => s.family == main, 3),
@@ -66,26 +70,17 @@ abstract final class ComponentSamples {
         ('primary', null, (s) => hint.hasMatch(s.name), 3),
       if (button && variant != ButtonVariant.filled)
         (null, null, (s) => hint.hasMatch(s.name), 3),
-      ('medium', null, (s) => _medium.hasMatch(s.name), 3),
+      ('`size`', null, (s) => size != null && SampleUsage.sizeOf(s) == size, 3),
     ]) {
-      main = _mostUsed(pool);
+      main = SampleUsage.family(pool);
+      size = SampleUsage.size(pool);
       final narrowed = pool.where(keep).toList();
       final count = narrowed.where((s) => measured?.call(s) ?? true).length;
       if (count < least) continue;
       pool = narrowed;
       noun = name?.replaceAll('`main`', '`${main ?? ''}`') ?? noun;
-      if (word != null) words.add(word);
+      if (word != null) words.add(word.replaceAll('`size`', size ?? ''));
     }
     return (samples: pool, label: [...words, noun].join(' '));
-  }
-
-  static String? _mostUsed(List<ComponentSample> pool) {
-    final families = <String, int>{};
-    for (final s in pool.where((s) => s.instance)) {
-      UsageStats.count(families, s.family);
-    }
-    final ranked = families.keys.toList()
-      ..sort((a, b) => families[b]! - families[a]!);
-    return ranked.firstOrNull;
   }
 }

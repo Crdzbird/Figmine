@@ -18,11 +18,14 @@ enum ComponentKind {
     r'\b(bottom[ _-]?nav(igation)?|navigation[ _-]bar)s?\b',
   ),
 
-  /// Bottom sheets.
-  bottomSheet(r'\b(bottom[ _-]?)?sheets?\b', r'\bbottom[ _-]?sheets?\b'),
+  /// Bottom sheets, not side sheets.
+  bottomSheet(
+    r'\b(?<!side[ _-])(bottom[ _-]?)?sheets?\b',
+    r'\bbottom[ _-]?sheets?\b',
+  ),
 
-  /// Dialogs and modals.
-  dialog(r'\b(dialog|modal)s?\b', r'\bdialogs?\b'),
+  /// Dialogs and modals, not variants such as `type=modal`.
+  dialog(r'\b(dialog|(?<!=\s?)modal)s?\b', r'\bdialogs?\b'),
 
   /// Checkboxes.
   checkbox(r'\bcheck ?box(es)?\b', r'\bcheck ?box(es)?\b'),
