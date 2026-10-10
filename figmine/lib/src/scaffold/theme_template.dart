@@ -5,17 +5,23 @@ abstract final class ThemeTemplate {
   /// Component theme files and the function each one declares.
   static const Map<String, String> components = {
     'app_bar_theme.dart': 'createAppBarTheme(colors, textTheme)',
+    'bottom_sheet_theme.dart': 'createBottomSheetTheme(colors)',
     'card_theme.dart': 'createCardTheme(colors)',
     'checkbox_theme.dart': 'createCheckboxTheme(colors)',
     'chip_theme.dart': 'createChipTheme(colors, textTheme)',
+    'dialog_theme.dart': 'createDialogTheme(colors, textTheme)',
+    'fab_theme.dart': 'createFabTheme(colors)',
     'filled_button_theme.dart': 'createFilledButtonTheme(colors, textTheme)',
     'input_decoration_theme.dart': 'createInputDecorationTheme(colors)',
+    'navigation_bar_theme.dart': 'createNavigationBarTheme(colors, textTheme)',
     'outlined_button_theme.dart':
         'createOutlinedButtonTheme(colors, textTheme)',
     'radio_theme.dart': 'createRadioTheme(colors)',
+    'snack_bar_theme.dart': 'createSnackBarTheme(colors, textTheme)',
     'switch_theme.dart': 'createSwitchTheme(colors)',
     'tab_bar_theme.dart': 'createTabBarTheme(colors, textTheme)',
     'text_button_theme.dart': 'createTextButtonTheme(colors, textTheme)',
+    'tooltip_theme.dart': 'createTooltipTheme(colors, textTheme)',
   };
 
   /// Returns the theme class source.
@@ -52,16 +58,22 @@ final class $theme {
       textTheme: textTheme,
       scaffoldBackgroundColor: colors.surface,
       appBarTheme: ${components['app_bar_theme.dart']},
+      bottomSheetTheme: ${components['bottom_sheet_theme.dart']},
       cardTheme: ${components['card_theme.dart']},
       checkboxTheme: ${components['checkbox_theme.dart']},
       chipTheme: ${components['chip_theme.dart']},
+      dialogTheme: ${components['dialog_theme.dart']},
       filledButtonTheme: ${components['filled_button_theme.dart']},
+      floatingActionButtonTheme: ${components['fab_theme.dart']},
       inputDecorationTheme: ${components['input_decoration_theme.dart']},
+      navigationBarTheme: ${components['navigation_bar_theme.dart']},
       outlinedButtonTheme: ${components['outlined_button_theme.dart']},
       radioTheme: ${components['radio_theme.dart']},
+      snackBarTheme: ${components['snack_bar_theme.dart']},
       switchTheme: ${components['switch_theme.dart']},
       tabBarTheme: ${components['tab_bar_theme.dart']},
       textButtonTheme: ${components['text_button_theme.dart']},
+      tooltipTheme: ${components['tooltip_theme.dart']},
       extensions: [colors],
     );
   }

@@ -28,7 +28,9 @@ abstract final class ComponentSamples {
   /// Samples of [kind], without parts of larger components such as list
   /// items and labels; buttons also need a label and a fill. Narrower
   /// groups are preferred in turn while at least three of their samples
-  /// are [measured]: names that say the kind outright, component instances
+  /// are [measured]: components and then names that say the kind
+  /// outright, such as a `Tooltip` set over an icon layer called tooltip,
+  /// component instances
   /// over lookalike layers, the most used component, the resting state,
   /// mobile variants (even a single one, as the app targets phones), the
   /// primary hierarchy of buttons and the medium size. With [states], every
@@ -54,6 +56,7 @@ abstract final class ComponentSamples {
     var noun = button ? 'labelled, filled buttons' : '${kind.name} samples';
     final words = <String>[];
     for (final (word, name, keep, least) in <Narrowing>[
+      (null, null, (s) => strong.hasMatch(s.family), 3),
       (null, null, (s) => strong.hasMatch(s.name), 3),
       (null, 'component instances', (s) => s.instance, 3),
       (null, '`main` instances', (s) => s.family == main, 3),

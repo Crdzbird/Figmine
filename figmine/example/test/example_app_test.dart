@@ -53,7 +53,9 @@ void main() {
     expect(find.byType(Checkbox), findsOneWidget);
     expect(find.byType(Switch), findsOneWidget);
     await tester.scrollUntilVisible(
-      find.byType(FigmineIcon).first,
+      find.byWidgetPredicate(
+        (w) => w is FigmineIcon && w.size == 32 && w.asset == AppIcons.home,
+      ),
       200,
       scrollable: find
           .descendant(
@@ -62,7 +64,10 @@ void main() {
           )
           .first,
     );
-    expect(find.byType(FigmineIcon), findsNWidgets(3));
+    expect(
+      find.byWidgetPredicate((w) => w is FigmineIcon && w.size == 32),
+      findsNWidgets(AppIcons.values.length),
+    );
 
     await tester.tap(find.text('Effects'));
     await tester.pumpAndSettle();

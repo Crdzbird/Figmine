@@ -42,6 +42,11 @@ final class TokenGalleryPage extends StatelessWidget {
             ],
           ),
         ),
+        floatingActionButton: FloatingActionButton(
+          tooltip: 'Add',
+          onPressed: () {},
+          child: const FigmineIcon(AppIcons.home),
+        ),
         body: TabBarView(
           children: [
             ColorSection(padding: padding),

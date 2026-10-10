@@ -28,6 +28,12 @@ void main() {
       'lib/theme/components/switch_theme.dart',
       'lib/theme/components/tab_bar_theme.dart',
       'lib/theme/components/text_button_theme.dart',
+      'lib/theme/components/bottom_sheet_theme.dart',
+      'lib/theme/components/dialog_theme.dart',
+      'lib/theme/components/fab_theme.dart',
+      'lib/theme/components/navigation_bar_theme.dart',
+      'lib/theme/components/snack_bar_theme.dart',
+      'lib/theme/components/tooltip_theme.dart',
       'lib/theme/theme.dart',
     ]);
     final theme = files['lib/theme/app_theme.dart']!;

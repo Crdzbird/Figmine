@@ -21,6 +21,12 @@ abstract final class StatePaints {
     ('radio', ComponentKind.radio, ButtonVariant.filled),
     ('switch', ComponentKind.toggle, ButtonVariant.filled),
     ('tab', ComponentKind.tab, ButtonVariant.filled),
+    ('fab', ComponentKind.fab, ButtonVariant.filled),
+    ('navigationBar', ComponentKind.navigationBar, ButtonVariant.filled),
+    ('sheet', ComponentKind.bottomSheet, ButtonVariant.filled),
+    ('dialog', ComponentKind.dialog, ButtonVariant.filled),
+    ('snackbar', ComponentKind.snackbar, ButtonVariant.filled),
+    ('tooltip', ComponentKind.tooltip, ButtonVariant.filled),
   ];
 
   /// The most common fill, label and stroke of each state of the default
@@ -43,7 +49,7 @@ abstract final class StatePaints {
         for (final (part, read)
             in <(String, StatePaint? Function(ComponentSample))>[
               ('fill', (s) => _paint(s.fill, s.fillVariable)),
-              ('label', (s) => _paint(s.label, s.labelVariable)),
+              ('label', _label),
               ('stroke', (s) => _paint(s.stroke, s.strokeVariable)),
               ('mark', (s) => _paint(s.mark, s.markVariable)),
             ]) {
@@ -55,6 +61,11 @@ abstract final class StatePaints {
     }
     return paints;
   }
+
+  /// The text color, or for icon only components the icon color.
+  static StatePaint? _label(ComponentSample s) => s.label == null
+      ? _paint(s.mark, s.markVariable)
+      : _paint(s.label, s.labelVariable);
 
   static StatePaint? _paint(int? argb, String? variable) =>
       argb == null ? null : (argb: argb, variable: variable);

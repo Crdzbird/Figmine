@@ -103,6 +103,17 @@ final class AppColorScheme extends ThemeExtension<AppColorScheme> {
     required Color textButtonHovered,
     required Color textButtonPressed,
     required Color onTextButtonDisabled,
+    required Color fab,
+    required Color onFab,
+    required Color navigationBar,
+    required Color onNavigationBar,
+    required Color sheet,
+    required Color dialog,
+    required Color onDialog,
+    required Color snackbar,
+    required Color onSnackbar,
+    required Color tooltip,
+    required Color onTooltip,
     required Color button,
     required Color onButton,
     required Color buttonHovered,
@@ -219,6 +230,17 @@ final class AppColorScheme extends ThemeExtension<AppColorScheme> {
     required this.textButtonHovered,
     required this.textButtonPressed,
     required this.onTextButtonDisabled,
+    required this.fab,
+    required this.onFab,
+    required this.navigationBar,
+    required this.onNavigationBar,
+    required this.sheet,
+    required this.dialog,
+    required this.onDialog,
+    required this.snackbar,
+    required this.onSnackbar,
+    required this.tooltip,
+    required this.onTooltip,
     required this.button,
     required this.onButton,
     required this.buttonHovered,
@@ -336,6 +358,17 @@ final class AppColorScheme extends ThemeExtension<AppColorScheme> {
     textButtonHovered: Color(0x14304FFE),
     textButtonPressed: Color(0x1A304FFE),
     onTextButtonDisabled: Color(0xFFA5A5A6),
+    fab: AppPrimitivesPalettePrimary.v20,
+    onFab: AppPrimitivesPalettePrimary.v80,
+    navigationBar: AppPrimitivesPaletteNeutral.v20,
+    onNavigationBar: AppPrimitivesPaletteNeutral.v70,
+    sheet: Color(0xFFF3F2FF),
+    dialog: Color(0xFFE8E7F4),
+    onDialog: AppSemanticLight.onSurface,
+    snackbar: AppPrimitivesPaletteNeutral.v80,
+    onSnackbar: Color(0xFFF0EFFD),
+    tooltip: AppPrimitivesPaletteNeutral.v80,
+    onTooltip: Color(0xFFF0EFFD),
     button: AppSemanticLight.primary,
     onButton: AppSemanticLight.onPrimary,
     buttonHovered: Color(0xFF415DFE),
@@ -453,6 +486,17 @@ final class AppColorScheme extends ThemeExtension<AppColorScheme> {
     textButtonHovered: Color(0x14D9DFFF),
     textButtonPressed: Color(0x1AD9DFFF),
     onTextButtonDisabled: Color(0xFF69696B),
+    fab: AppPrimitivesPalettePrimary.v80,
+    onFab: AppPrimitivesPalettePrimary.v20,
+    navigationBar: AppPrimitivesPaletteNeutral.v90,
+    onNavigationBar: AppPrimitivesPaletteNeutral.v30,
+    sheet: Color(0xFF1A1B24),
+    dialog: Color(0xFF292A33),
+    onDialog: AppSemanticDark.onSurface,
+    snackbar: AppPrimitivesPaletteNeutral.v20,
+    onSnackbar: Color(0xFF2F303A),
+    tooltip: AppPrimitivesPaletteNeutral.v20,
+    onTooltip: Color(0xFF2F303A),
     button: AppSemanticDark.primary,
     onButton: AppSemanticDark.onPrimary,
     buttonHovered: Color(0xFFC9D0F4),
@@ -782,6 +826,39 @@ final class AppColorScheme extends ThemeExtension<AppColorScheme> {
   /// Material default: `surface` with `onSurface` at 38%.
   final Color onTextButtonDisabled;
 
+  /// Material default: `primaryContainer`.
+  final Color fab;
+
+  /// Material default: `onPrimaryContainer`.
+  final Color onFab;
+
+  /// Material default: `surfaceContainer`.
+  final Color navigationBar;
+
+  /// Material default: `onSurfaceVariant`.
+  final Color onNavigationBar;
+
+  /// Material default: `surfaceContainerLow`.
+  final Color sheet;
+
+  /// Material default: `surfaceContainerHigh`.
+  final Color dialog;
+
+  /// Material default: `onSurface`.
+  final Color onDialog;
+
+  /// Material default: `inverseSurface`.
+  final Color snackbar;
+
+  /// Material default: `onInverseSurface`.
+  final Color onSnackbar;
+
+  /// Material default: `inverseSurface`.
+  final Color tooltip;
+
+  /// Material default: `onInverseSurface`.
+  final Color onTooltip;
+
   /// Material default: `primary`.
   final Color button;
 
@@ -996,6 +1073,17 @@ final class AppColorScheme extends ThemeExtension<AppColorScheme> {
     Color? textButtonHovered,
     Color? textButtonPressed,
     Color? onTextButtonDisabled,
+    Color? fab,
+    Color? onFab,
+    Color? navigationBar,
+    Color? onNavigationBar,
+    Color? sheet,
+    Color? dialog,
+    Color? onDialog,
+    Color? snackbar,
+    Color? onSnackbar,
+    Color? tooltip,
+    Color? onTooltip,
     Color? button,
     Color? onButton,
     Color? buttonHovered,
@@ -1126,6 +1214,17 @@ final class AppColorScheme extends ThemeExtension<AppColorScheme> {
     textButtonHovered: textButtonHovered ?? this.textButtonHovered,
     textButtonPressed: textButtonPressed ?? this.textButtonPressed,
     onTextButtonDisabled: onTextButtonDisabled ?? this.onTextButtonDisabled,
+    fab: fab ?? this.fab,
+    onFab: onFab ?? this.onFab,
+    navigationBar: navigationBar ?? this.navigationBar,
+    onNavigationBar: onNavigationBar ?? this.onNavigationBar,
+    sheet: sheet ?? this.sheet,
+    dialog: dialog ?? this.dialog,
+    onDialog: onDialog ?? this.onDialog,
+    snackbar: snackbar ?? this.snackbar,
+    onSnackbar: onSnackbar ?? this.onSnackbar,
+    tooltip: tooltip ?? this.tooltip,
+    onTooltip: onTooltip ?? this.onTooltip,
     button: button ?? this.button,
     onButton: onButton ?? this.onButton,
     buttonHovered: buttonHovered ?? this.buttonHovered,
@@ -1441,6 +1540,17 @@ final class AppColorScheme extends ThemeExtension<AppColorScheme> {
         other.onTextButtonDisabled,
         t,
       )!,
+      fab: Color.lerp(fab, other.fab, t)!,
+      onFab: Color.lerp(onFab, other.onFab, t)!,
+      navigationBar: Color.lerp(navigationBar, other.navigationBar, t)!,
+      onNavigationBar: Color.lerp(onNavigationBar, other.onNavigationBar, t)!,
+      sheet: Color.lerp(sheet, other.sheet, t)!,
+      dialog: Color.lerp(dialog, other.dialog, t)!,
+      onDialog: Color.lerp(onDialog, other.onDialog, t)!,
+      snackbar: Color.lerp(snackbar, other.snackbar, t)!,
+      onSnackbar: Color.lerp(onSnackbar, other.onSnackbar, t)!,
+      tooltip: Color.lerp(tooltip, other.tooltip, t)!,
+      onTooltip: Color.lerp(onTooltip, other.onTooltip, t)!,
       button: Color.lerp(button, other.button, t)!,
       onButton: Color.lerp(onButton, other.onButton, t)!,
       buttonHovered: Color.lerp(buttonHovered, other.buttonHovered, t)!,

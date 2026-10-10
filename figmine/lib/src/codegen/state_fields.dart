@@ -4,6 +4,7 @@ import 'package:figmine/src/codegen/state_dark.dart';
 import 'package:figmine/src/codegen/state_extrapolation.dart';
 import 'package:figmine/src/codegen/state_fallback.dart';
 import 'package:figmine/src/codegen/state_field_specs.dart';
+import 'package:figmine/src/codegen/state_readable.dart';
 import 'package:figmine/src/codegen/token_index.dart';
 import 'package:figmine/src/config/tokens_config.dart';
 import 'package:figmine/src/sources/collection_modes.dart';
@@ -65,10 +66,11 @@ abstract final class StateFields {
         '${field.doc} Bound in the $variant.',
       );
     }
-    final same = [
-      by[spec.base],
-      ...by.values,
-    ].where((f) => f?.lightArgb == paint.argb).firstOrNull;
+    final rest = by[StateFieldSpecs.rest(spec).$1];
+    final same = [by[spec.base], ...by.values].nonNulls
+        .where((f) => f.lightArgb == paint.argb)
+        .where((f) => StateReadable.keeps(spec, f, f.darkArgb, rest))
+        .firstOrNull;
     if (same != null) {
       return StateFallback.copy(spec.name, same, 'Same as `${same.name}`.');
     }

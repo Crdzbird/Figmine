@@ -1,5 +1,29 @@
 /// Components figmine measures to build component themes.
 enum ComponentKind {
+  /// Tooltips.
+  tooltip(r'\btool[ _-]?tips?\b', r'\btool[ _-]?tips?\b'),
+
+  /// Snack bars and toasts.
+  snackbar(r'\b(snack[ _-]?bar|toast)s?\b', r'\b(snack[ _-]?bar|toast)s?\b'),
+
+  /// Floating action buttons.
+  fab(
+    r'\b(fab|floating[ _-]?action[ _-]?button)s?\b',
+    r'\b(fab|floating[ _-]?action[ _-]?button)s?\b',
+  ),
+
+  /// Bottom navigation bars.
+  navigationBar(
+    r'\b(bottom[ _-]?(nav(igation)?|bar)|navigation[ _-]bar)s?\b',
+    r'\b(bottom[ _-]?nav(igation)?|navigation[ _-]bar)s?\b',
+  ),
+
+  /// Bottom sheets.
+  bottomSheet(r'\b(bottom[ _-]?)?sheets?\b', r'\bbottom[ _-]?sheets?\b'),
+
+  /// Dialogs and modals.
+  dialog(r'\b(dialog|modal)s?\b', r'\bdialogs?\b'),
+
   /// Checkboxes.
   checkbox(r'\bcheck ?box(es)?\b', r'\bcheck ?box(es)?\b'),
 
@@ -41,6 +65,9 @@ enum ComponentKind {
   /// The part of [pattern] that names the kind outright, such as `chip`
   /// where `tag` may also be a badge.
   final String strong;
+
+  /// Whether the component is drawn over a scrim, which is not its fill.
+  bool get modal => this == dialog || this == bottomSheet;
 
   /// The kind named in [name], or null.
   static ComponentKind? match(String name) {

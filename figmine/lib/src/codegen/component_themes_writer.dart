@@ -3,6 +3,7 @@ import 'package:figmine/src/codegen/codegen_context.dart';
 import 'package:figmine/src/codegen/control_theme_source.dart';
 import 'package:figmine/src/codegen/field_theme_source.dart';
 import 'package:figmine/src/codegen/fixed_file.dart';
+import 'package:figmine/src/codegen/surface_theme_source.dart';
 import 'package:figmine/src/codegen/text_theme_source.dart';
 
 /// Writes the component themes that resolve the state colors of the
@@ -28,6 +29,7 @@ ${ButtonThemeSource.render(s, m)}
 ${FieldThemeSource.render(s, m)}
 ${ControlThemeSource.render(s)}
 ${TextThemeSource.render(s, m)}
+${SurfaceThemeSource.render(s, m)}
 }
 ''';
   }

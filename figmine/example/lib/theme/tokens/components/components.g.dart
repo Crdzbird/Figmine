@@ -34,4 +34,25 @@ abstract final class AppComponents {
 
   /// Material default: screens were not analyzed.
   static const double appBarHeight = 64;
+
+  /// Material default: screens were not analyzed.
+  static const double fabRadius = 16;
+
+  /// Material default: screens were not analyzed.
+  static const double fabSize = 56;
+
+  /// Material default: screens were not analyzed.
+  static const double navigationBarHeight = 80;
+
+  /// Material default: screens were not analyzed.
+  static const double sheetRadius = 28;
+
+  /// Material default: screens were not analyzed.
+  static const double dialogRadius = 28;
+
+  /// Material default: screens were not analyzed.
+  static const double snackbarRadius = 4;
+
+  /// Material default: screens were not analyzed.
+  static const double tooltipRadius = 4;
 }

@@ -56,6 +56,8 @@ final class ScaffoldCommand extends Command<int> {
     final written = force
         ? [for (final f in files) f.path]
         : await project.writeMissing(files);
+    final problem = await project.formatAll(written);
+    if (problem != null) CliSupport.log('dart format failed: $problem');
     for (final file in files) {
       final verb = written.contains(file.path) ? 'Created' : 'Kept';
       CliSupport.log('$verb ${file.path}.');

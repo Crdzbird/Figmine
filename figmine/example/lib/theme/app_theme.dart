@@ -1,14 +1,20 @@
 import 'package:figmine_example/theme/components/app_bar_theme.dart';
+import 'package:figmine_example/theme/components/bottom_sheet_theme.dart';
 import 'package:figmine_example/theme/components/card_theme.dart';
 import 'package:figmine_example/theme/components/checkbox_theme.dart';
 import 'package:figmine_example/theme/components/chip_theme.dart';
+import 'package:figmine_example/theme/components/dialog_theme.dart';
+import 'package:figmine_example/theme/components/fab_theme.dart';
 import 'package:figmine_example/theme/components/filled_button_theme.dart';
 import 'package:figmine_example/theme/components/input_decoration_theme.dart';
+import 'package:figmine_example/theme/components/navigation_bar_theme.dart';
 import 'package:figmine_example/theme/components/outlined_button_theme.dart';
 import 'package:figmine_example/theme/components/radio_theme.dart';
+import 'package:figmine_example/theme/components/snack_bar_theme.dart';
 import 'package:figmine_example/theme/components/switch_theme.dart';
 import 'package:figmine_example/theme/components/tab_bar_theme.dart';
 import 'package:figmine_example/theme/components/text_button_theme.dart';
+import 'package:figmine_example/theme/components/tooltip_theme.dart';
 import 'package:figmine_example/theme/tokens/figmine.g.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -40,16 +46,22 @@ final class AppTheme {
       textTheme: textTheme,
       scaffoldBackgroundColor: colors.surface,
       appBarTheme: createAppBarTheme(colors, textTheme),
+      bottomSheetTheme: createBottomSheetTheme(colors),
       cardTheme: createCardTheme(colors),
       checkboxTheme: createCheckboxTheme(colors),
       chipTheme: createChipTheme(colors, textTheme),
+      dialogTheme: createDialogTheme(colors, textTheme),
       filledButtonTheme: createFilledButtonTheme(colors, textTheme),
+      floatingActionButtonTheme: createFabTheme(colors),
       inputDecorationTheme: createInputDecorationTheme(colors),
+      navigationBarTheme: createNavigationBarTheme(colors, textTheme),
       outlinedButtonTheme: createOutlinedButtonTheme(colors, textTheme),
       radioTheme: createRadioTheme(colors),
+      snackBarTheme: createSnackBarTheme(colors, textTheme),
       switchTheme: createSwitchTheme(colors),
       tabBarTheme: createTabBarTheme(colors, textTheme),
       textButtonTheme: createTextButtonTheme(colors, textTheme),
+      tooltipTheme: createTooltipTheme(colors, textTheme),
       extensions: [colors],
     );
   }

@@ -1,4 +1,5 @@
 import 'package:figmine/figmine.dart';
+import 'package:figmine_example/app/overlay_demos.dart';
 import 'package:figmine_example/theme/theme.dart';
 import 'package:material_ui/material_ui.dart';
 
@@ -60,6 +61,8 @@ final class ComponentSection extends StatelessWidget {
           onChanged: pick,
           title: const Text('Switch'),
         ),
+        SizedBox(height: context.appSpacing.sectionGap),
+        const OverlayDemos(),
         SizedBox(height: context.appSpacing.sectionGap),
         Wrap(
           spacing: gap,

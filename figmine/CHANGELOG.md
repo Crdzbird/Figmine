@@ -120,6 +120,21 @@
   `figmine tokens` workflow that `init` writes generates the theme on that
   branch, offline when no Figma token is set, and opens or updates the
   pull request. Offline syncs of exported files need no lock file.
+- Floating action buttons, navigation bars, bottom sheets, dialogs, snack
+  bars and toasts, and tooltips get colors, corner radii and sizes from
+  the screens, generated themes, scaffold files and a preview example.
+  The translucent fill around a dialog or sheet counts as its scrim, so
+  the panel inside is measured. Run `figmine scaffold --force` to wire
+  them into an existing theme.
+- Components whose own name states the kind, such as a `Tooltip` set, are
+  preferred over layers that only carry the name, such as an icon called
+  tooltip.
+- Text, icon and outline colors of a component keep reading on its fill in
+  dark mode: a value that would disappear moves to a readable tone of its
+  own hue.
+- The contrast audit skips pairs where both colors are Material defaults,
+  such as the navigation bar of a design without one.
+- `figmine scaffold` formats the files it writes.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files
   removed on sync.

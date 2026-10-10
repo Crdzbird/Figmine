@@ -30,7 +30,9 @@ The run reports `Heavy Figma reads: 0 sent`. File metadata comes from
 
 - Colors: the generated scheme roles and every color token with its mode.
 - Components: filled, outlined and text buttons, a disabled button, an input,
-  chips, a checkbox, a radio and a switch, styled by `AppComponentThemes`.
+  chips, a checkbox, a radio, a switch, a dialog, a bottom sheet, a snack
+  bar, a tooltip, a navigation bar and a floating action button, styled by
+  `AppComponentThemes`.
 - Effects: the gradient and shadow tokens and the type scale.
 
 Page padding and gaps come from `context.appSpacing`, which picks the Spacing

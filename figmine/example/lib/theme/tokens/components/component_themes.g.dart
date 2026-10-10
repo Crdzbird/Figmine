@@ -268,4 +268,84 @@ abstract final class AppComponentThemes {
         labelStyle: t.titleSmall,
         unselectedLabelStyle: t.titleSmall,
       );
+
+  /// Floating action buttons: fill, icon, size and corners.
+  static FloatingActionButtonThemeData fab(AppColorScheme c) =>
+      FloatingActionButtonThemeData(
+        backgroundColor: c.fab,
+        foregroundColor: c.onFab,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppComponents.fabRadius),
+        ),
+        sizeConstraints: const BoxConstraints.tightFor(
+          width: AppComponents.fabSize,
+          height: AppComponents.fabSize,
+        ),
+      );
+
+  /// Navigation bars: fill, height, and labels and icons per state.
+  static NavigationBarThemeData navigationBar(AppColorScheme c, TextTheme t) =>
+      NavigationBarThemeData(
+        height: AppComponents.navigationBarHeight,
+        backgroundColor: c.navigationBar,
+        labelTextStyle: WidgetStateProperty.resolveWith(
+          (s) => t.labelMedium?.copyWith(
+            color: s.contains(WidgetState.selected)
+                ? c.onSurface
+                : c.onNavigationBar,
+          ),
+        ),
+        iconTheme: WidgetStateProperty.resolveWith(
+          (s) => IconThemeData(
+            color: s.contains(WidgetState.selected)
+                ? c.onSecondaryContainer
+                : c.onNavigationBar,
+          ),
+        ),
+      );
+
+  /// Bottom sheets: fill and top corners.
+  static BottomSheetThemeData bottomSheet(AppColorScheme c) =>
+      BottomSheetThemeData(
+        backgroundColor: c.sheet,
+        modalBackgroundColor: c.sheet,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(AppComponents.sheetRadius),
+          ),
+        ),
+      );
+
+  /// Dialogs: fill, corners, title and content text.
+  static DialogThemeData dialog(AppColorScheme c, TextTheme t) =>
+      DialogThemeData(
+        backgroundColor: c.dialog,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppComponents.dialogRadius),
+        ),
+        titleTextStyle: t.headlineSmall?.copyWith(color: c.onDialog),
+        contentTextStyle: t.bodyMedium?.copyWith(color: c.onDialog),
+      );
+
+  /// Snack bars: fill, text, action and corners.
+  static SnackBarThemeData snackBar(AppColorScheme c, TextTheme t) =>
+      SnackBarThemeData(
+        backgroundColor: c.snackbar,
+        contentTextStyle: t.bodyMedium?.copyWith(color: c.onSnackbar),
+        actionTextColor: c.inversePrimary,
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppComponents.snackbarRadius),
+        ),
+      );
+
+  /// Tooltips: fill, corners and text.
+  static TooltipThemeData tooltip(AppColorScheme c, TextTheme t) =>
+      TooltipThemeData(
+        decoration: BoxDecoration(
+          color: c.tooltip,
+          borderRadius: BorderRadius.circular(AppComponents.tooltipRadius),
+        ),
+        textStyle: t.bodySmall?.copyWith(color: c.onTooltip),
+      );
 }

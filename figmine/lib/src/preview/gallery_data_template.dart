@@ -2,8 +2,9 @@
 /// gallery shows.
 abstract final class GalleryDataTemplate {
   /// Functions `_roles(ColorScheme)`, `_styles(TextTheme)`, `_controls()`
-  /// with unselected and selected toggles and tabs, and `_fields()`, the
-  /// text field in its resting, focused, error and disabled states.
+  /// with unselected and selected toggles, a floating action button and
+  /// tabs, and `_fields()`, the text field in its resting, focused, error
+  /// and disabled states.
   static const String source = '''
 Map<String, (Color, Color)> _roles(ColorScheme s) => {
     'primary': (s.primary, s.onPrimary),
@@ -43,6 +44,11 @@ Widget _controls() => Wrap(
       ),
     ),
     Switch(value: false, onChanged: (_) {}),
+    FloatingActionButton(
+      heroTag: null,
+      onPressed: () {},
+      child: const Text('+'),
+    ),
     const SizedBox(
       width: 260,
       child: DefaultTabController(

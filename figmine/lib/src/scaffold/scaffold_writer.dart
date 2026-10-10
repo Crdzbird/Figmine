@@ -2,6 +2,7 @@ import 'package:figmine/src/codegen/generated_file.dart';
 import 'package:figmine/src/scaffold/component_templates.dart';
 import 'package:figmine/src/scaffold/control_templates.dart';
 import 'package:figmine/src/scaffold/scaffold_context.dart';
+import 'package:figmine/src/scaffold/surface_templates.dart';
 import 'package:figmine/src/scaffold/theme_template.dart';
 
 /// Produces the theme scaffold: a theme class, component themes and a
@@ -17,6 +18,7 @@ abstract final class ScaffoldWriter {
       for (final entry in {
         ...ComponentTemplates.render(c),
         ...ControlTemplates.render(c),
+        ...SurfaceTemplates.render(c),
       }.entries)
         'components/${entry.key}': entry.value,
     };

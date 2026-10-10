@@ -1,3 +1,4 @@
+import 'package:figmine/src/inference/color_math.dart';
 import 'package:figmine/src/inference/component_body.dart';
 import 'package:figmine/src/inference/component_kind.dart';
 import 'package:figmine/src/inference/component_sample.dart';
@@ -7,7 +8,8 @@ import 'package:figmine/src/inference/usage_stats.dart';
 
 /// Measures component instances, and spots buttons drawn without components.
 abstract final class SampleReader {
-  /// Reads the measurements of [node] as a [kind].
+  /// Reads the measurements of [node] as a [kind]. The translucent fill
+  /// of a dialog or sheet is its scrim, so the panel inside is measured.
   ///
   /// [name] holds the component set and variant names, when known.
   /// [instance] tells a component instance from a lookalike layer, and
@@ -19,8 +21,9 @@ abstract final class SampleReader {
     bool instance = false,
     String family = '',
   }) {
-    final painted =
-        NodeFacts.fill(node) != null || NodeFacts.stroke(node) != null;
+    final fill = NodeFacts.fill(node);
+    final scrim = kind.modal && fill != null && ColorMath.alpha(fill) < 1;
+    final painted = (fill != null && !scrim) || NodeFacts.stroke(node) != null;
     final background = painted ? node : ComponentBody.of(node);
     final label = NodeFacts.find(node, (n) => n['type'] == 'TEXT');
     final shape = background ?? node;

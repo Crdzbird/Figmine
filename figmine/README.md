@@ -123,7 +123,9 @@ tokens:
   values are derived when the design has only light ones.
 - `AppTypography` with a `TextTheme`.
 - `AppComponentThemes` for filled, outlined and text buttons, inputs, chips,
-  checkboxes, radios, switches and tabs, with every state the design shows.
+  checkboxes, radios, switches, tabs, floating action buttons, navigation
+  bars, bottom sheets, dialogs, snack bars and tooltips, with every state
+  the design shows.
 - `AppComponents` with measured heights, radii and paddings.
 - Shadows as `List<BoxShadow>` and gradients as `Gradient` constants.
 - A `Modes` enum for collections with modes beyond light and dark. For

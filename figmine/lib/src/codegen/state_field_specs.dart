@@ -1,5 +1,6 @@
 import 'package:figmine/src/codegen/control_state_specs.dart';
 import 'package:figmine/src/codegen/outlined_state_specs.dart';
+import 'package:figmine/src/codegen/surface_state_specs.dart';
 
 /// A component state color of the scheme: its field, the key of the
 /// color read from the screens, and the Material default as the `base`
@@ -29,6 +30,7 @@ abstract final class StateFieldSpecs {
   static final List<StateSpec> all = [
     ...OutlinedStateSpecs.all,
     ...ControlStateSpecs.all,
+    ...SurfaceStateSpecs.all,
     spec('button', 'button.enabled.fill', 'primary'),
     spec('onButton', 'button.enabled.label', 'onPrimary'),
     spec('buttonHovered', 'button.hovered.fill', 'button', 'onButton', 0.08),

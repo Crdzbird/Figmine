@@ -3,6 +3,7 @@ import 'package:figmine/src/codegen/scheme_field_builders.dart';
 import 'package:figmine/src/codegen/state_extrapolation.dart';
 import 'package:figmine/src/codegen/state_fallback.dart';
 import 'package:figmine/src/codegen/state_field_specs.dart';
+import 'package:figmine/src/codegen/state_readable.dart';
 import 'package:figmine/src/inference/color_math.dart';
 
 /// A color painted over a base, in light and dark mode.
@@ -65,8 +66,12 @@ abstract final class StateDark {
       );
     }
     best ??= StateExtrapolation.toneShift(spec, field, by[rest]);
-    final dark = best?.dark ?? StateFallback.material(spec, by).darkArgb;
-    final note = best == null ? 'the Material default' : best.note;
+    final chosen = best?.dark ?? StateFallback.material(spec, by).darkArgb;
+    final readable = StateReadable.fix(spec, field, chosen, by[rest]);
+    final dark = readable ?? chosen;
+    final note = readable != null && readable != chosen
+        ? 'its own hue at a tone that reads on `$rest`'
+        : (best == null ? 'the Material default' : best.note);
     return (
       name: field.name,
       doc: '$doc The dark value is $note.',

@@ -78,10 +78,15 @@ final class ProjectFiles {
   }
 
   /// Formats [directory] with `dart format`. Failures are reported, not thrown.
-  Future<String?> format(String directory) async {
+  Future<String?> format(String directory) async =>
+      await formatAll([directory]);
+
+  /// Formats the files and folders at [paths] in one `dart format` run.
+  Future<String?> formatAll(List<String> paths) async {
+    if (paths.isEmpty) return null;
     final result = await Process.run(Platform.resolvedExecutable, [
       'format',
-      p.join(root, directory),
+      for (final path in paths) p.join(root, path),
     ]);
     if (result.exitCode == 0) return null;
     return '${result.stderr}';

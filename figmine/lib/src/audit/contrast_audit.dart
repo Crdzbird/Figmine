@@ -33,17 +33,22 @@ abstract final class ContrastAudit {
     }.toList();
   }
 
-  /// The pairs of [fields] that fail their target.
+  /// The pairs of [fields] that fail their target. A pair of two Material
+  /// defaults, such as the navigation bar of a design without one, only
+  /// repeats the roles it copies and is skipped.
   static List<ContrastFinding> run(List<SchemeField> fields) {
     final byName = {for (final f in fields) f.name: f};
     return [
       for (final (fg, bg, required) in pairs(fields))
         if (byName[fg] case final f?)
           if (byName[bg] case final b?)
-            for (final mode in const ['light', 'dark'])
-              ?_check(f, b, mode, required),
+            if (!_default(f) || !_default(b))
+              for (final mode in const ['light', 'dark'])
+                ?_check(f, b, mode, required),
     ];
   }
+
+  static bool _default(SchemeField f) => f.doc.startsWith('Material default');
 
   static String? _container(String name) =>
       '${name[2].toLowerCase()}${name.substring(3)}';
