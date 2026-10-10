@@ -108,7 +108,7 @@ export, and a hot reload shows it in the running app.
 | `generate` | Reads Figma and writes the code, the lock file and a change report. `--offline` uses the lock file and cache only, `--watch` regenerates whenever the token files change. |
 | `scaffold` | Writes the theme class and component themes once. `--force` updates them to the current templates. |
 | `adopt` | Finds hard coded colors, spacings and radii that match tokens. `--apply` replaces them, `--since <ref>` checks only new lines. |
-| `score` | Grades the theme against reference values, for tuning and CI. |
+| `score` | Grades the theme against reference values, for tuning and CI. `--inferred` grades what the screens alone give. |
 | `check` | Tells whether Figma has a newer version than the lock file. |
 | `preview` | Renders light and dark images of the theme for pull requests. |
 | `exporter` | Writes the Figma plugin. |

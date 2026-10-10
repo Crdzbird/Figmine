@@ -1,16 +1,18 @@
+import 'package:figmine/src/codegen/scheme_fields.dart';
+import 'package:figmine/src/codegen/scheme_matcher.dart';
+import 'package:figmine/src/codegen/token_index.dart';
 import 'package:figmine/src/config/config_exception.dart';
 import 'package:figmine/src/config/figmine_config.dart';
+import 'package:figmine/src/config/scheme_config.dart';
+import 'package:figmine/src/config/tokens_config.dart';
 import 'package:figmine/src/figma/figma_client.dart';
 import 'package:figmine/src/figma/read_cache.dart';
 import 'package:figmine/src/inference/design_inference.dart';
+import 'package:figmine/src/inference/inference_result.dart';
 import 'package:figmine/src/pipeline/project_files.dart';
 import 'package:figmine/src/score/offline_client.dart';
 import 'package:figmine/src/score/theme_snapshot.dart';
 import 'package:figmine/src/screens/screen_loader.dart';
-import 'package:figmine/src/sources/collection_modes.dart';
-import 'package:figmine/src/tokens/color_value.dart';
-import 'package:figmine/src/tokens/design_token.dart';
-import 'package:figmine/src/tokens/token_collection.dart';
 import 'package:path/path.dart' as p;
 
 /// Infers a theme from the cached screens alone, ignoring every token.
@@ -36,13 +38,10 @@ abstract final class InferredSnapshot {
       config: config.inference,
     ).load(config.fileKey);
     final result = DesignInference.analyze(screens, config.tokens);
-    final colors = result.colors;
-    final modes = colors == null
-        ? null
-        : CollectionModes.pick(colors.modes, config.tokens);
+    final fields = scheme(result, config.tokens);
     return (
-      light: _colors(colors, modes?.light),
-      dark: _colors(colors, modes?.dark),
+      light: {for (final f in fields) f.name: f.lightArgb},
+      dark: {for (final f in fields) f.name: f.darkArgb},
       components: {
         for (final e in result.components.entries) e.key: e.value.value,
       },
@@ -53,8 +52,23 @@ abstract final class InferredSnapshot {
     );
   }
 
-  static Map<String, int> _colors(TokenCollection? colors, String? mode) => {
-    for (final t in colors?.tokens ?? const <DesignToken>[])
-      if (t.values[mode]?.value case final ColorValue c) t.name: c.argb,
-  };
+  /// The color scheme `generate` would build from [result] alone, with
+  /// derived roles such as containers, and no hand set roles.
+  static List<SchemeField> scheme(InferenceResult result, TokensConfig c) {
+    final collections = [?result.colors, ?result.layout];
+    final index = TokenIndex(
+      collections: collections,
+      prefix: 'App',
+      config: c,
+    );
+    return SchemeFields.resolve(
+      matcher: SchemeMatcher(
+        collections,
+        const SchemeConfig(),
+        evidence: result.evidence,
+      ),
+      index: index,
+      tokens: c,
+    );
+  }
 }

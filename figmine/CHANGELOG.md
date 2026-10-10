@@ -173,6 +173,9 @@
   as bottom sheets, and `type=modal` no longer makes a component a dialog.
 - When tokens come from exported files, the file's styles are not read
   from Figma, saving heavy API reads.
+- `figmine score --inferred` grades the color scheme `generate` would
+  build from the screens alone, derived roles such as containers
+  included, instead of only the roles inference names itself.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files
   removed on sync.
