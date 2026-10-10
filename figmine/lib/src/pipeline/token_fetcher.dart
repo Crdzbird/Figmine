@@ -69,7 +69,7 @@ final class TokenFetcher {
     final key = config.fileKey;
     await client.cache?.pin(key, meta.version);
     final canvas = CanvasFetcher(client: client, config: config, log: log);
-    final screens = await canvas.screens();
+    final screens = await canvas.screens(offline: offline);
     final files = await FileTokens.load(root, config.tokens);
     Future<List<StyleNode>>? pending;
     Future<List<StyleNode>> styles() => pending ??= StyleCatalog(

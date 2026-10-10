@@ -163,6 +163,9 @@
   variables are readable and how many styles it publishes, and suggests
   the exporter plugin when variables are out of reach.
 - The workflows `figmine init` writes use `actions/checkout@v7`.
+- Offline syncs skip screen inference when no screens were cached for the
+  version, instead of failing, and modes classes of plain values no
+  longer import Flutter.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files
   removed on sync.

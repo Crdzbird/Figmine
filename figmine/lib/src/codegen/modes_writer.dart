@@ -1,6 +1,7 @@
 import 'package:figmine/src/codegen/codegen_context.dart';
 import 'package:figmine/src/codegen/modes_members.dart';
 import 'package:figmine/src/codegen/modes_plan.dart';
+import 'package:figmine/src/codegen/token_dart_types.dart';
 import 'package:figmine/src/codegen/token_index.dart';
 import 'package:figmine/src/config/tokens_config.dart';
 import 'package:figmine/src/sources/collection_modes.dart';
@@ -32,7 +33,10 @@ abstract final class ModesWriter {
     final file = index.fileOf[c.name]!;
     return [
       context.header(
-        imports: [context.materialImport, context.uriOfFile(file)],
+        imports: [
+          if (_flutter(p)) context.materialImport,
+          context.uriOfFile(file),
+        ],
       ),
       '/// The values of Figma collection `${c.name}` in one mode, to switch',
       '/// at runtime: ${c.modes.join(', ')}.',
@@ -55,4 +59,10 @@ abstract final class ModesWriter {
       '',
     ].join('\n');
   }
+
+  /// Whether the class needs Flutter: for the window size getter, or for
+  /// a value type such as `Color`.
+  static bool _flutter(ModesPlan p) =>
+      p.sizes != null ||
+      p.fields.any((f) => !TokenDartTypes.core.contains(f.token.type));
 }

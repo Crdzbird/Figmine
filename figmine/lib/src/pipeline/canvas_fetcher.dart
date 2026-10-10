@@ -1,6 +1,7 @@
 import 'package:figmine/src/config/figmine_config.dart';
 import 'package:figmine/src/config/inference_mode.dart';
 import 'package:figmine/src/figma/figma_client.dart';
+import 'package:figmine/src/figma/figma_exception.dart';
 import 'package:figmine/src/pipeline/offline_source.dart';
 import 'package:figmine/src/screens/screen_loader.dart';
 import 'package:figmine/src/screens/screen_set.dart';
@@ -27,13 +28,21 @@ final class CanvasFetcher {
   /// Receives progress messages.
   final void Function(String message) log;
 
-  /// The screens to analyze, or null when inference is off.
-  Future<ScreenSet?> screens() async {
+  /// The screens to analyze, or null when inference is off. [offline],
+  /// screens never cached for this version are skipped, not an error.
+  Future<ScreenSet?> screens({bool offline = false}) async {
     if (config.inference.mode == InferenceMode.off) return null;
-    final screens = await ScreenLoader(
-      client: client,
-      config: config.inference,
-    ).load(config.fileKey);
+    final ScreenSet screens;
+    try {
+      screens = await ScreenLoader(
+        client: client,
+        config: config.inference,
+      ).load(config.fileKey);
+    } on FigmaException catch (error) {
+      if (!offline || error.statusCode != 404) rethrow;
+      log('No screens cached for this version, so nothing is inferred.');
+      return null;
+    }
     log('Loaded ${screens.frames.length} screens for inference.');
     return screens;
   }

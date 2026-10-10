@@ -12,6 +12,25 @@ import 'package:figmine/src/tokens/token_type.dart';
 import 'package:figmine/src/tokens/token_value.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+String _write(TokenCollection collection) {
+  const config = TokensConfig();
+  final layout = FileLayout();
+  final index = TokenIndex(
+    collections: [collection],
+    prefix: 'App',
+    config: config,
+    layout: layout,
+  );
+  final context = CodegenContext(
+    prefix: 'App',
+    project: const ProjectInfo(packageName: 'app'),
+    meta: const FigmaFileMeta(name: 'F', version: '1', lastModified: ''),
+    layout: layout,
+    directory: 'lib/theme/tokens',
+  );
+  return ModesWriter.write(context, index, collection);
+}
+
 void main() {
   test('breakpoint modes map onto window size classes, apps first', () {
     expect(ModeBreakpoints.of(['Desktop', 'Mobile', 'Tablet']), {
@@ -43,26 +62,29 @@ void main() {
         ),
       ],
     );
-    const config = TokensConfig();
-    final layout = FileLayout();
-    final index = TokenIndex(
-      collections: [collection],
-      prefix: 'App',
-      config: config,
-      layout: layout,
-    );
-    final context = CodegenContext(
-      prefix: 'App',
-      project: const ProjectInfo(packageName: 'app'),
-      meta: const FigmaFileMeta(name: 'F', version: '1', lastModified: ''),
-      layout: layout,
-      directory: 'lib/theme/tokens',
-    );
-    expect(ModesWriter.applies(collection, config), isTrue);
-    final source = ModesWriter.write(context, index, collection);
+    expect(ModesWriter.applies(collection, const TokensConfig()), isTrue);
+    final source = _write(collection);
     expect(source, contains('enum AppResponsiveModes {'));
     expect(source, contains('  mobile('));
     expect(source, contains('if (width < 600) return mobile;'));
     expect(source, contains('AppResponsiveModes get appResponsive =>'));
+  });
+
+  test('modes of plain values need no Flutter import', () {
+    const collection = TokenCollection(
+      name: 'Font theme',
+      modes: ['Baseline', 'Wireframe'],
+      tokens: [
+        DesignToken(
+          path: ['Brand'],
+          type: TokenType.string,
+          values: {
+            'Baseline': TokenValue('Roboto'),
+            'Wireframe': TokenValue('Inter'),
+          },
+        ),
+      ],
+    );
+    expect(_write(collection), isNot(contains('material')));
   });
 }

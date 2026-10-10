@@ -6,6 +6,7 @@ import 'package:figmine/src/figma/figma_exception.dart';
 import 'package:figmine/src/figma/read_cache.dart';
 import 'package:figmine/src/lock/lock_file.dart';
 import 'package:figmine/src/lock/lock_json.dart';
+import 'package:figmine/src/pipeline/canvas_fetcher.dart';
 import 'package:figmine/src/pipeline/offline_source.dart';
 import 'package:figmine/src/score/offline_client.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -60,5 +61,18 @@ void main() {
     });
     final meta = await OfflineSource.meta(dir.path, config);
     expect((meta.name, meta.version, meta.lastModified), ('Brand', '', 'T'));
+  });
+
+  test('offline, screens never cached are skipped, not an error', () async {
+    final logs = <String>[];
+    final screens = await CanvasFetcher(
+      client: FigmaClient(httpClient: OfflineClient(), token: 'offline'),
+      config: FigmineConfig.fromYaml(const {
+        'figma': {'file_key': 'AbC123xyzAbC'},
+      }),
+      log: logs.add,
+    ).screens(offline: true);
+    expect(screens, isNull);
+    expect(logs.single, startsWith('No screens cached'));
   });
 }
