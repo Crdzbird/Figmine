@@ -193,6 +193,11 @@
   palette, a gray for a gray surface or the same hue and tint for a tinted
   one, sit on the side of the surface away from the text, and are at least
   1.5 tones apart, so state tints and documentation boards stay out.
+- Derived roles keep a vivid brand's chroma in the primary palette, as the
+  Material 3 baseline does, instead of the muted chroma of
+  `ColorScheme.fromSeed`, and dark roles take the light primary's chroma,
+  which a pale dark primary cannot hold. Muted seeds still match
+  `fromSeed`, and roles snapped onto a design's own scale do not change.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files
   removed on sync.

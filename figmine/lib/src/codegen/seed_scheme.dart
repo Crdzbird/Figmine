@@ -1,9 +1,14 @@
+import 'dart:math' as math;
+
+import 'package:figmine/src/codegen/seed_roles.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
 
 /// Derives ColorScheme roles from a seed color at generation time.
 ///
-/// Uses the tonal spot scheme with standard contrast, the same algorithm as
-/// `ColorScheme.fromSeed`, so derived roles match Flutter. A gray seed, such
+/// Uses the tonal spot scheme with standard contrast, the algorithm of
+/// `ColorScheme.fromSeed`, but keeps a vivid seed's chroma in the primary
+/// palette, so derived primary roles stay on the brand's own palette, as
+/// in the Material 3 baseline. A gray seed, such
 /// as the near black of a monochrome brand, uses the monochrome scheme, as
 /// `DynamicSchemeVariant.monochrome` does, instead of inventing hues.
 abstract final class SeedScheme {
@@ -13,64 +18,48 @@ abstract final class SeedScheme {
   /// Whether [seed] is too gray to carry a hue: perceptual chroma below 8.
   static bool isGray(int seed) => Hct.fromInt(seed).chroma < 8;
 
-  /// Returns every ColorScheme role as ARGB for [seed].
-  static Map<String, int> derive(int seed, {required bool dark}) {
+  /// Returns every ColorScheme role as ARGB for [seed], with the primary
+  /// palette at least as vivid as [chroma], such as the light primary's.
+  static Map<String, int> derive(
+    int seed, {
+    required bool dark,
+    double chroma = 0,
+  }) {
     final hct = Hct.fromInt(seed);
     final scheme = isGray(seed)
         ? SchemeMonochrome(sourceColorHct: hct, isDark: dark, contrastLevel: 0)
-        : SchemeTonalSpot(sourceColorHct: hct, isDark: dark, contrastLevel: 0);
+        : _vivid(hct, dark: dark, chroma: chroma);
     return {
-      for (final entry in _colors.entries)
+      for (final entry in SeedRoles.colors.entries)
         entry.key: entry.value.getArgb(scheme),
     };
   }
 
-  static final Map<String, DynamicColor> _colors = {
-    'primary': MaterialDynamicColors.primary,
-    'onPrimary': MaterialDynamicColors.onPrimary,
-    'primaryContainer': MaterialDynamicColors.primaryContainer,
-    'onPrimaryContainer': MaterialDynamicColors.onPrimaryContainer,
-    'primaryFixed': MaterialDynamicColors.primaryFixed,
-    'primaryFixedDim': MaterialDynamicColors.primaryFixedDim,
-    'onPrimaryFixed': MaterialDynamicColors.onPrimaryFixed,
-    'onPrimaryFixedVariant': MaterialDynamicColors.onPrimaryFixedVariant,
-    'secondary': MaterialDynamicColors.secondary,
-    'onSecondary': MaterialDynamicColors.onSecondary,
-    'secondaryContainer': MaterialDynamicColors.secondaryContainer,
-    'onSecondaryContainer': MaterialDynamicColors.onSecondaryContainer,
-    'secondaryFixed': MaterialDynamicColors.secondaryFixed,
-    'secondaryFixedDim': MaterialDynamicColors.secondaryFixedDim,
-    'onSecondaryFixed': MaterialDynamicColors.onSecondaryFixed,
-    'onSecondaryFixedVariant': MaterialDynamicColors.onSecondaryFixedVariant,
-    'tertiary': MaterialDynamicColors.tertiary,
-    'onTertiary': MaterialDynamicColors.onTertiary,
-    'tertiaryContainer': MaterialDynamicColors.tertiaryContainer,
-    'onTertiaryContainer': MaterialDynamicColors.onTertiaryContainer,
-    'tertiaryFixed': MaterialDynamicColors.tertiaryFixed,
-    'tertiaryFixedDim': MaterialDynamicColors.tertiaryFixedDim,
-    'onTertiaryFixed': MaterialDynamicColors.onTertiaryFixed,
-    'onTertiaryFixedVariant': MaterialDynamicColors.onTertiaryFixedVariant,
-    'error': MaterialDynamicColors.error,
-    'onError': MaterialDynamicColors.onError,
-    'errorContainer': MaterialDynamicColors.errorContainer,
-    'onErrorContainer': MaterialDynamicColors.onErrorContainer,
-    'surface': MaterialDynamicColors.surface,
-    'onSurface': MaterialDynamicColors.onSurface,
-    'surfaceDim': MaterialDynamicColors.surfaceDim,
-    'surfaceBright': MaterialDynamicColors.surfaceBright,
-    'surfaceContainerLowest': MaterialDynamicColors.surfaceContainerLowest,
-    'surfaceContainerLow': MaterialDynamicColors.surfaceContainerLow,
-    'surfaceContainer': MaterialDynamicColors.surfaceContainer,
-    'surfaceContainerHigh': MaterialDynamicColors.surfaceContainerHigh,
-    'surfaceContainerHighest': MaterialDynamicColors.surfaceContainerHighest,
-    'onSurfaceVariant': MaterialDynamicColors.onSurfaceVariant,
-    'outline': MaterialDynamicColors.outline,
-    'outlineVariant': MaterialDynamicColors.outlineVariant,
-    'shadow': MaterialDynamicColors.shadow,
-    'scrim': MaterialDynamicColors.scrim,
-    'inverseSurface': MaterialDynamicColors.inverseSurface,
-    'onInverseSurface': MaterialDynamicColors.inverseOnSurface,
-    'inversePrimary': MaterialDynamicColors.inversePrimary,
-    'surfaceTint': MaterialDynamicColors.primary,
-  };
+  /// The tonal spot scheme with the primary palette at the seed's own
+  /// chroma when it is above tonal spot's 36, as Material's original
+  /// palettes and the Material 3 baseline keep a vivid brand vivid.
+  static DynamicScheme _vivid(
+    Hct hct, {
+    required bool dark,
+    required double chroma,
+  }) {
+    final spot = SchemeTonalSpot(
+      sourceColorHct: hct,
+      isDark: dark,
+      contrastLevel: 0,
+    );
+    return DynamicScheme(
+      sourceColorHct: hct,
+      variant: spot.variant,
+      isDark: dark,
+      primaryPalette: TonalPalette.of(
+        hct.hue,
+        [hct.chroma, chroma, 36.0].reduce(math.max),
+      ),
+      secondaryPalette: spot.secondaryPalette,
+      tertiaryPalette: spot.tertiaryPalette,
+      neutralPalette: spot.neutralPalette,
+      neutralVariantPalette: spot.neutralVariantPalette,
+    );
+  }
 }

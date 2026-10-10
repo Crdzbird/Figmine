@@ -57,9 +57,9 @@ void main() {
   });
 
   group(SeedScheme, () {
-    test('matches ColorScheme.fromSeed for every role', () {
+    test('matches ColorScheme.fromSeed for a muted seed', () {
       for (final brightness in Brightness.values) {
-        const seed = Color(0xFF3567F6);
+        const seed = Color(0xFF6B5E8C);
         final flutter = ColorScheme.fromSeed(
           seedColor: seed,
           brightness: brightness,

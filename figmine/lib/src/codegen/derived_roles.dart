@@ -5,10 +5,12 @@ import 'package:figmine/src/codegen/value_expressions.dart';
 import 'package:figmine/src/config/tokens_config.dart';
 import 'package:figmine/src/sources/collection_modes.dart';
 import 'package:figmine/src/tokens/color_value.dart';
+import 'package:material_color_utilities/material_color_utilities.dart';
 
 /// ColorScheme roles derived from the seed, for roles Figma lacks.
 final class DerivedRoles {
-  /// Derives light and dark roles from the [seed] token.
+  /// Derives light and dark roles from the [seed] token. Dark roles keep
+  /// the light seed's chroma, as a pale dark primary cannot hold it.
   factory(ColorCandidate? seed, TokensConfig config) {
     final modes = seed == null
         ? null
@@ -17,7 +19,11 @@ final class DerivedRoles {
     final dark = _argb(seed?.token.values[modes?.dark]?.value) ?? light;
     return DerivedRoles._(
       light: SeedScheme.derive(light ?? SeedScheme.baseline, dark: false),
-      dark: SeedScheme.derive(dark ?? SeedScheme.baseline, dark: true),
+      dark: SeedScheme.derive(
+        dark ?? SeedScheme.baseline,
+        dark: true,
+        chroma: light == null ? 0 : Hct.fromInt(light).chroma,
+      ),
       seedName: seed == null ? 'the Material baseline' : seed.token.name,
     );
   }
