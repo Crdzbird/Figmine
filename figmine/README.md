@@ -139,6 +139,20 @@ export, and a hot reload shows it in the running app.
 
 `lib/theme` is written once and is yours: tune the component themes there.
 
+### Token gallery
+
+`catalog.g.dart` lists every token catalogue as `appTokenCatalog`, and the
+`FigmineGallery` widget shows it with a preview of each value: swatches,
+sizes, shadows, gradients, curves, durations, weights and flags. It only
+needs the widgets layer, so it fits a debug page or a Widgetbook use case:
+
+```dart
+WidgetbookUseCase(
+  name: 'Design tokens',
+  builder: (context) => const FigmineGallery(catalog: appTokenCatalog),
+)
+```
+
 ## Keeping the app in sync
 
 `init` adds three GitHub workflows:

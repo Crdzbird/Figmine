@@ -27,6 +27,7 @@ final class FileLayout {
     (_, FixedFile.barrel) => 'figmine.g.dart',
     (_, FixedFile.deprecated) => 'deprecated.g.dart',
     (_, FixedFile.icons) => 'icons/icons.g.dart',
+    (_, FixedFile.catalog) => 'catalog.g.dart',
     (OutputLayout.domain, FixedFile.colorScheme) => 'color/color_scheme.g.dart',
     (OutputLayout.domain, FixedFile.themeContext) =>
       'color/theme_context.g.dart',

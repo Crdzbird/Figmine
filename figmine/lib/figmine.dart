@@ -4,4 +4,5 @@
 library;
 
 export 'src/tokens/figmine_token_entry.dart';
+export 'src/widgets/figmine_gallery.dart';
 export 'src/widgets/figmine_icon.dart';

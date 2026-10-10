@@ -1,3 +1,4 @@
+import 'package:figmine/src/codegen/catalog_writer.dart';
 import 'package:figmine/src/codegen/collection_writer.dart';
 import 'package:figmine/src/codegen/color_scheme_writer.dart';
 import 'package:figmine/src/codegen/component_themes_writer.dart';
@@ -35,10 +36,6 @@ abstract final class CodeEmitter {
     );
     final kept = DeprecatedMembers.byClass(deprecated);
     final live = {for (final e in index.entries) e.address.className};
-    final orphans = {
-      for (final entry in kept.entries)
-        if (!live.contains(entry.key)) entry.key: entry.value,
-    };
     final icons = config.icons;
     String at(FixedFile file) => context.fileOf(file);
     final sources = <String, String>{
@@ -64,6 +61,7 @@ abstract final class CodeEmitter {
         if (ModesWriter.applies(c, config.tokens))
           ModesWriter.path(index, c): ModesWriter.write(context, index, c),
       at(FixedFile.componentThemes): ComponentThemesWriter.write(context),
+      at(FixedFile.catalog): CatalogWriter.write(context, index, tokens),
       if (icons != null)
         at(FixedFile.icons): IconsWriter.write(
           context,
@@ -71,17 +69,8 @@ abstract final class CodeEmitter {
           icons.output,
         ),
     };
-    if (orphans.isNotEmpty) {
-      sources[at(FixedFile.deprecated)] = DeprecatedMembers.library(
-        context.header(
-          imports: [
-            if (orphans.values.expand((m) => m.values).any(_isColor))
-              context.materialImport,
-          ],
-        ),
-        orphans,
-      );
-    }
+    final orphans = DeprecatedMembers.orphans(context, kept, live);
+    if (orphans != null) sources[at(FixedFile.deprecated)] = orphans;
     sources[at(FixedFile.barrel)] = context.header(
       exports: [for (final file in sources.keys) context.uriOfFile(file)],
     );
@@ -93,6 +82,4 @@ abstract final class CodeEmitter {
         ),
     ];
   }
-
-  static bool _isColor(LockSymbol symbol) => symbol.type == 'Color';
 }

@@ -33,6 +33,7 @@ shows the platform font. File metadata comes from
 ## What the app shows
 
 - Colors: the generated scheme roles and every color token with its mode.
+- Tokens: `FigmineGallery` over the generated `appTokenCatalog`.
 - Components: filled, outlined and text buttons, a disabled button, an input,
   chips, a checkbox, a radio, a switch, a dialog, a bottom sheet, a snack
   bar, a tooltip, a navigation bar and a floating action button, styled by

@@ -1,3 +1,4 @@
+import 'package:figmine/src/codegen/codegen_context.dart';
 import 'package:figmine/src/codegen/dart_source.dart';
 import 'package:figmine/src/codegen/doc_comment.dart';
 import 'package:figmine/src/lock/lock_symbol.dart';
@@ -31,6 +32,26 @@ abstract final class DeprecatedMembers {
         ..writeln();
     }
     return buffer.toString();
+  }
+
+  static const Set<String> _core = {'double', 'String', 'bool', 'Duration'};
+
+  /// The library of the classes in [kept] that no [live] class carries on,
+  /// or null when every class still exists.
+  static String? orphans(
+    CodegenContext context,
+    Map<String, Map<String, LockSymbol>> kept,
+    Set<String> live,
+  ) {
+    final gone = {
+      for (final entry in kept.entries)
+        if (!live.contains(entry.key)) entry.key: entry.value,
+    };
+    if (gone.isEmpty) return null;
+    final symbols = gone.values.expand((m) => m.values);
+    final flutter = symbols.any((s) => !_core.contains(s.type));
+    final imports = [if (flutter) context.materialImport];
+    return library(context.header(imports: imports), gone);
   }
 
   /// A library with whole classes that no longer exist.

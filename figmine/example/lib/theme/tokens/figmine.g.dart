@@ -2,6 +2,7 @@
 /// not edit by hand.
 library;
 
+export 'package:figmine_example/theme/tokens/catalog.g.dart';
 export 'package:figmine_example/theme/tokens/color/color_scheme.g.dart';
 export 'package:figmine_example/theme/tokens/color/primitives.g.dart';
 export 'package:figmine_example/theme/tokens/color/semantic.g.dart';

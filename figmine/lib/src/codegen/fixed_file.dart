@@ -18,6 +18,9 @@ enum FixedFile {
   /// The `AppIcons` asset paths.
   icons,
 
+  /// Every token catalogue, for galleries.
+  catalog,
+
   /// Constants removed from Figma that code still uses.
   deprecated,
 

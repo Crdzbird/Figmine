@@ -22,7 +22,7 @@ final class TokenGalleryPage extends StatelessWidget {
     final isDark = context.appColorScheme.brightness == Brightness.dark;
     final padding = EdgeInsets.all(context.appSpacing.pageMargin);
     return DefaultTabController(
-      length: 3,
+      length: 4,
       child: Scaffold(
         appBar: AppBar(
           title: const Text('figmine tokens'),
@@ -35,8 +35,10 @@ final class TokenGalleryPage extends StatelessWidget {
             ),
           ],
           bottom: const TabBar(
+            isScrollable: true,
             tabs: [
               Tab(text: 'Colors'),
+              Tab(text: 'Tokens'),
               Tab(text: 'Components'),
               Tab(text: 'Effects'),
             ],
@@ -50,6 +52,7 @@ final class TokenGalleryPage extends StatelessWidget {
         body: TabBarView(
           children: [
             ColorSection(padding: padding),
+            FigmineGallery(catalog: appTokenCatalog, padding: padding),
             ComponentSection(padding: padding),
             EffectsSection(padding: padding),
           ],

@@ -1,3 +1,4 @@
+import 'package:figmine/figmine.dart';
 import 'package:figmine_example/app/component_section.dart';
 import 'package:figmine_example/app/example_app.dart';
 import 'package:figmine_example/theme/theme.dart';
@@ -50,5 +51,13 @@ void main() {
     await tester.tap(find.text('Snack bar'));
     await tester.pump();
     expect(find.byType(SnackBar), findsOneWidget);
+  });
+
+  testWidgets('the tokens tab shows every catalogue', (tester) async {
+    await tester.pumpWidget(ExampleApp(mode: ValueNotifier(ThemeMode.light)));
+    await tester.tap(find.text('Tokens'));
+    await tester.pumpAndSettle();
+    expect(find.byType(FigmineGallery), findsOneWidget);
+    expect(find.text('Primitives'), findsOneWidget);
   });
 }

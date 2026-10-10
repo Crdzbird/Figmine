@@ -154,6 +154,9 @@
   or `figmine.yaml` change, so a new export from the plugin reaches the
   running app with a hot reload. A file read halfway through a save is
   logged and skipped.
+- `FigmineGallery` shows every token of the generated `appTokenCatalog`
+  with a preview of its value. It needs only the widgets layer, so it
+  works as a debug page or a Widgetbook use case.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files
   removed on sync.
