@@ -54,7 +54,7 @@ void main() {
 
   test('a closed terminal stops asking', () async {
     final (prompt, _) = _prompt([]);
-    final FileOffer offer = (name: null, variables: 3, styles: null);
+    const FileOffer offer = (name: null, variables: 3, styles: null);
     await expectLater(
       InitWizard.ask(prompt, (key) async => offer),
       throwsFormatException,
