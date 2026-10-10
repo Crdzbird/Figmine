@@ -149,7 +149,8 @@
 - CI renders the example theme in light and dark mode and uploads the
   images, and `tool/corpus.dart` scores local design files against their
   references and fails when inference regresses below the committed
-  baseline.
+  baseline. CI scores the Simple Design System corpus, published as the
+  `corpus-v1` release asset.
 - `figmine generate --watch` regenerates offline whenever the token files
   or `figmine.yaml` change, so a new export from the plugin reaches the
   running app with a hot reload. A file read halfway through a save is

@@ -50,6 +50,16 @@ jobs:
         working-directory: figmine
         run: flutter test --coverage
 
+      - name: Score the inference corpus
+        working-directory: figmine
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download corpus-v1 --repo "$GITHUB_REPOSITORY" \
+            --pattern corpus-sds.tar.gz --dir "$RUNNER_TEMP"
+          tar -xzf "$RUNNER_TEMP/corpus-sds.tar.gz" -C "$RUNNER_TEMP"
+          dart run tool/corpus.dart "$RUNNER_TEMP/figmine_sds"
+
       - name: Example matches the generator
         working-directory: figmine/example
         run: |

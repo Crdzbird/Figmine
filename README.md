@@ -43,6 +43,9 @@ screens alone, and exits with code 1 when a score drops below
 `tool/corpus_baseline.json`. Add `--update` to record new scores after an
 intended change.
 
+CI scores the public part of the corpus, the Simple Design System by Figma,
+from the [`corpus-v1` release](https://github.com/Crdzbird/Figmine/releases/tag/corpus-v1).
+
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [license_link]: https://opensource.org/licenses/MIT
 [very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg

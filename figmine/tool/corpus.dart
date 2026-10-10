@@ -9,7 +9,8 @@ import 'package:path/path.dart' as p;
 /// Usage: `dart run tool/corpus.dart [--update] <project folder>...`
 ///
 /// Each project needs `figmine.yaml`, its lock file, the `.figmine` cache
-/// and one `*reference.yaml`. Exits with code 1 when a score drops.
+/// and one `*reference.yaml`, but no dependency on figmine: it runs this
+/// package's own command. Exits with code 1 when a score drops.
 Future<void> main(List<String> args) async {
   final update = args.contains('--update');
   final projects = args.where((a) => !a.startsWith('--')).toList();
@@ -63,9 +64,14 @@ Future<void> main(List<String> args) async {
 
 Future<String> _run(String project, List<String> args) async {
   final env = {...Platform.environment}..remove('FIGMA_TOKEN');
+  final package = p.dirname(p.dirname(Platform.script.toFilePath()));
   final result = await Process.run(
     Platform.resolvedExecutable,
-    ['run', 'figmine', ...args],
+    [
+      '--packages=${p.join(package, '.dart_tool', 'package_config.json')}',
+      p.join(package, 'bin', 'figmine.dart'),
+      ...args,
+    ],
     workingDirectory: project,
     environment: env,
     includeParentEnvironment: false,
