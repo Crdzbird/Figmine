@@ -27,6 +27,22 @@ flutter test
 
 The plugin and relay tests run with Node.js when it is installed.
 
+### Inference regression corpus
+
+Heuristic changes are checked against real design files kept outside the
+repository. Each corpus folder is a figmine project with its lock file, its
+`.figmine` cache and a `*reference.yaml` of expected values:
+
+```bash
+cd figmine
+dart run tool/corpus.dart ../../figmine_playground ../../figmine_sds
+```
+
+It regenerates each project offline, scores the generated theme and the
+screens alone, and exits with code 1 when a score drops below
+`tool/corpus_baseline.json`. Add `--update` to record new scores after an
+intended change.
+
 [license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
 [license_link]: https://opensource.org/licenses/MIT
 [very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
