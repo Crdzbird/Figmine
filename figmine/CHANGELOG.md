@@ -176,6 +176,12 @@
 - `figmine score --inferred` grades the color scheme `generate` would
   build from the screens alone, derived roles such as containers
   included, instead of only the roles inference names itself.
+- Colors drawn on a dark panel inside a light screen, such as the action
+  of a snack bar or a dark mode example on a documentation page, count as
+  inverse colors, not light mode ones. Pale secondary and tertiary
+  candidates, below 3:1 against the surface, need three screens, so dark
+  mode swatches no longer become light accents and the roles are derived
+  from primary instead.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files
   removed on sync.

@@ -15,7 +15,8 @@ abstract final class AccentRoles {
   /// stands out from the surface; otherwise the most common colored button
   /// fill, or the most used accent.
   /// Secondary and tertiary stay out of the hues of error, success and
-  /// warning colors, and skip pale tints, which serve as containers.
+  /// warning colors, skip pale tints, which serve as containers, and need
+  /// several screens when they are pale.
   /// Accents found on a single screen, such as annotation colors on a
   /// documentation board, do not count when there are three or more.
   static void infer(
@@ -50,7 +51,7 @@ abstract final class AccentRoles {
     final others = ranked
         .where((c) => c != error && ColorMath.distinct(c, primary))
         .where((c) => feedback.every((f) => ColorMath.hueDistance(c, f) >= 20))
-        .where((c) => ColorMath.contrast(c, surface ?? ColorMath.white) >= 1.5)
+        .where((c) => _stands(c, surface ?? ColorMath.white, s))
         .toList();
     final secondary = others.firstOrNull;
     final tertiary = others
@@ -69,6 +70,16 @@ abstract final class AccentRoles {
         evidence: 'Readable on $role.',
       );
     }
+  }
+
+  /// Whether [c] stands out from [surface] as an accent: 3:1, the
+  /// minimum for UI components, or a paler color that recurs on at least
+  /// three screens, as pale tones on one or two screens are usually
+  /// swatches or examples of another mode.
+  static bool _stands(int c, int surface, UsageStats s) {
+    final contrast = ColorMath.contrast(c, surface);
+    if (contrast >= 3) return true;
+    return contrast >= 1.5 && (s.colorFrames[c]?.length ?? 0) >= 3;
   }
 
   static bool _isRed(int argb) {

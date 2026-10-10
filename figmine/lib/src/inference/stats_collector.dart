@@ -1,6 +1,5 @@
-import 'package:figmine/src/inference/color_math.dart';
-import 'package:figmine/src/inference/component_kind.dart';
-import 'package:figmine/src/inference/node_facts.dart';
+import 'package:figmine/src/inference/backdrop.dart';
+import 'package:figmine/src/inference/node_kind.dart';
 import 'package:figmine/src/inference/paint_recorder.dart';
 import 'package:figmine/src/inference/sample_reader.dart';
 import 'package:figmine/src/inference/usage_stats.dart';
@@ -19,11 +18,12 @@ final class StatsCollector {
     final frames = screens.frames;
     final darkShare = frames.isEmpty
         ? 0
-        : frames.where((f) => _isDark(f.node)).length / frames.length;
+        : frames.where((f) => Backdrop.dark(f.node)).length / frames.length;
     for (final frame in frames) {
       final named = '${frame.page} ${frame.node['name']}'.toLowerCase();
       final isDark =
-          named.contains('dark') || (darkShare >= 0.25 && _isDark(frame.node));
+          named.contains('dark') ||
+          (darkShare >= 0.25 && Backdrop.dark(frame.node));
       final stats = isDark ? dark : light;
       stats.frames++;
       _walk(frame.node, stats, inside: false);
@@ -39,20 +39,20 @@ final class StatsCollector {
   /// Statistics of frames with a dark background.
   final UsageStats dark = UsageStats();
 
-  static bool _isDark(Map<String, Object?> frame) {
-    final fill = NodeFacts.fill(frame);
-    return fill != null && ColorMath.luminance(fill) < 0.2;
-  }
+  final UsageStats _inverse = UsageStats();
 
   void _walk(
     Map<String, Object?> node,
     UsageStats stats, {
     required bool inside,
     String? set,
+    UsageStats? paints,
   }) {
     if (node['visible'] == false) return;
-    if (PaintRecorder.add(stats, node)) return;
-    final found = inside ? null : _kind(node, set);
+    if (PaintRecorder.add(paints ?? stats, node)) return;
+    final inverse =
+        paints ?? (stats == light && Backdrop.inverts(node) ? _inverse : null);
+    final found = inside ? null : NodeKind.of(screens, node, set);
     if (found != null) {
       stats.samples.add(
         SampleReader.read(
@@ -66,32 +66,13 @@ final class StatsCollector {
     }
     final variants = node['type'] == 'COMPONENT_SET' ? '${node['name']}' : null;
     for (final child in UsageStats.children(node)) {
-      _walk(child, stats, inside: inside || found != null, set: variants);
+      _walk(
+        child,
+        stats,
+        inside: inside || found != null,
+        set: variants,
+        paints: inverse,
+      );
     }
-  }
-
-  /// The kind, full name and component of [node]: an instance, a variant
-  /// of the component [set] it is defined in, or a lookalike button.
-  (ComponentKind, String, String?)? _kind(
-    Map<String, Object?> node,
-    String? set,
-  ) {
-    if (node['type'] == 'COMPONENT' && set != null) {
-      final name = '$set ${node['name']}';
-      final kind = ComponentKind.match(name);
-      if (kind != null) return (kind, name, set);
-    }
-    if (node['type'] == 'INSTANCE') {
-      final component = screens.components['${node['componentId']}'];
-      final set = screens.componentSets['${component?['componentSetId']}'];
-      final name = [set?['name'], component?['name'], node['name']].join(' ');
-      final kind = ComponentKind.match(name);
-      final family = '${set?['name'] ?? component?['name']}';
-      if (kind != null) return (kind, name, family);
-    }
-    if (SampleReader.looksLikeButton(node)) {
-      return (ComponentKind.button, '${node['name']}', null);
-    }
-    return null;
   }
 }
