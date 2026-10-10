@@ -146,7 +146,8 @@
   styles use that `pubspec.yaml` does not bundle under `flutter.fonts`,
   since Flutter would show the platform font instead. Roboto and SF Pro
   count as bundled.
-- `tool/corpus.dart` scores local design files against their references
+- CI renders the example theme in light and dark mode and uploads the
+  images, and `tool/corpus.dart` scores local design files against their references
   and fails when inference regresses below the committed baseline.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files

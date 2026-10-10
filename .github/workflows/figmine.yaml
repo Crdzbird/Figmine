@@ -61,3 +61,13 @@ jobs:
       - name: Test example
         working-directory: figmine/example
         run: flutter test
+
+      - name: Render the example theme
+        working-directory: figmine/example
+        run: dart run figmine preview --output "$RUNNER_TEMP/preview"
+
+      - name: Upload the theme preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: example-theme-preview
+          path: ${{ runner.temp }}/preview
