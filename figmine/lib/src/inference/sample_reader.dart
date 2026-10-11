@@ -26,7 +26,9 @@ abstract final class SampleReader {
     final fill = NodeFacts.fill(node);
     final scrim = kind.modal && fill != null && ColorMath.alpha(fill) < 1;
     final painted = (fill != null && !scrim) || NodeFacts.stroke(node) != null;
-    final background = painted ? node : ComponentBody.of(node);
+    final background = painted
+        ? node
+        : ComponentBody.of(node, opaque: kind.modal);
     final label = NodeFacts.find(node, (n) => n['type'] == 'TEXT');
     final shape = background ?? node;
     final mark = ComponentBody.mark(shape);

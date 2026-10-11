@@ -42,9 +42,24 @@ enum ComponentState {
     selected: RegExp(r'^(selected|checked|active)$'),
   };
 
+  /// Whether a variant [name] names a state or a selection at all, such
+  /// as `state=enabled` or `selected=false`, unlike a plain container.
+  static bool stated(String name) =>
+      _pair.allMatches(name.toLowerCase()).any((m) {
+        final key = m.group(1)!.trim();
+        return _stateKey.hasMatch(key) ||
+            _flag.hasMatch(key) ||
+            _checked.hasMatch(m.group(2)!);
+      });
+
+  static final RegExp _flag = RegExp(
+    r'(^|\s)(selected|checked|active|disabled|error)$',
+  );
+
   /// The state a variant [name] describes, such as `state=hover`,
-  /// `error=yes` or `Value Type=Checked`, or null when it names several,
-  /// such as a focused error, or a mixed one, such as indeterminate.
+  /// `error=yes`, `type=error` or `Value Type=Checked`, or null when it
+  /// names several, such as a focused error, or a mixed one, such as
+  /// indeterminate.
   static ComponentState? of(String name) {
     final found = <ComponentState>{};
     for (final match in _pair.allMatches(name.toLowerCase())) {
@@ -52,6 +67,11 @@ enum ComponentState {
       final value = match.group(2)!;
       if (_mixed.hasMatch(value)) return null;
       if (_checked.hasMatch(value)) found.add(selected);
+      if (!_stateKey.hasMatch(key)) {
+        for (final state in const [error, disabled]) {
+          if (_words[state]!.hasMatch(value)) found.add(state);
+        }
+      }
       final word = _stateKey.hasMatch(key)
           ? value
           : (_yes.hasMatch(value) ? key.split(' ').last : null);

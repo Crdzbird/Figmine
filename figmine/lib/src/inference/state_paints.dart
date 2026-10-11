@@ -34,25 +34,22 @@ abstract final class StatePaints {
   static Map<String, StatePaint> collect(List<ComponentSample> samples) {
     final paints = <String, StatePaint>{};
     for (final (key, kind, variant) in components) {
-      final pool = ComponentSamples.select(
-        kind,
-        samples,
-        states: true,
-        variant: variant,
-      );
-      final byState = <ComponentState, List<ComponentSample>>{};
-      for (final sample in pool.samples) {
-        final state = ComponentState.of(sample.name);
-        if (state != null) (byState[state] ??= []).add(sample);
-      }
-      for (final entry in byState.entries) {
-        for (final (part, read)
-            in <(String, StatePaint? Function(ComponentSample))>[
-              ('fill', (s) => _paint(s.fill, s.fillVariable)),
-              ('label', _label),
-              ('stroke', (s) => _paint(s.stroke, s.strokeVariable)),
-              ('mark', (s) => _paint(s.mark, s.markVariable)),
-            ]) {
+      List<ComponentSample> pool({required bool parts}) =>
+          ComponentSamples.select(
+            kind,
+            samples,
+            states: true,
+            parts: parts,
+            variant: variant,
+          ).samples;
+      for (final (part, read, parts)
+          in <(String, StatePaint? Function(ComponentSample), bool)>[
+            ('fill', (s) => _paint(s.fill, s.fillVariable), false),
+            ('label', _label, true),
+            ('stroke', (s) => _paint(s.stroke, s.strokeVariable), false),
+            ('mark', (s) => _paint(s.mark, s.markVariable), false),
+          ]) {
+        for (final entry in _byState(pool(parts: parts)).entries) {
           final common = _mostCommon(entry.value.map(read).nonNulls);
           if (common == null) continue;
           paints['$key.${entry.key.name}.$part'] = common;
@@ -60,6 +57,17 @@ abstract final class StatePaints {
       }
     }
     return paints;
+  }
+
+  static Map<ComponentState, List<ComponentSample>> _byState(
+    List<ComponentSample> pool,
+  ) {
+    final byState = <ComponentState, List<ComponentSample>>{};
+    for (final sample in pool) {
+      final state = ComponentState.of(sample.name);
+      if (state != null) (byState[state] ??= []).add(sample);
+    }
+    return byState;
   }
 
   /// The text color, or for icon only components the icon color.

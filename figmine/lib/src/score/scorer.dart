@@ -1,3 +1,4 @@
+import 'package:figmine/src/codegen/overlay_fit.dart';
 import 'package:figmine/src/inference/color_math.dart';
 import 'package:figmine/src/score/score_item.dart';
 import 'package:figmine/src/score/theme_snapshot.dart';
@@ -6,25 +7,41 @@ import 'package:material_color_utilities/material_color_utilities.dart';
 /// Grades a theme against a reference.
 abstract final class Scorer {
   /// Every value of [reference] graded against [actual]. Colors compare by
-  /// CAM16 distance, numbers within a tolerance, text by family and size.
+  /// CAM16 distance as seen on the reference surface, so translucent state
+  /// layers count by how they look, numbers within a tolerance, and text
+  /// by family and size.
   static List<ScoreItem> grade(ThemeSnapshot reference, ThemeSnapshot actual) =>
       [
-        for (final (section, expected, got) in [
-          ('colors', reference.light, actual.light),
-          ('dark colors', reference.dark, actual.dark),
+        for (final (section, expected, got, base) in [
+          ('colors', reference.light, actual.light, ColorMath.white),
+          ('dark colors', reference.dark, actual.dark, ColorMath.black),
         ])
           for (final e in expected.entries)
-            _color(section, e.key, e.value, got[e.key]),
+            _color(
+              section,
+              e.key,
+              e.value,
+              got[e.key],
+              expected['surface'] ?? base,
+            ),
         for (final e in reference.components.entries)
           _number(e.key, e.value, actual.components[e.key]),
         for (final e in reference.text.entries)
           _text(e.key, e.value, actual.text[e.key]),
       ];
 
-  static ScoreItem _color(String section, String name, int want, int? got) {
+  static ScoreItem _color(
+    String section,
+    String name,
+    int want,
+    int? got,
+    int surface,
+  ) {
+    int seen(int c) =>
+        OverlayFit.blend(surface, c | 0xFF000000, ColorMath.alpha(c));
     final distance = got == null
         ? null
-        : Cam16.fromInt(want).distance(Cam16.fromInt(got));
+        : Cam16.fromInt(seen(want)).distance(Cam16.fromInt(seen(got)));
     final grade = switch (distance) {
       null => Grade.missing,
       <= 1.5 => Grade.match,

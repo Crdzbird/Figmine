@@ -124,7 +124,7 @@ abstract final class AppComponentThemes {
   }
 
   /// Text fields: outlines for resting, hovered, focused, error and
-  /// disabled, and fills for resting and disabled.
+  /// disabled, fills for resting and disabled, and labels per state.
   static InputDecorationThemeData inputDecoration(AppColorScheme c) =>
       InputDecorationThemeData(
         filled: true,
@@ -132,6 +132,24 @@ abstract final class AppComponentThemes {
           (s) => s.contains(WidgetState.disabled) ? c.inputDisabled : c.input,
         ),
         hoverColor: Colors.transparent,
+        labelStyle: WidgetStateTextStyle.resolveWith(
+          (s) => TextStyle(
+            color: s.contains(WidgetState.disabled)
+                ? c.onInputDisabled
+                : c.onInput,
+          ),
+        ),
+        floatingLabelStyle: WidgetStateTextStyle.resolveWith(
+          (s) => TextStyle(
+            color: s.contains(WidgetState.error)
+                ? c.inputErrorOutline
+                : (s.contains(WidgetState.focused)
+                      ? c.inputFocusedOutline
+                      : (s.contains(WidgetState.disabled)
+                            ? c.onInputDisabled
+                            : c.onInput)),
+          ),
+        ),
         border: WidgetStateInputBorder.resolveWith(
           (s) => OutlineInputBorder(
             borderRadius: BorderRadius.circular(AppComponents.inputRadius),

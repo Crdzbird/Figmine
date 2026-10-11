@@ -201,6 +201,13 @@
 - Component sizes prefer the variants a component set defines, when the
   screens show at least three, over placed instances, which designers
   often stretch to fit a layout.
+- Component state colors come from variants that name their state, such
+  as single tabs over whole tab bars, with stated items such as
+  navigation items read for labels; values such as `type=error` mark the
+  error state; private components starting with `.` or `_` count as parts;
+  and dialog and sheet bodies skip their scrim. Text field labels use
+  `onInput` per state. Scores compare translucent state layers as they look
+  on the surface. The Material 3 kit scores 100% on 48 state colors.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files
   removed on sync.
