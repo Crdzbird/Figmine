@@ -36,4 +36,14 @@ void main() {
     ]);
     expect(findings.map((f) => f.foreground).toSet(), {'onSnackbar'});
   });
+
+  test('a transparent fill is no backdrop for readability', () {
+    final outline = StateFieldSpecs.all.firstWhere(
+      (s) => s.name == 'outlinedButtonOutline',
+    );
+    final rest = _field('outlinedButton', 0x00000000, 0x00000000);
+    final variant = _field('outlineVariant', 0xFFCAC4D0, 0xFF49454F);
+    expect(StateReadable.need(outline, variant, rest), isNull);
+    expect(StateReadable.keeps(outline, variant, 0xFF49454F, rest), isTrue);
+  });
 }

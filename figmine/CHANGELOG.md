@@ -212,6 +212,9 @@
   as a switch, and a state color that matches a scheme color copies one
   of the same role, so a white fill never takes the dark value of white
   text. The Simple Design System matches 40 of its 41 state colors.
+- Dark state colors keep a copied outline when the component's fill is
+  transparent, as a transparent fill is no backdrop to check readability
+  against. The Material 3 kit matches all 48 state colors in dark mode too.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files
   removed on sync.

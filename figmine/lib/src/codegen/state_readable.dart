@@ -10,9 +10,11 @@ import 'package:figmine/src/inference/color_math.dart';
 abstract final class StateReadable {
   /// The contrast [field] needs on [rest] in dark mode: what it has in
   /// light mode, up to 4.5:1 for text and icons and 3:1 for outlines, or
-  /// null when [spec] is a fill or has no resting fill.
+  /// null when [spec] is a fill or has no resting fill, or a transparent
+  /// one, such as an outlined button's, which is no backdrop.
   static double? need(StateSpec spec, SchemeField field, SchemeField? rest) {
     if (rest == null || rest.name == spec.name) return null;
+    if (ColorMath.alpha(rest.lightArgb) < 0.5) return null;
     if (spec.key.endsWith('.fill')) return null;
     final light = ColorMath.contrast(field.lightArgb, rest.lightArgb);
     return math.min(light, spec.key.endsWith('.stroke') ? 3.0 : 4.5);
