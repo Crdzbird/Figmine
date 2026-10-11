@@ -50,7 +50,7 @@ abstract final class StatePaints {
             ('mark', (s) => _paint(s.mark, s.markVariable), false),
           ]) {
         for (final entry in _byState(pool(parts: parts)).entries) {
-          final common = _mostCommon(entry.value.map(read).nonNulls);
+          final common = _mostCommon(entry.value, read);
           if (common == null) continue;
           paints['$key.${entry.key.name}.$part'] = common;
         }
@@ -78,13 +78,22 @@ abstract final class StatePaints {
   static StatePaint? _paint(int? argb, String? variable) =>
       argb == null ? null : (argb: argb, variable: variable);
 
-  static StatePaint? _mostCommon(Iterable<StatePaint> paints) {
+  /// The paint most samples show, and on a tie the one the component
+  /// set's own variants show, as placed instances may carry overrides.
+  static StatePaint? _mostCommon(
+    List<ComponentSample> samples,
+    StatePaint? Function(ComponentSample) read,
+  ) {
     final counts = <StatePaint, int>{};
-    for (final paint in paints) {
+    final defined = <StatePaint>{};
+    for (final sample in samples) {
+      final paint = read(sample);
+      if (paint == null) continue;
       counts[paint] = (counts[paint] ?? 0) + 1;
+      if (sample.definition) defined.add(paint);
     }
-    final ranked = counts.keys.toList()
-      ..sort((a, b) => counts[b]! - counts[a]!);
+    int rank(StatePaint p) => counts[p]! * 2 + (defined.contains(p) ? 1 : 0);
+    final ranked = counts.keys.toList()..sort((a, b) => rank(b) - rank(a));
     return ranked.firstOrNull;
   }
 }

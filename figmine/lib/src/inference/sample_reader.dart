@@ -3,7 +3,9 @@ import 'package:figmine/src/inference/component_body.dart';
 import 'package:figmine/src/inference/component_kind.dart';
 import 'package:figmine/src/inference/component_sample.dart';
 import 'package:figmine/src/inference/content_inset.dart';
+import 'package:figmine/src/inference/focus_body.dart';
 import 'package:figmine/src/inference/node_facts.dart';
+import 'package:figmine/src/inference/node_opacity.dart';
 import 'package:figmine/src/inference/usage_stats.dart';
 
 /// Measures component instances, and spots buttons drawn without components.
@@ -23,38 +25,39 @@ abstract final class SampleReader {
     bool definition = false,
     String family = '',
   }) {
-    final fill = NodeFacts.fill(node);
+    final layers = NodeOpacity.flatten(node);
+    final fill = NodeFacts.fill(layers);
     final scrim = kind.modal && fill != null && ColorMath.alpha(fill) < 1;
-    final painted = (fill != null && !scrim) || NodeFacts.stroke(node) != null;
+    final painted =
+        (fill != null && !scrim) || NodeFacts.stroke(layers) != null;
     final background = painted
-        ? node
-        : ComponentBody.of(node, opaque: kind.modal);
-    final label = NodeFacts.find(node, (n) => n['type'] == 'TEXT');
-    final shape = background ?? node;
+        ? layers
+        : ComponentBody.of(layers, opaque: kind.modal);
+    final label = NodeFacts.find(layers, (n) => n['type'] == 'TEXT');
+    final shape = background ?? layers;
+    final body = FocusBody.of(layers, background);
     final mark = ComponentBody.mark(shape);
-    final top = node['paddingTop'];
+    final top = layers['paddingTop'];
     return (
       kind: kind,
       name: name.toLowerCase(),
       instance: instance,
       definition: definition,
       family: family.toLowerCase(),
-      fill: background == null ? null : NodeFacts.fill(background),
-      fillVariable: background == null
-          ? null
-          : NodeFacts.paintVariable(background, 'fills'),
-      stroke: NodeFacts.stroke(shape) ?? NodeFacts.stroke(node),
+      fill: NodeFacts.fill(body),
+      fillVariable: NodeFacts.paintVariable(body, 'fills'),
+      stroke: NodeFacts.stroke(shape) ?? NodeFacts.stroke(layers),
       strokeVariable:
           NodeFacts.paintVariable(shape, 'strokes') ??
-          NodeFacts.paintVariable(node, 'strokes'),
+          NodeFacts.paintVariable(layers, 'strokes'),
       label: label == null ? null : NodeFacts.fill(label),
       labelVariable: label == null
           ? null
           : NodeFacts.paintVariable(label, 'fills'),
       radius: NodeFacts.radius(shape),
       pill: NodeFacts.isPill(shape),
-      height: NodeFacts.size(background ?? node).height,
-      paddingHorizontal: ContentInset.horizontal(node),
+      height: NodeFacts.size(background ?? layers).height,
+      paddingHorizontal: ContentInset.horizontal(layers),
       padding: top is num ? top.toDouble() : null,
       shadow: NodeFacts.shadow(shape),
       mark: mark == null

@@ -215,6 +215,12 @@
 - Dark state colors keep a copied outline when the component's fill is
   transparent, as a transparent fill is no backdrop to check readability
   against. The Material 3 kit matches all 48 state colors in dark mode too.
+- State colors read layer opacity through parent groups, so a disabled
+  variant faded by its group keeps its opacity, and a bound variable drawn
+  at another opacity becomes the token's light and dark colors at that
+  opacity. A focus ring takes the fill of the body it surrounds, a
+  disabled checked control is its own state for `checkboxDisabled`, and
+  on a tie between placed copies the component set's own variant wins.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files
   removed on sync.

@@ -19,7 +19,11 @@ enum ComponentState {
   error,
 
   /// It is selected or checked.
-  selected;
+  selected,
+
+  /// It is selected and does not accept input, such as a disabled checked
+  /// checkbox.
+  disabledSelected;
 
   static final RegExp _pair = RegExp(r'([a-z][a-z ]*?)\s*=\s*([a-z0-9-]+)');
 
@@ -79,6 +83,9 @@ enum ComponentState {
       for (final entry in _words.entries) {
         if (entry.value.hasMatch(word)) found.add(entry.key);
       }
+    }
+    if (found.length == 2 && found.containsAll({disabled, selected})) {
+      return disabledSelected;
     }
     if (found.length > 1) return null;
     return found.firstOrNull ?? enabled;

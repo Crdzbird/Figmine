@@ -21,7 +21,7 @@ abstract final class ControlStateSpecs {
     _s('checkboxErrorOutline', 'checkbox.error.stroke', 'error'),
     _s(
       'checkboxDisabled',
-      'checkbox.disabled.fill',
+      'checkbox.disabledSelected.fill',
       'surface',
       'onSurface',
       0.38,

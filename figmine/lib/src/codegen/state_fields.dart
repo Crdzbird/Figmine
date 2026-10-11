@@ -5,9 +5,9 @@ import 'package:figmine/src/codegen/state_extrapolation.dart';
 import 'package:figmine/src/codegen/state_fallback.dart';
 import 'package:figmine/src/codegen/state_field_specs.dart';
 import 'package:figmine/src/codegen/state_readable.dart';
+import 'package:figmine/src/codegen/state_token.dart';
 import 'package:figmine/src/codegen/token_index.dart';
 import 'package:figmine/src/config/tokens_config.dart';
-import 'package:figmine/src/sources/collection_modes.dart';
 
 /// Builds the component state fields of the color scheme.
 abstract final class StateFields {
@@ -56,15 +56,7 @@ abstract final class StateFields {
         .where((c) => c.token.variableId == paint.variable)
         .firstOrNull;
     if (paint.variable != null && token != null) {
-      final field = SchemeFieldBuilders.field(spec.name, token, index, tokens);
-      final modes = CollectionModes.pick(token.collection.modes, tokens);
-      if (modes.light != modes.dark) return field;
-      return StateDark.apply(
-        spec,
-        field,
-        by,
-        '${field.doc} Bound in the $variant.',
-      );
+      return StateToken.field(spec, paint, token, by, index, tokens);
     }
     final rest = by[StateFieldSpecs.rest(spec).$1];
     final same = [by[spec.base], ...by.values].nonNulls
