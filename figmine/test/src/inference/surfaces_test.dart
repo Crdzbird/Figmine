@@ -11,6 +11,7 @@ ComponentSample _tooltip(String family, int fill) => (
   kind: ComponentKind.tooltip,
   name: '$family tooltip',
   instance: true,
+  definition: false,
   family: family,
   fill: fill,
   fillVariable: null,

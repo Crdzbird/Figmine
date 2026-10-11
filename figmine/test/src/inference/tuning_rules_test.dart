@@ -17,6 +17,7 @@ ComponentSample _button(String name, {int? label = 1, int? fill = 1}) => (
   kind: ComponentKind.button,
   name: name,
   instance: true,
+  definition: false,
   family: name.split(' | ').first,
   fill: fill,
   fillVariable: null,

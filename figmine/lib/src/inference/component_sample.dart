@@ -5,6 +5,7 @@ typedef ComponentSample = ({
   ComponentKind kind,
   String name,
   bool instance,
+  bool definition,
   String family,
   int? fill,
   String? fillVariable,

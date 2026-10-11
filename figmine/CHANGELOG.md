@@ -198,6 +198,9 @@
   `ColorScheme.fromSeed`, and dark roles take the light primary's chroma,
   which a pale dark primary cannot hold. Muted seeds still match
   `fromSeed`, and roles snapped onto a design's own scale do not change.
+- Component sizes prefer the variants a component set defines, when the
+  screens show at least three, over placed instances, which designers
+  often stretch to fit a layout.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files
   removed on sync.

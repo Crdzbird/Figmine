@@ -63,6 +63,7 @@ final class StatsCollector {
           found.$1,
           name: found.$2,
           instance: found.$3 != null,
+          definition: node['type'] == 'COMPONENT',
           family: found.$3 ?? '',
         ),
       );

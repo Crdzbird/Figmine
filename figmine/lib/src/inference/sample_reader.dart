@@ -12,13 +12,15 @@ abstract final class SampleReader {
   /// of a dialog or sheet is its scrim, so the panel inside is measured.
   ///
   /// [name] holds the component set and variant names, when known.
-  /// [instance] tells a component instance from a lookalike layer, and
-  /// [family] names its component set.
+  /// [instance] tells a component instance from a lookalike layer,
+  /// [definition] a variant defined in its component set, and [family]
+  /// names its component set.
   static ComponentSample read(
     Map<String, Object?> node,
     ComponentKind kind, {
     String name = '',
     bool instance = false,
+    bool definition = false,
     String family = '',
   }) {
     final fill = NodeFacts.fill(node);
@@ -33,6 +35,7 @@ abstract final class SampleReader {
       kind: kind,
       name: name.toLowerCase(),
       instance: instance,
+      definition: definition,
       family: family.toLowerCase(),
       fill: background == null ? null : NodeFacts.fill(background),
       fillVariable: background == null

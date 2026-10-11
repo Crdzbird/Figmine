@@ -34,9 +34,10 @@ abstract final class ComponentSamples {
   /// over lookalike layers, the most used component, the resting state,
   /// mobile variants (even a single one, as the app targets phones), the
   /// primary hierarchy of buttons and the size the screens use most, as
-  /// systems disagree on which size is the default. With [states], every
-  /// interaction state stays, for reading state colors. Buttons are of the
-  /// [variant] style, filled by default.
+  /// systems disagree on which size is the default, and then the variants
+  /// the component set defines, as placed instances are often resized.
+  /// With [states], every interaction state stays, for reading state
+  /// colors. Buttons are of the [variant] style, filled by default.
   static ({List<ComponentSample> samples, String label}) select(
     ComponentKind kind,
     List<ComponentSample> samples, {
@@ -71,6 +72,8 @@ abstract final class ComponentSamples {
       if (button && variant != ButtonVariant.filled)
         (null, null, (s) => hint.hasMatch(s.name), 3),
       ('`size`', null, (s) => size != null && SampleUsage.sizeOf(s) == size, 3),
+      if (!states)
+        (null, '`main` component definitions', (s) => s.definition, 3),
     ]) {
       main = SampleUsage.family(pool);
       size = SampleUsage.size(pool);

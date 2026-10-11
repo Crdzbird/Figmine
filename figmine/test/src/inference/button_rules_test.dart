@@ -13,6 +13,7 @@ ComponentSample _button(
   kind: ComponentKind.button,
   name: name,
   instance: instance,
+  definition: false,
   family: family,
   fill: 1,
   fillVariable: null,

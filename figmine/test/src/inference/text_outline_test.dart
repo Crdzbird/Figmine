@@ -21,6 +21,7 @@ UsageStats _stats({
       kind: ComponentKind.input,
       name: 'text field',
       instance: true,
+      definition: false,
       family: 'text field',
       fill: null,
       fillVariable: null,

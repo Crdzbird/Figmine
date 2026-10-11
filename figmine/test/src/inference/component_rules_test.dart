@@ -13,6 +13,7 @@ ComponentSample _sample(
   kind: kind,
   name: '$family $variant',
   instance: true,
+  definition: false,
   family: family,
   fill: 1,
   fillVariable: null,

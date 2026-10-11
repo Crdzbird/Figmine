@@ -10,6 +10,7 @@ void main() {
           kind: ComponentKind.appBar,
           name: 'header',
           instance: true,
+          definition: false,
           family: 'header',
           fill: null,
           fillVariable: null,

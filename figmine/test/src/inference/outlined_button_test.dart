@@ -9,6 +9,7 @@ ComponentSample _button({int? fill, int? stroke, int? label = 0xFF3567F6}) => (
   kind: ComponentKind.button,
   name: 'button hierarchy=secondary',
   instance: true,
+  definition: false,
   family: 'button',
   fill: fill,
   fillVariable: null,
