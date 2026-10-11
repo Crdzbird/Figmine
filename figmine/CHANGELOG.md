@@ -208,6 +208,10 @@
   and dialog and sheet bodies skip their scrim. Text field labels use
   `onInput` per state. Scores compare translucent state layers as they look
   on the surface. The Material 3 kit scores 100% on 48 state colors.
+- Only switch names the switch kind outright, so a tag toggle is not read
+  as a switch, and a state color that matches a scheme color copies one
+  of the same role, so a white fill never takes the dark value of white
+  text. The Simple Design System matches 40 of its 41 state colors.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files
   removed on sync.

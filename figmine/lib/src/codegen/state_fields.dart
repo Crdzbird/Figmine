@@ -68,7 +68,7 @@ abstract final class StateFields {
     }
     final rest = by[StateFieldSpecs.rest(spec).$1];
     final same = [by[spec.base], ...by.values].nonNulls
-        .where((f) => f.lightArgb == paint.argb)
+        .where((f) => f.lightArgb == paint.argb && _sameRole(spec, f))
         .where((f) => StateReadable.keeps(spec, f, f.darkArgb, rest))
         .firstOrNull;
     if (same != null) {
@@ -84,5 +84,15 @@ abstract final class StateFields {
       darkArgb: paint.argb,
     );
     return StateDark.apply(spec, field, by, field.doc);
+  }
+
+  /// Whether [f] plays the part [spec] reads: fills copy fills and labels
+  /// copy `on` colors, so a white fill never takes the dark value of white
+  /// text.
+  static bool _sameRole(StateSpec spec, SchemeField f) {
+    final on = RegExp('^on[A-Z]').hasMatch(f.name);
+    if (spec.key.endsWith('.fill')) return !on;
+    if (spec.key.endsWith('.label')) return on;
+    return true;
   }
 }

@@ -33,8 +33,9 @@ enum ComponentKind {
   /// Radio buttons.
   radio(r'\bradio\b', r'\bradio\b'),
 
-  /// Switches and toggles.
-  toggle(r'\b(switch|toggle)(es)?\b', r'\b(switch|toggle)(es)?\b'),
+  /// Switches and toggles; only switch names the kind outright, as a tag
+  /// toggle is a chip.
+  toggle(r'\b(switch|toggle)(es)?\b', r'\bswitch(es)?\b'),
 
   /// Tabs.
   tab(r'\btabs?\b', r'\btabs?\b'),
