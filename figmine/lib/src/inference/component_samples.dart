@@ -2,6 +2,7 @@ import 'package:figmine/src/inference/button_variant.dart';
 import 'package:figmine/src/inference/component_kind.dart';
 import 'package:figmine/src/inference/component_sample.dart';
 import 'package:figmine/src/inference/component_state.dart';
+import 'package:figmine/src/inference/resting_style.dart';
 import 'package:figmine/src/inference/sample_usage.dart';
 
 /// A preference among samples: an adjective or a noun for the label, the
@@ -35,7 +36,7 @@ abstract final class ComponentSamples {
   /// variants; the primary hierarchy of buttons; the most used size; and
   /// the variants the set defines, as instances are often resized. With
   /// [parts], stated items such as navigation items stay. Buttons are of
-  /// the [variant] style.
+  /// the [variant] style, and [fixedSize] replaces the most used size.
   static ({List<ComponentSample> samples, String label}) select(
     ComponentKind kind,
     List<ComponentSample> samples, {
@@ -43,13 +44,13 @@ abstract final class ComponentSamples {
     bool states = false,
     bool parts = false,
     ButtonVariant variant = ButtonVariant.filled,
+    String? fixedSize,
   }) {
     final button = kind == ComponentKind.button;
     final style = variant.matches;
     final hint = RegExp(variant.hint);
-    var pool = samples
-        .where((s) => s.kind == kind)
-        .where((s) => !button || style(s))
+    final ofKind = samples.where((s) => s.kind == kind).toList();
+    var pool = (button ? RestingStyle.filter(ofKind, style) : ofKind)
         .where(
           (s) =>
               !_part.hasMatch(s.instance ? s.family : s.name) ||
@@ -82,7 +83,7 @@ abstract final class ComponentSamples {
         (null, '`main` component definitions', (s) => s.definition, 3),
     ]) {
       main = SampleUsage.family(pool);
-      size = SampleUsage.size(pool);
+      size = fixedSize ?? SampleUsage.size(pool);
       final narrowed = pool.where(keep).toList();
       final count = narrowed.where((s) => measured?.call(s) ?? true).length;
       if (count < least) continue;

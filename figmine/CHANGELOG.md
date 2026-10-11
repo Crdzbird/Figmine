@@ -221,6 +221,10 @@
   opacity. A focus ring takes the fill of the body it surrounds, a
   disabled checked control is its own state for `checkboxDisabled`, and
   on a tie between placed copies the component set's own variant wins.
+- A button's style is judged on its resting variant, so the hovered and
+  disabled variants of a text button count as text button states, and
+  every button style reads its states at the size the filled button uses.
+  The Simple Design System scores 100%.
 - SVG icon export with the `FigmineIcon` widget.
 - Domain and Figma folder layouts for generated code, with stale files
   removed on sync.

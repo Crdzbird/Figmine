@@ -1,39 +1,28 @@
-import 'package:figmine/src/inference/button_variant.dart';
 import 'package:figmine/src/inference/component_kind.dart';
 import 'package:figmine/src/inference/component_sample.dart';
 import 'package:figmine/src/inference/component_samples.dart';
 import 'package:figmine/src/inference/component_state.dart';
+import 'package:figmine/src/inference/sample_usage.dart';
+import 'package:figmine/src/inference/state_components.dart';
 
 /// A color seen in the screens, with the variable bound to it, if any.
 typedef StatePaint = ({int argb, String? variable});
 
 /// Reads the colors of component states from the variants in the screens.
 abstract final class StatePaints {
-  /// Components whose states figmine reads: their key, kind, and the
-  /// style of buttons.
-  static const List<(String, ComponentKind, ButtonVariant)> components = [
-    ('button', ComponentKind.button, ButtonVariant.filled),
-    ('outlinedButton', ComponentKind.button, ButtonVariant.outlined),
-    ('textButton', ComponentKind.button, ButtonVariant.text),
-    ('input', ComponentKind.input, ButtonVariant.filled),
-    ('chip', ComponentKind.chip, ButtonVariant.filled),
-    ('checkbox', ComponentKind.checkbox, ButtonVariant.filled),
-    ('radio', ComponentKind.radio, ButtonVariant.filled),
-    ('switch', ComponentKind.toggle, ButtonVariant.filled),
-    ('tab', ComponentKind.tab, ButtonVariant.filled),
-    ('fab', ComponentKind.fab, ButtonVariant.filled),
-    ('navigationBar', ComponentKind.navigationBar, ButtonVariant.filled),
-    ('sheet', ComponentKind.bottomSheet, ButtonVariant.filled),
-    ('dialog', ComponentKind.dialog, ButtonVariant.filled),
-    ('snackbar', ComponentKind.snackbar, ButtonVariant.filled),
-    ('tooltip', ComponentKind.tooltip, ButtonVariant.filled),
-  ];
-
   /// The most common fill, label and stroke of each state of the default
-  /// variant of each kind, keyed like `button.hovered.fill`.
+  /// variant of each kind, keyed like `button.hovered.fill`. Every button
+  /// style takes the size the filled button uses.
   static Map<String, StatePaint> collect(List<ComponentSample> samples) {
     final paints = <String, StatePaint>{};
-    for (final (key, kind, variant) in components) {
+    final buttonSize = SampleUsage.size(
+      ComponentSamples.select(
+        ComponentKind.button,
+        samples,
+        states: true,
+      ).samples,
+    );
+    for (final (key, kind, variant) in StateComponents.all) {
       List<ComponentSample> pool({required bool parts}) =>
           ComponentSamples.select(
             kind,
@@ -41,6 +30,7 @@ abstract final class StatePaints {
             states: true,
             parts: parts,
             variant: variant,
+            fixedSize: kind == ComponentKind.button ? buttonSize : null,
           ).samples;
       for (final (part, read, parts)
           in <(String, StatePaint? Function(ComponentSample), bool)>[
