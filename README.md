@@ -38,6 +38,12 @@ cd figmine
 dart run tool/corpus.dart ../../figmine_playground ../../figmine_sds
 ```
 
+Expected values always come from the design file itself: its variables,
+styles and component variants. figmine turns what the Figma design offers
+into code, so where a design system's own code library differs from its
+Figma file, the Figma value is the expected one and the difference is
+noted, not scored.
+
 It regenerates each project offline, scores the generated theme and the
 screens alone, and exits with code 1 when a score drops below
 `tool/corpus_baseline.json`. Add `--update` to record new scores after an
