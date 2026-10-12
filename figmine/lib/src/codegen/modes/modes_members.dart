@@ -41,7 +41,6 @@ abstract final class ModesMembers {
       '  static ${p.cls} byMode(String name) => all[name] ?? $first;',
       ...?_of(p),
       '}',
-      ...?_context(p),
     ];
   }
 
@@ -61,10 +60,10 @@ abstract final class ModesMembers {
     ];
   }
 
-  static List<String>? _context(ModesPlan p) {
+  /// The extension with the context getter of breakpoints, or null.
+  static List<String>? context(ModesPlan p) {
     if (p.sizes == null) return null;
     return [
-      '',
       '/// The [${p.cls}] for the width of the current window.',
       'extension ${p.cls}Context on BuildContext {',
       '  /// The mode for the current window width.',

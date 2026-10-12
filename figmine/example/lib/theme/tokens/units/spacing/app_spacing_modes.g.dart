@@ -2,8 +2,9 @@
 /// not edit by hand.
 library;
 
-import 'package:figmine_example/theme/tokens/units/spacing.g.dart';
-import 'package:material_ui/material_ui.dart';
+import 'package:figmine_example/theme/tokens/units/spacing/app_spacing_desktop.g.dart';
+import 'package:figmine_example/theme/tokens/units/spacing/app_spacing_mobile.g.dart';
+import 'package:figmine_example/theme/tokens/units/spacing/app_spacing_tablet.g.dart';
 
 /// The values of Figma collection `Spacing` in one mode, to switch
 /// at runtime: Mobile, Tablet, Desktop.
@@ -68,11 +69,4 @@ enum AppSpacingModes {
     if (width < 840) return tablet;
     return desktop;
   }
-}
-
-/// The [AppSpacingModes] for the width of the current window.
-extension AppSpacingModesContext on BuildContext {
-  /// The mode for the current window width.
-  AppSpacingModes get appSpacing =>
-      AppSpacingModes.of(MediaQuery.sizeOf(this).width);
 }

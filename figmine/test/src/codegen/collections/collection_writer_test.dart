@@ -22,15 +22,26 @@ void main() {
   );
 
   group(CollectionWriter, () {
-    test('writes typed constants with Figma docs', () {
-      final source = CollectionWriter.write(
+    test('writes a library per class with typed constants', () {
+      final files = CollectionWriter.write(
         context,
         index,
         sampleTokens.collections.first,
       );
+      final source =
+          files['color/primitives/app_primitives_palette_blue.g.dart']!;
+      for (final library in files.values) {
+        expect(
+          RegExp(
+            '^abstract final class',
+            multiLine: true,
+          ).allMatches(library).length,
+          lessThanOrEqualTo(1),
+        );
+      }
       expect(source, contains('abstract final class AppPrimitivesPaletteBlue'));
       expect(source, contains('static const Color v500 = Color(0xFF0000FF);'));
-      expect(source, contains('static const double m = 12;'));
+      expect(files.values.join(), contains('static const double m = 12;'));
       expect(source, contains('/// Brand blue.'));
       expect(source, contains('/// Figma `palette/blue/500`.'));
     });
@@ -40,25 +51,22 @@ void main() {
         context,
         index,
         sampleTokens.collections.last,
-      );
+      )['color/semantic/app_semantic_light.g.dart']!;
       expect(source, contains('/// Figma group `Semantic`, mode `Light`.'));
       expect(
         source,
         contains('static const Color primary = AppPrimitivesPaletteBlue.v500;'),
       );
       expect(source, contains('/// Aliases `palette/blue/500 (Primitives)`.'));
-      expect(
-        source,
-        contains("import 'package:my_app/theme/color/primitives.g.dart';"),
-      );
+      expect(source, contains('primitives/app_primitives_palette_blue.g.dart'));
     });
 
-    test('writes typed catalogues', () {
+    test('writes each typed catalogue in its own library', () {
       final source = CollectionWriter.write(
         context,
         index,
         sampleTokens.collections.last,
-      );
+      )['color/semantic/app_semantic_color_tokens.g.dart']!;
       expect(
         source,
         contains(

@@ -2,8 +2,10 @@
 /// not edit by hand.
 library;
 
-import 'package:figmine_example/theme/tokens/color/primitives.g.dart';
-import 'package:figmine_example/theme/tokens/color/semantic.g.dart';
+import 'package:figmine_example/theme/tokens/color/primitives/app_primitives_palette_neutral.g.dart';
+import 'package:figmine_example/theme/tokens/color/primitives/app_primitives_palette_primary.g.dart';
+import 'package:figmine_example/theme/tokens/color/semantic/app_semantic_dark.g.dart';
+import 'package:figmine_example/theme/tokens/color/semantic/app_semantic_light.g.dart';
 import 'package:material_ui/material_ui.dart';
 
 /// The color scheme of the design system: every Material role plus the extra

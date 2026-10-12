@@ -22,7 +22,7 @@ void main() {
       expect(index.find('Primitives', 'palette/blue/500', null), (
         className: 'AppPrimitivesPaletteBlue',
         member: 'v500',
-        file: 'color/primitives.g.dart',
+        file: 'color/primitives/app_primitives_palette_blue.g.dart',
       ));
       expect(
         index.find('Semantic', 'primary', 'Dark')!.className,
@@ -44,10 +44,14 @@ void main() {
         'AppCoreRadius',
       );
       expect(index.find('Semantic', 'success', 'Light')!.className, 'AppLight');
-      expect(index.fileOf, {
-        'Primitives': 'color/primitives.g.dart',
-        'Semantic': 'color/semantic.g.dart',
+      expect(index.folderOf, {
+        'Primitives': 'color/primitives',
+        'Semantic': 'color/semantic',
       });
+      expect(
+        index.find('Semantic', 'success', 'Light')!.file,
+        'color/semantic/app_light.g.dart',
+      );
     });
 
     test('collections never take the names of fixed classes and files', () {
@@ -69,11 +73,9 @@ void main() {
         config: const TokensConfig(),
         reservedClasses: {'AppTypography'},
       );
-      expect(index.fileOf['Typography'], 'typography/typography.g.dart');
-      expect(
-        index.find('Typography', 'base', null)!.className,
-        'AppTypographyTokens',
-      );
+      final base = index.find('Typography', 'base', null)!;
+      expect(base.className, 'AppTypographyTokens');
+      expect(base.file, 'typography/app_typography_tokens.g.dart');
     });
 
     test('references aliased constants and falls back to literals', () {
@@ -82,7 +84,7 @@ void main() {
       final index = _index();
       expect(ValueExpressions.of(index, primary.values['Light']!), (
         code: 'AppPrimitivesPaletteBlue.v500',
-        file: 'color/primitives.g.dart',
+        file: 'color/primitives/app_primitives_palette_blue.g.dart',
       ));
       expect(ValueExpressions.of(index, primary.values['Dark']!), (
         code: 'Color(0xFFFFFFFF)',

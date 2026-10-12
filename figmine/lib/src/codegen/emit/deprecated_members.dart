@@ -2,6 +2,7 @@ import 'package:figmine/src/codegen/emit/codegen_context.dart';
 import 'package:figmine/src/codegen/emit/dart_source.dart';
 import 'package:figmine/src/codegen/emit/doc_comment.dart';
 import 'package:figmine/src/lock/lock_symbol.dart';
+import 'package:figmine/src/naming/dart_identifier.dart';
 
 /// Writes deprecated constants kept for code that still uses them.
 abstract final class DeprecatedMembers {
@@ -36,38 +37,38 @@ abstract final class DeprecatedMembers {
 
   static const Set<String> _core = {'double', 'String', 'bool', 'Duration'};
 
-  /// The library of the classes in [kept] that no [live] class carries on,
-  /// or null when every class still exists.
-  static String? orphans(
+  /// A library per class in [kept] that no [live] class carries on, by
+  /// path under [folder].
+  static Map<String, String> orphans(
     CodegenContext context,
+    String folder,
     Map<String, Map<String, LockSymbol>> kept,
     Set<String> live,
-  ) {
-    final gone = {
-      for (final entry in kept.entries)
-        if (!live.contains(entry.key)) entry.key: entry.value,
-    };
-    if (gone.isEmpty) return null;
-    final symbols = gone.values.expand((m) => m.values);
-    final flutter = symbols.any((s) => !_core.contains(s.type));
-    final imports = [if (flutter) context.materialImport];
-    return library(context.header(imports: imports), gone);
-  }
+  ) => {
+    for (final MapEntry(key: name, value: members) in kept.entries)
+      if (!live.contains(name))
+        '$folder/${DartIdentifier.snake([name])}.g.dart': library(
+          context.header(
+            imports: [
+              if (members.values.any((s) => !_core.contains(s.type)))
+                context.materialImport,
+            ],
+          ),
+          name,
+          members,
+        ),
+  };
 
-  /// A library with whole classes that no longer exist.
+  /// A library with a whole class [name] that no longer exists.
   static String library(
     String header,
-    Map<String, Map<String, LockSymbol>> classes,
-  ) {
-    final buffer = StringBuffer(header);
-    for (final entry in classes.entries) {
-      buffer
-        ..writeln()
-        ..writeln('/// Constants removed from Figma, kept for existing code.')
-        ..writeln('abstract final class ${entry.key} {')
-        ..write(write(entry.value))
-        ..writeln('}');
-    }
-    return buffer.toString();
-  }
+    String name,
+    Map<String, LockSymbol> members,
+  ) => [
+    header,
+    '\n/// Constants removed from Figma, kept for existing code.\n',
+    'abstract final class $name {\n',
+    write(members),
+    '}\n',
+  ].join();
 }

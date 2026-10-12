@@ -60,8 +60,7 @@ void main() {
       expect(first.status, GenerateStatus.updated);
       expect(first.report, contains('### Tokens (9)'));
       expect(
-        File('${root.path}/lib/theme/tokens/color/semantic.g.dart')
-            .existsSync(),
+        Directory('${root.path}/lib/theme/tokens/color/semantic').existsSync(),
         isTrue,
       );
       expect(File('${root.path}/figmine.lock.json').existsSync(), isTrue);

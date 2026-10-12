@@ -7,10 +7,9 @@ import 'package:figmine/src/tokens/token_collection.dart';
 
 /// Assigns a class, constant and file to every token in every mode.
 ///
-/// Each collection gets one file. Each group of a collection gets one
-/// class, or one class per mode when the collection has several modes. The
-/// configured light and dark modes are named `Light` and `Dark`, whatever
-/// Figma calls them, such as `SDS Light`.
+/// Each collection gets a folder, and each group a class in its own file,
+/// one per mode when there are several. The configured light and dark
+/// modes are named `Light` and `Dark`, such as Figma's `SDS Light`.
 final class TokenIndex {
   /// Indexes [collections] for classes named with [prefix].
   ///
@@ -41,8 +40,8 @@ final class TokenIndex {
   /// Token settings with the collection name segments.
   final TokensConfig config;
 
-  /// Generated file of each collection, by collection name.
-  final Map<String, String> fileOf = {};
+  /// Folder of each collection, by collection name.
+  final Map<String, String> folderOf = {};
 
   /// Every token in every mode, in generation order.
   final List<IndexEntry> entries = [];
@@ -50,10 +49,10 @@ final class TokenIndex {
   final FileLayout _layout;
   final IndexNamer _namer;
   final Map<String, TokenAddress> _addresses = {};
+  final Map<String, String> _files = {};
 
-  /// Returns the address of [name] in [collection] and [mode].
-  ///
-  /// Tokens of single mode collections are found with any [mode].
+  /// The address of [name] in [collection] and [mode], which any [mode]
+  /// finds in a single mode collection.
   TokenAddress? find(String collection, String name, String? mode) {
     final exact = _addresses['$collection|$name|$mode'];
     if (exact != null) return exact;
@@ -63,10 +62,14 @@ final class TokenIndex {
     return all.length == 1 ? all.single.value : null;
   }
 
+  /// The library of the declaration [name] in the folder of [collection].
+  String libraryOf(String collection, String name) =>
+      _files[name] ??= _layout.library(folderOf[collection]!, name);
+
   void _add(TokenCollection collection) {
     final segment = config.segmentOf(collection.name);
-    final file = _layout.collection(collection);
-    fileOf[collection.name] = file;
+    final folder = _layout.collection(collection);
+    folderOf[collection.name] = folder;
     final picked = CollectionModes.pick(collection.modes, config);
     String label(String mode) => mode == picked.light && mode != picked.dark
         ? 'Light'
@@ -80,7 +83,7 @@ final class TokenIndex {
         final address = (
           className: className,
           member: _namer.member(className, token.leaf),
-          file: file,
+          file: libraryOf(collection.name, className),
         );
         _addresses['${collection.name}|${token.name}|$mode'] = address;
         entries.add((

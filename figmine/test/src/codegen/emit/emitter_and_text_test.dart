@@ -21,10 +21,15 @@ void main() {
       file.path.replaceFirst('lib/theme/tokens/', ''): file.contents,
   };
 
-  test('emits one file per collection plus the shared libraries', () {
+  test('emits one library per class and list plus the shared ones', () {
     expect(files.keys, [
-      'color/primitives.g.dart',
-      'color/semantic.g.dart',
+      'color/primitives/app_primitives_palette_blue.g.dart',
+      'color/primitives/app_primitives_radius.g.dart',
+      'color/primitives/app_primitives_color_tokens.g.dart',
+      'color/primitives/app_primitives_number_tokens.g.dart',
+      'color/semantic/app_semantic_light.g.dart',
+      'color/semantic/app_semantic_dark.g.dart',
+      'color/semantic/app_semantic_color_tokens.g.dart',
       'color/color_scheme.g.dart',
       'typography/text_styles.g.dart',
       'components/components.g.dart',

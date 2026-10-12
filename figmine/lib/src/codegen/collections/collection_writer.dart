@@ -10,44 +10,51 @@ import 'package:figmine/src/lock/lock_symbol.dart';
 import 'package:figmine/src/tokens/token_collection.dart';
 import 'package:figmine/src/tokens/token_value.dart';
 
-/// Writes one library per collection: a class per group with a constant
-/// per token, followed by the catalogue lists.
+/// Writes the libraries of a collection: one per group class, with a
+/// constant per token, and one with the catalogue lists.
 abstract final class CollectionWriter {
-  /// Returns the library source of [collection].
-  static String write(
+  /// The library sources of [collection], by path.
+  static Map<String, String> write(
     CodegenContext context,
     TokenIndex index,
     TokenCollection collection, {
     Map<String, Map<String, LockSymbol>> deprecated = const {},
   }) {
-    final own = index.fileOf[collection.name];
-    final entries = index.entries.where((e) => e.collection == collection);
     final classes = <String, List<IndexEntry>>{};
-    final imports = <String>{'package:figmine/figmine.dart'};
-    for (final entry in entries) {
+    for (final entry in index.entries) {
+      if (entry.collection != collection) continue;
       classes.putIfAbsent(entry.address.className, () => []).add(entry);
-      if (!TokenDartTypes.core.contains(entry.token.type)) {
-        imports.add(context.materialImport);
-      }
-      final file = ValueExpressions.of(index, _value(entry)).file;
-      if (file != null && file != own) imports.add(context.uriOfFile(file));
     }
     final modes = collection.modes.join(', ');
-    final buffer = StringBuffer(
-      context.header(
-        imports: imports.toList(),
-        doc: ['Figma collection `${collection.name}`. Modes: $modes.'],
-      ),
-    );
-    for (final group in classes.entries) {
-      buffer
-        ..writeln()
-        ..write(_class(index, group.key, group.value))
-        ..write(DeprecatedMembers.write(deprecated[group.key] ?? const {}))
-        ..writeln('}');
-    }
-    buffer.write(CatalogueWriter.write(context, index, collection));
-    return buffer.toString();
+    final doc = ['Figma collection `${collection.name}`. Modes: $modes.'];
+    return {
+      for (final MapEntry(key: name, value: entries) in classes.entries)
+        entries.first.address.file: [
+          context.header(imports: _imports(context, index, entries), doc: doc),
+          '\n',
+          _class(index, name, entries),
+          DeprecatedMembers.write(deprecated[name] ?? const {}),
+          '}\n',
+        ].join(),
+      ...CatalogueWriter.write(context, index, collection),
+    };
+  }
+
+  static List<String> _imports(
+    CodegenContext context,
+    TokenIndex index,
+    List<IndexEntry> entries,
+  ) {
+    final own = entries.first.address.file;
+    return {
+      for (final entry in entries) ...[
+        if (!TokenDartTypes.core.contains(entry.token.type))
+          context.materialImport,
+        if (ValueExpressions.of(index, _value(entry)).file case final f?
+            when f != own)
+          context.uriOfFile(f),
+      ],
+    }.toList();
   }
 
   static String _class(

@@ -13,7 +13,7 @@ import 'package:figmine/src/tokens/token_type.dart';
 import 'package:figmine/src/tokens/token_value.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-String _write(TokenCollection collection) {
+Map<String, String> _write(TokenCollection collection) {
   const config = TokensConfig();
   final layout = FileLayout();
   final index = TokenIndex(
@@ -64,11 +64,17 @@ void main() {
       ],
     );
     expect(ModesWriter.applies(collection, const TokensConfig()), isTrue);
-    final source = _write(collection);
-    expect(source, contains('enum AppResponsiveModes {'));
-    expect(source, contains('  mobile('));
-    expect(source, contains('if (width < 600) return mobile;'));
-    expect(source, contains('AppResponsiveModes get appResponsive =>'));
+    final files = _write(collection);
+    expect(files.keys, [
+      'units/responsive/app_responsive_modes.g.dart',
+      'units/responsive/app_responsive_modes_context.g.dart',
+    ]);
+    final [modes, getter] = files.values.toList();
+    expect(modes, contains('enum AppResponsiveModes {'));
+    expect(modes, contains('  mobile('));
+    expect(modes, contains('if (width < 600) return mobile;'));
+    expect(modes, isNot(contains('material')));
+    expect(getter, contains('AppResponsiveModes get appResponsive =>'));
   });
 
   test('modes of plain values need no Flutter import', () {
@@ -86,6 +92,8 @@ void main() {
         ),
       ],
     );
-    expect(_write(collection), isNot(contains('material')));
+    final files = _write(collection);
+    expect(files, hasLength(1));
+    expect(files.values.single, isNot(contains('material')));
   });
 }

@@ -67,8 +67,9 @@ void main() {
       await app.readAsString(),
       contains('AppPrimitivesPaletteBrand.v500'),
     );
-    final deprecated = await File('$root/lib/theme/tokens/deprecated.g.dart')
-        .readAsString();
+    final deprecated = await File(
+      '$root/lib/theme/tokens/deprecated/app_primitives_radius.g.dart',
+    ).readAsString();
     expect(deprecated, contains('abstract final class AppPrimitivesRadius {'));
     expect(deprecated, contains('@Deprecated('));
     expect(deprecated, contains('static const double v16 = 16;'));
@@ -88,7 +89,7 @@ void main() {
     await app.writeAsString('final a = AppPrimitivesPaletteBrand.v500;\n');
     await _sync(root, '3', edited);
     expect(
-      File('$root/lib/theme/tokens/deprecated.g.dart').existsSync(),
+      Directory('$root/lib/theme/tokens/deprecated').existsSync(),
       isFalse,
     );
   });

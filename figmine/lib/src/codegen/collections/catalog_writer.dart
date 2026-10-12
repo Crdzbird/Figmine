@@ -17,8 +17,9 @@ abstract final class CatalogWriter {
           if (e.collection == collection) e.token.type,
       };
       for (final type in TokenType.values.where(types.contains)) {
-        names.add(CatalogueWriter.nameOf(context, collection, type));
-        imports.add(context.uriOfFile(index.fileOf[collection.name]!));
+        final name = CatalogueWriter.nameOf(context, collection, type);
+        names.add(name);
+        imports.add(context.uriOfFile(index.libraryOf(collection.name, name)));
       }
     }
     final name = DartIdentifier.camel([context.prefix, 'token', 'catalog']);

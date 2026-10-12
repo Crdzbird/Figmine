@@ -22,10 +22,10 @@ final class FileLayout {
 
   final UniqueNamer _paths = UniqueNamer();
 
-  /// Path of a fixed library.
+  /// Path of a fixed library, or of the folder of deprecated classes.
   String fixed(FixedFile file) => switch ((layout, file)) {
     (_, FixedFile.barrel) => 'figmine.g.dart',
-    (_, FixedFile.deprecated) => 'deprecated.g.dart',
+    (_, FixedFile.deprecated) => 'deprecated',
     (_, FixedFile.icons) => 'icons/icons.g.dart',
     (_, FixedFile.catalog) => 'catalog.g.dart',
     (OutputLayout.domain, FixedFile.colorScheme) => 'color/color_scheme.g.dart',
@@ -41,18 +41,21 @@ final class FileLayout {
       'theme/${DartIdentifier.snake([file.name])}.g.dart',
   };
 
-  /// Path of the library of [collection], unique among all libraries.
-  String collection(TokenCollection collection) {
-    final stem = switch (layout) {
-      OutputLayout.domain => _domain(collection),
-      OutputLayout.figma => _figma(collection),
-    };
-    return '${_paths.claim(stem)}.g.dart';
-  }
+  /// Folder of the libraries of [collection], unique among all paths.
+  String collection(TokenCollection collection) =>
+      _paths.claim(switch (layout) {
+        OutputLayout.domain => _domain(collection),
+        OutputLayout.figma => _figma(collection),
+      });
+
+  /// Path of the library of the declaration [name] in [folder].
+  String library(String folder, String name) =>
+      '${_paths.claim('$folder/${DartIdentifier.snake([name])}')}.g.dart';
 
   static String _domain(TokenCollection collection) {
     final domain = CollectionDomain.of(collection);
-    return '$domain/${CollectionDomain.stem(collection, domain)}';
+    final stem = CollectionDomain.stem(collection, domain);
+    return stem == domain ? domain : '$domain/$stem';
   }
 
   static String _figma(TokenCollection collection) {

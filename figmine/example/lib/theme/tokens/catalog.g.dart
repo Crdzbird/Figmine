@@ -3,12 +3,17 @@
 library;
 
 import 'package:figmine/figmine.dart';
-import 'package:figmine_example/theme/tokens/color/primitives.g.dart';
-import 'package:figmine_example/theme/tokens/color/semantic.g.dart';
-import 'package:figmine_example/theme/tokens/effects/effects.g.dart';
-import 'package:figmine_example/theme/tokens/motion/motion.g.dart';
-import 'package:figmine_example/theme/tokens/units/flags.g.dart';
-import 'package:figmine_example/theme/tokens/units/spacing.g.dart';
+import 'package:figmine_example/theme/tokens/color/primitives/app_primitives_color_tokens.g.dart';
+import 'package:figmine_example/theme/tokens/color/primitives/app_primitives_font_weight_tokens.g.dart';
+import 'package:figmine_example/theme/tokens/color/primitives/app_primitives_number_tokens.g.dart';
+import 'package:figmine_example/theme/tokens/color/primitives/app_primitives_string_tokens.g.dart';
+import 'package:figmine_example/theme/tokens/color/semantic/app_semantic_color_tokens.g.dart';
+import 'package:figmine_example/theme/tokens/effects/app_effects_gradient_tokens.g.dart';
+import 'package:figmine_example/theme/tokens/effects/app_effects_shadow_tokens.g.dart';
+import 'package:figmine_example/theme/tokens/motion/app_motion_curve_tokens.g.dart';
+import 'package:figmine_example/theme/tokens/motion/app_motion_duration_tokens.g.dart';
+import 'package:figmine_example/theme/tokens/units/flags/app_flags_boolean_tokens.g.dart';
+import 'package:figmine_example/theme/tokens/units/spacing/app_spacing_number_tokens.g.dart';
 
 /// Every token catalogue of the design, for `FigmineGallery` and checks
 /// against Figma.

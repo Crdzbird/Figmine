@@ -42,34 +42,36 @@ List<String> _paths(OutputLayout layout) {
 }
 
 void main() {
-  test('domain layout sorts collections by name, then by token type', () {
+  test('domain layout gives each collection a folder by token type', () {
     expect(_paths(OutputLayout.domain), [
-      'color/ui.g.dart',
-      'color/core.g.dart',
-      'color/brand.g.dart',
-      'units/core.g.dart',
-      'typography/ui.g.dart',
-      'units/units.g.dart',
-      'color/semantic.g.dart',
-      'units/spacing_scale.g.dart',
-      'color/inferred.g.dart',
+      'color/ui',
+      'color/core',
+      'color/brand',
+      'units/core',
+      'typography/ui',
+      'units',
+      'color/semantic',
+      'units/spacing_scale',
+      'color/inferred',
     ]);
     final files = FileLayout();
+    expect(files.library('units', 'AppUnits'), 'units/app_units.g.dart');
+    expect(files.library('units', 'AppUnits'), 'units/app_units2.g.dart');
     expect(files.fixed(FixedFile.colorScheme), 'color/color_scheme.g.dart');
     expect(files.fixed(FixedFile.textStyles), 'typography/text_styles.g.dart');
   });
 
   test('figma layout mirrors collection names', () {
     expect(_paths(OutputLayout.figma), [
-      'figma/ui/colors.g.dart',
-      'figma/core/colors.g.dart',
-      'figma/brand_colors.g.dart',
-      'figma/core/units.g.dart',
-      'figma/ui/typography.g.dart',
-      'figma/units.g.dart',
-      'figma/semantic.g.dart',
-      'figma/spacing_scale.g.dart',
-      'inferred/colors.g.dart',
+      'figma/ui/colors',
+      'figma/core/colors',
+      'figma/brand_colors',
+      'figma/core/units',
+      'figma/ui/typography',
+      'figma/units',
+      'figma/semantic',
+      'figma/spacing_scale',
+      'inferred/colors',
     ]);
     final files = FileLayout(OutputLayout.figma);
     expect(files.fixed(FixedFile.colorScheme), 'theme/color_scheme.g.dart');

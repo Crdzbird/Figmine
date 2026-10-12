@@ -40,12 +40,7 @@ abstract final class CodeEmitter {
     String at(FixedFile file) => context.fileOf(file);
     final sources = <String, String>{
       for (final collection in tokens.collections)
-        index.fileOf[collection.name]!: CollectionWriter.write(
-          context,
-          index,
-          collection,
-          deprecated: kept,
-        ),
+        ...CollectionWriter.write(context, index, collection, deprecated: kept),
       at(FixedFile.colorScheme): ColorSchemeWriter.write(context, fields),
       at(FixedFile.textStyles): TypographyWriter.write(
         context,
@@ -59,7 +54,7 @@ abstract final class CodeEmitter {
       at(FixedFile.themeContext): ContextWriter.write(context),
       for (final c in tokens.collections)
         if (ModesWriter.applies(c, config.tokens))
-          ModesWriter.path(index, c): ModesWriter.write(context, index, c),
+          ...ModesWriter.write(context, index, c),
       at(FixedFile.componentThemes): ComponentThemesWriter.write(context),
       at(FixedFile.catalog): CatalogWriter.write(context, index, tokens),
       if (icons != null)
@@ -68,9 +63,13 @@ abstract final class CodeEmitter {
           TokenNaming.icons(tokens.icons),
           icons.output,
         ),
+      ...DeprecatedMembers.orphans(
+        context,
+        at(FixedFile.deprecated),
+        kept,
+        live,
+      ),
     };
-    final orphans = DeprecatedMembers.orphans(context, kept, live);
-    if (orphans != null) sources[at(FixedFile.deprecated)] = orphans;
     sources[at(FixedFile.barrel)] = context.header(
       exports: [for (final file in sources.keys) context.uriOfFile(file)],
     );

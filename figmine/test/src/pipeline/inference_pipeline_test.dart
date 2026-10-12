@@ -43,11 +43,11 @@ void main() {
     String read(String file) =>
         File('${root.path}/lib/theme/tokens/$file').readAsStringSync();
     expect(
-      read('color/inferred.g.dart'),
+      read('color/inferred/app_inferred_colors_light.g.dart'),
       contains('static const Color primary = Color(0xFF3567F6);'),
     );
     expect(
-      read('units/inferred_layout.g.dart'),
+      read('units/inferred_layout/app_inferred_layout_spacing.g.dart'),
       contains('AppInferredLayoutSpacing'),
     );
     expect(
