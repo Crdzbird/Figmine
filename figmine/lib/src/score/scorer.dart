@@ -1,5 +1,5 @@
-import 'package:figmine/src/codegen/overlay_fit.dart';
-import 'package:figmine/src/inference/color_math.dart';
+import 'package:figmine/src/codegen/scheme/overlay_fit.dart';
+import 'package:figmine/src/inference/color/color_math.dart';
 import 'package:figmine/src/score/score_item.dart';
 import 'package:figmine/src/score/theme_snapshot.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';

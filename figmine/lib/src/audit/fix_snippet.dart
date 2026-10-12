@@ -1,8 +1,8 @@
 import 'package:figmine/src/audit/contrast_finding.dart';
 import 'package:figmine/src/audit/contrast_fix.dart';
-import 'package:figmine/src/codegen/material_roles.dart';
-import 'package:figmine/src/codegen/scheme_field_builders.dart';
-import 'package:figmine/src/inference/color_math.dart';
+import 'package:figmine/src/codegen/scheme/material_roles.dart';
+import 'package:figmine/src/codegen/scheme/scheme_field_builders.dart';
+import 'package:figmine/src/inference/color/color_math.dart';
 
 /// Turns contrast fixes into `figmine.yaml` settings.
 abstract final class FixSnippet {

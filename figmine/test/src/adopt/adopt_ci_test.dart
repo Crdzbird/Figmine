@@ -1,8 +1,8 @@
 import 'package:figmine/src/adopt/added_lines.dart';
 import 'package:figmine/src/adopt/adopt_output.dart';
 import 'package:figmine/src/adopt/literal_kind.dart';
-import 'package:figmine/src/cli/adopt_workflow_template.dart';
-import 'package:figmine/src/cli/workflow_template.dart';
+import 'package:figmine/src/cli/templates/adopt_workflow_template.dart';
+import 'package:figmine/src/cli/templates/workflow_template.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yaml/yaml.dart';
 

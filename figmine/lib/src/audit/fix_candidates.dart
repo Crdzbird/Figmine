@@ -1,5 +1,5 @@
 import 'package:figmine/src/config/tokens_config.dart';
-import 'package:figmine/src/sources/collection_modes.dart';
+import 'package:figmine/src/sources/variables/collection_modes.dart';
 import 'package:figmine/src/tokens/color_value.dart';
 import 'package:figmine/src/tokens/token_collection.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';

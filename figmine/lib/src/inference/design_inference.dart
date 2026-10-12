@@ -1,18 +1,18 @@
 import 'package:figmine/src/config/tokens_config.dart';
-import 'package:figmine/src/inference/accent_roles.dart';
-import 'package:figmine/src/inference/component_metrics.dart';
-import 'package:figmine/src/inference/feedback_roles.dart';
+import 'package:figmine/src/inference/color/accent_roles.dart';
+import 'package:figmine/src/inference/color/feedback_roles.dart';
+import 'package:figmine/src/inference/color/inferred_collections.dart';
+import 'package:figmine/src/inference/color/inferred_color.dart';
+import 'package:figmine/src/inference/color/outline_roles.dart';
+import 'package:figmine/src/inference/color/surface_roles.dart';
+import 'package:figmine/src/inference/components/component_metrics.dart';
+import 'package:figmine/src/inference/components/state_paints.dart';
 import 'package:figmine/src/inference/inference_result.dart';
-import 'package:figmine/src/inference/inferred_collections.dart';
-import 'package:figmine/src/inference/inferred_color.dart';
-import 'package:figmine/src/inference/inferred_layout.dart';
-import 'package:figmine/src/inference/outline_roles.dart';
-import 'package:figmine/src/inference/paint_usage.dart';
-import 'package:figmine/src/inference/state_paints.dart';
-import 'package:figmine/src/inference/stats_collector.dart';
-import 'package:figmine/src/inference/surface_roles.dart';
-import 'package:figmine/src/inference/typography_inferrer.dart';
-import 'package:figmine/src/inference/usage_stats.dart';
+import 'package:figmine/src/inference/scales/inferred_layout.dart';
+import 'package:figmine/src/inference/scales/typography_inferrer.dart';
+import 'package:figmine/src/inference/stats/paint_usage.dart';
+import 'package:figmine/src/inference/stats/stats_collector.dart';
+import 'package:figmine/src/inference/stats/usage_stats.dart';
 import 'package:figmine/src/screens/screen_set.dart';
 
 /// Recognizes colors, typography, scales and components in screens.

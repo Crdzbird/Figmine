@@ -1,8 +1,8 @@
 import 'package:figmine/src/audit/contrast_audit.dart';
 import 'package:figmine/src/audit/contrast_fixer.dart';
 import 'package:figmine/src/audit/fix_snippet.dart';
-import 'package:figmine/src/codegen/scheme_fields.dart';
-import 'package:figmine/src/inference/color_math.dart';
+import 'package:figmine/src/codegen/scheme/scheme_fields.dart';
+import 'package:figmine/src/inference/color/color_math.dart';
 import 'package:figmine/src/lock/accessibility_section.dart';
 import 'package:flutter_test/flutter_test.dart';
 

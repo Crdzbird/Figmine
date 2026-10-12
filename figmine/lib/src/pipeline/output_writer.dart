@@ -1,4 +1,4 @@
-import 'package:figmine/src/codegen/code_emitter.dart';
+import 'package:figmine/src/codegen/emit/code_emitter.dart';
 import 'package:figmine/src/config/figmine_config.dart';
 import 'package:figmine/src/config/project_info.dart';
 import 'package:figmine/src/lock/font_section.dart';

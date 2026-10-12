@@ -1,6 +1,6 @@
 import 'package:figmine/src/audit/contrast_audit.dart';
 import 'package:figmine/src/audit/contrast_fixer.dart';
-import 'package:figmine/src/codegen/scheme_fields.dart';
+import 'package:figmine/src/codegen/scheme/scheme_fields.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 SchemeField _field(String name, int light, int dark) => (

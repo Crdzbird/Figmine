@@ -1,4 +1,4 @@
-import 'package:figmine/src/codegen/typography_roles.dart';
+import 'package:figmine/src/codegen/typography/typography_roles.dart';
 import 'package:figmine/src/config/typography_config.dart';
 import 'package:figmine/src/score/scheme_values.dart';
 import 'package:figmine/src/score/text_values.dart';

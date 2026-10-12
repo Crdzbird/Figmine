@@ -1,6 +1,6 @@
 import 'package:figmine/src/naming/dart_identifier.dart';
-import 'package:figmine/src/sources/alias_groups.dart';
 import 'package:figmine/src/sources/token_value_parser.dart';
+import 'package:figmine/src/sources/variables/alias_groups.dart';
 import 'package:figmine/src/tokens/design_token.dart';
 import 'package:figmine/src/tokens/token_collection.dart';
 import 'package:figmine/src/tokens/token_type.dart';

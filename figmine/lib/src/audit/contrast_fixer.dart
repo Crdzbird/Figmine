@@ -2,8 +2,8 @@ import 'package:figmine/src/audit/contrast_finding.dart';
 import 'package:figmine/src/audit/contrast_fix.dart';
 import 'package:figmine/src/audit/fix_builder.dart';
 import 'package:figmine/src/audit/fix_candidates.dart';
-import 'package:figmine/src/codegen/scheme_field_builders.dart';
-import 'package:figmine/src/inference/color_math.dart';
+import 'package:figmine/src/codegen/scheme/scheme_field_builders.dart';
+import 'package:figmine/src/inference/color/color_math.dart';
 
 /// Suggests fixes for failing contrast pairs.
 abstract final class ContrastFixer {

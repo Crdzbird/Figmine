@@ -1,6 +1,6 @@
-import 'package:figmine/src/codegen/dart_source.dart';
-import 'package:figmine/src/codegen/token_dart_types.dart';
-import 'package:figmine/src/codegen/token_index.dart';
+import 'package:figmine/src/codegen/emit/dart_source.dart';
+import 'package:figmine/src/codegen/emit/token_dart_types.dart';
+import 'package:figmine/src/codegen/emit/token_index.dart';
 import 'package:figmine/src/lock/lock_symbol.dart';
 
 /// Lists every constant the generated token libraries declare.

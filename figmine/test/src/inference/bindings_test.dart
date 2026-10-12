@@ -1,4 +1,4 @@
-import 'package:figmine/src/codegen/scheme_matcher.dart';
+import 'package:figmine/src/codegen/scheme/scheme_matcher.dart';
 import 'package:figmine/src/config/scheme_config.dart';
 import 'package:figmine/src/config/tokens_config.dart';
 import 'package:figmine/src/inference/design_inference.dart';

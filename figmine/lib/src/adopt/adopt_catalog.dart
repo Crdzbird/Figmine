@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:figmine/src/adopt/scheme_roles.dart';
 import 'package:figmine/src/adopt/token_catalog.dart';
-import 'package:figmine/src/codegen/file_layout.dart';
-import 'package:figmine/src/codegen/fixed_file.dart';
+import 'package:figmine/src/codegen/emit/file_layout.dart';
+import 'package:figmine/src/codegen/emit/fixed_file.dart';
 import 'package:figmine/src/config/config_exception.dart';
 import 'package:figmine/src/config/figmine_config.dart';
 import 'package:figmine/src/naming/dart_identifier.dart';

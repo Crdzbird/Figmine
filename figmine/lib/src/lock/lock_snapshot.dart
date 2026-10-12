@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
-import 'package:figmine/src/codegen/dart_source.dart';
+import 'package:figmine/src/codegen/emit/dart_source.dart';
 import 'package:figmine/src/tokens/color_value.dart';
 import 'package:figmine/src/tokens/gradient_value.dart';
 import 'package:figmine/src/tokens/shadow_value.dart';

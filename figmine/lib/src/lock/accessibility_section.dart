@@ -1,6 +1,6 @@
 import 'package:figmine/src/audit/audit_result.dart';
 import 'package:figmine/src/audit/contrast_fix.dart';
-import 'package:figmine/src/inference/color_math.dart';
+import 'package:figmine/src/inference/color/color_math.dart';
 
 /// Renders the contrast audit as Markdown.
 abstract final class AccessibilitySection {

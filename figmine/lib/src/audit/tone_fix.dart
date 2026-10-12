@@ -1,4 +1,4 @@
-import 'package:figmine/src/inference/color_math.dart';
+import 'package:figmine/src/inference/color/color_math.dart';
 import 'package:material_color_utilities/material_color_utilities.dart';
 
 /// Moves a color in tone until it contrasts enough with a background.

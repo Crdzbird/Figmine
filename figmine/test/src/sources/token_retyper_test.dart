@@ -1,4 +1,4 @@
-import 'package:figmine/src/codegen/dart_source.dart';
+import 'package:figmine/src/codegen/emit/dart_source.dart';
 import 'package:figmine/src/sources/dtcg/dtcg_types.dart';
 import 'package:figmine/src/sources/token_retyper.dart';
 import 'package:figmine/src/tokens/curve_value.dart';

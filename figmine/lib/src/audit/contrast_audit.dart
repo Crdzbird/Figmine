@@ -1,6 +1,6 @@
 import 'package:figmine/src/audit/contrast_finding.dart';
-import 'package:figmine/src/codegen/scheme_fields.dart';
-import 'package:figmine/src/inference/color_math.dart';
+import 'package:figmine/src/codegen/scheme/scheme_fields.dart';
+import 'package:figmine/src/inference/color/color_math.dart';
 
 /// Checks the color scheme against WCAG 2.2 contrast minimums.
 abstract final class ContrastAudit {

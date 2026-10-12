@@ -1,4 +1,4 @@
-import 'package:figmine/src/inference/screen_evidence.dart';
+import 'package:figmine/src/inference/color/screen_evidence.dart';
 import 'package:figmine/src/tokens/component_metric.dart';
 import 'package:figmine/src/tokens/text_style_token.dart';
 import 'package:figmine/src/tokens/token_collection.dart';

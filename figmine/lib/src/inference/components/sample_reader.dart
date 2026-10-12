@@ -1,0 +1,91 @@
+import 'package:figmine/src/inference/color/color_math.dart';
+import 'package:figmine/src/inference/components/component_body.dart';
+import 'package:figmine/src/inference/components/component_kind.dart';
+import 'package:figmine/src/inference/components/component_sample.dart';
+import 'package:figmine/src/inference/components/content_inset.dart';
+import 'package:figmine/src/inference/components/focus_body.dart';
+import 'package:figmine/src/inference/stats/node_facts.dart';
+import 'package:figmine/src/inference/stats/node_opacity.dart';
+import 'package:figmine/src/inference/stats/usage_stats.dart';
+
+/// Measures component instances, and spots buttons drawn without components.
+abstract final class SampleReader {
+  /// Reads the measurements of [node] as a [kind]. The translucent fill
+  /// of a dialog or sheet is its scrim, so the panel inside is measured.
+  ///
+  /// [name] holds the component set and variant names, when known.
+  /// [instance] tells a component instance from a lookalike layer,
+  /// [definition] a variant defined in its component set, and [family]
+  /// names its component set.
+  static ComponentSample read(
+    Map<String, Object?> node,
+    ComponentKind kind, {
+    String name = '',
+    bool instance = false,
+    bool definition = false,
+    String family = '',
+  }) {
+    final layers = NodeOpacity.flatten(node);
+    final fill = NodeFacts.fill(layers);
+    final scrim = kind.modal && fill != null && ColorMath.alpha(fill) < 1;
+    final painted =
+        (fill != null && !scrim) || NodeFacts.stroke(layers) != null;
+    final background = painted
+        ? layers
+        : ComponentBody.of(layers, opaque: kind.modal);
+    final label = NodeFacts.find(layers, (n) => n['type'] == 'TEXT');
+    final shape = background ?? layers;
+    final body = FocusBody.of(layers, background);
+    final mark = ComponentBody.mark(shape);
+    final top = layers['paddingTop'];
+    return (
+      kind: kind,
+      name: name.toLowerCase(),
+      instance: instance,
+      definition: definition,
+      family: family.toLowerCase(),
+      fill: NodeFacts.fill(body),
+      fillVariable: NodeFacts.paintVariable(body, 'fills'),
+      stroke: NodeFacts.stroke(shape) ?? NodeFacts.stroke(layers),
+      strokeVariable:
+          NodeFacts.paintVariable(shape, 'strokes') ??
+          NodeFacts.paintVariable(layers, 'strokes'),
+      label: label == null ? null : NodeFacts.fill(label),
+      labelVariable: label == null
+          ? null
+          : NodeFacts.paintVariable(label, 'fills'),
+      radius: NodeFacts.radius(shape),
+      pill: NodeFacts.isPill(shape),
+      height: NodeFacts.size(background ?? layers).height,
+      paddingHorizontal: ContentInset.horizontal(layers),
+      padding: top is num ? top.toDouble() : null,
+      shadow: NodeFacts.shadow(shape),
+      mark: mark == null
+          ? null
+          : NodeFacts.fill(mark) ?? NodeFacts.stroke(mark),
+      markVariable: mark == null
+          ? null
+          : NodeFacts.paintVariable(mark, 'fills') ??
+                NodeFacts.paintVariable(mark, 'strokes'),
+    );
+  }
+
+  /// Whether [node] looks like a button built without a component: an auto
+  /// layout with a short label, a fill, rounded corners and button height.
+  static bool looksLikeButton(Map<String, Object?> node) {
+    final type = node['type'];
+    if (type != 'FRAME' && type != 'INSTANCE') return false;
+    final layout = node['layoutMode'];
+    if (layout != 'HORIZONTAL' && layout != 'VERTICAL') return false;
+    final children = UsageStats.children(node).toList();
+    if (children.isEmpty || children.length > 3) return false;
+    final hasLabel = children.any((c) => c['type'] == 'TEXT');
+    final size = NodeFacts.size(node);
+    return hasLabel &&
+        NodeFacts.fill(node) != null &&
+        NodeFacts.radius(node) != null &&
+        size.height >= 28 &&
+        size.height <= 64 &&
+        size.width <= 360;
+  }
+}

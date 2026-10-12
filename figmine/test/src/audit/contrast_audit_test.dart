@@ -1,5 +1,5 @@
 import 'package:figmine/src/audit/contrast_audit.dart';
-import 'package:figmine/src/codegen/scheme_fields.dart';
+import 'package:figmine/src/codegen/scheme/scheme_fields.dart';
 import 'package:figmine/src/lock/accessibility_section.dart';
 import 'package:flutter_test/flutter_test.dart';
 

@@ -1,6 +1,6 @@
 import 'package:figmine/src/config/config_exception.dart';
 import 'package:figmine/src/config/yaml_reader.dart';
-import 'package:figmine/src/inference/metric_specs.dart';
+import 'package:figmine/src/inference/components/metric_specs.dart';
 import 'package:figmine/src/tokens/component_metric.dart';
 
 /// Component dimensions set by hand in `figmine.yaml`.

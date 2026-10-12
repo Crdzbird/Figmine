@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:figmine/src/cli/tokens_workflow_template.dart';
+import 'package:figmine/src/cli/templates/tokens_workflow_template.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:yaml/yaml.dart';
 

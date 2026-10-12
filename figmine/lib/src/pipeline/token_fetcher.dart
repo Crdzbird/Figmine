@@ -5,13 +5,13 @@ import 'package:figmine/src/figma/figma_version.dart';
 import 'package:figmine/src/pipeline/canvas_fetcher.dart';
 import 'package:figmine/src/pipeline/file_meta_reader.dart';
 import 'package:figmine/src/pipeline/token_assembler.dart';
-import 'package:figmine/src/sources/collections_fetcher.dart';
 import 'package:figmine/src/sources/dtcg/file_tokens.dart';
-import 'package:figmine/src/sources/style_catalog.dart';
-import 'package:figmine/src/sources/style_effects.dart';
-import 'package:figmine/src/sources/style_refs.dart';
+import 'package:figmine/src/sources/styles/style_catalog.dart';
+import 'package:figmine/src/sources/styles/style_effects.dart';
+import 'package:figmine/src/sources/styles/style_refs.dart';
 import 'package:figmine/src/sources/token_retyper.dart';
-import 'package:figmine/src/sources/variables_source.dart';
+import 'package:figmine/src/sources/variables/collections_fetcher.dart';
+import 'package:figmine/src/sources/variables/variables_source.dart';
 import 'package:figmine/src/tokens/token_set.dart';
 
 /// Reads file metadata and tokens from Figma.

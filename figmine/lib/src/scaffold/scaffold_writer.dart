@@ -1,4 +1,4 @@
-import 'package:figmine/src/codegen/generated_file.dart';
+import 'package:figmine/src/codegen/emit/generated_file.dart';
 import 'package:figmine/src/scaffold/component_templates.dart';
 import 'package:figmine/src/scaffold/control_templates.dart';
 import 'package:figmine/src/scaffold/scaffold_context.dart';

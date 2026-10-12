@@ -1,5 +1,5 @@
 import 'package:figmine/src/figma/figma_file_meta.dart';
-import 'package:figmine/src/inference/screen_evidence.dart';
+import 'package:figmine/src/inference/color/screen_evidence.dart';
 import 'package:figmine/src/tokens/component_metric.dart';
 import 'package:figmine/src/tokens/icon_token.dart';
 import 'package:figmine/src/tokens/text_style_token.dart';

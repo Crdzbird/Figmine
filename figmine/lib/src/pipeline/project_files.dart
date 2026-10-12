@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:figmine/src/codegen/generated_file.dart';
+import 'package:figmine/src/codegen/emit/generated_file.dart';
 import 'package:figmine/src/figma/json.dart';
 import 'package:figmine/src/lock/lock_file.dart';
 import 'package:figmine/src/lock/lock_json.dart';

@@ -1,6 +1,6 @@
-import 'package:figmine/src/codegen/scheme_fields.dart';
-import 'package:figmine/src/codegen/scheme_matcher.dart';
-import 'package:figmine/src/codegen/token_index.dart';
+import 'package:figmine/src/codegen/emit/token_index.dart';
+import 'package:figmine/src/codegen/scheme/scheme_fields.dart';
+import 'package:figmine/src/codegen/scheme/scheme_matcher.dart';
 import 'package:figmine/src/config/config_exception.dart';
 import 'package:figmine/src/config/figmine_config.dart';
 import 'package:figmine/src/config/scheme_config.dart';
