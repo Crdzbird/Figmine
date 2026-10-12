@@ -2,6 +2,7 @@ import 'package:figmine/src/codegen/codegen_context.dart';
 import 'package:figmine/src/codegen/file_layout.dart';
 import 'package:figmine/src/codegen/mode_breakpoints.dart';
 import 'package:figmine/src/codegen/modes_writer.dart';
+import 'package:figmine/src/codegen/size_class.dart';
 import 'package:figmine/src/codegen/token_index.dart';
 import 'package:figmine/src/config/project_info.dart';
 import 'package:figmine/src/config/tokens_config.dart';

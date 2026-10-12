@@ -9,6 +9,11 @@ typography, component themes with their states, shadows, gradients,
 responsive spacing and icons. figmine opens a pull request whenever the
 design changes.
 
+figmine works with any Figma file and follows what that file offers:
+Variables, styles, an exported token file or the screens themselves. The
+[scorecard](figmine/README.md#scoring-a-theme) shows how closely the
+generated theme matches public and production design files.
+
 | Path | Contents |
 | --- | --- |
 | [`figmine/`](figmine) | The package: the `dart run figmine` CLI, the Figma exporter plugin and the `FigmineIcon` widget. |
@@ -35,7 +40,7 @@ repository. Each corpus folder is a figmine project with its lock file, its
 
 ```bash
 cd figmine
-dart run tool/corpus.dart ../../figmine_playground ../../figmine_sds
+dart run tool/corpus.dart ../../figmine_sds ../../figmine_m3
 ```
 
 Expected values always come from the design file itself: its variables,

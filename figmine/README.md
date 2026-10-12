@@ -141,6 +141,25 @@ export, and a hot reload shows it in the running app.
 
 `lib/theme` is written once and is yours: tune the component themes there.
 
+### Component states
+
+State colors come from component variants that name their state, such as
+`state=hover`, `state=pressed`, `state=focused`, `state=disabled`,
+`selected=true` or `type=error`. For each component kind figmine reads the
+fill, the label and the mark of every state:
+
+- A variable bound in the variant stays a reference to that token. A
+  translucent token keeps its opacity, so a disabled fill at 12 percent of
+  `onSurface` is generated as exactly that.
+- A focus ring is skipped in favor of the body it surrounds, and a modal
+  scrim in favor of the sheet above it.
+- Buttons are judged on their resting variant, so a calendar day cell
+  never lends its colors to the text button.
+- A state the design leaves out follows the hovered one when it exists, and
+  otherwise falls back to the Material default for that state.
+- Dark values derived for labels, icons and outlines keep the contrast they
+  have on the resting fill in light mode.
+
 ### Token gallery
 
 `catalog.g.dart` lists every token catalogue as `appTokenCatalog`, and the
@@ -231,6 +250,50 @@ Every sync checks each text and outline color against its background in
 light and dark mode. Pairs below WCAG AA get a suggested fix: the closest
 token of your own design that passes, or the same hue at a passing tone, with
 a `color_scheme` snippet ready to paste.
+
+## Scoring a theme
+
+`score` compares the generated theme with the values a design states, so
+heuristic changes can be measured instead of judged by eye:
+
+```bash
+dart run figmine score --reference reference.yaml --report scorecard.md --min 95
+```
+
+The reference lists what the Figma file says, and every section is optional:
+
+```yaml
+colors:
+  primary: "#6750A4"
+  surface: {light: "#FEF7FF", dark: "#141218"}
+  textButtonHovered: "#6750A414"
+components:
+  buttonHeight: 40
+  inputRadius: 4
+typography:
+  bodyLarge: {family: Roboto, size: 16}
+```
+
+Colors match within 1.5 CAM16 units and are close within 6. Translucent
+colors are compared as they look on the reference surface. `--inferred`
+ignores tokens and styles and grades what the screens alone give, which
+shows how well a file with no Variables is served.
+
+Expected values always come from the design file, never from a code
+library. figmine turns what the Figma design offers into code, so where a
+design system's own code differs from its Figma file, the Figma value wins.
+Every rule is general: no design system is special cased.
+
+Against public and production design files, with their exported tokens:
+
+| Design file | Values scored | Score | Screens alone |
+| --- | --- | --- | --- |
+| Material 3 Design Kit | 161, with 48 state colors | 100% | 98.1% |
+| Simple Design System | 106, with 41 state colors | 100% | 74.1% |
+| A private production design system | 67, with 53 state colors | 100% | 100% |
+
+The Simple Design System has no dark screens, so its dark roles cannot be
+inferred from screens alone.
 
 ## Fonts
 

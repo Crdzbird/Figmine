@@ -1,5 +1,6 @@
 import 'package:figmine/src/codegen/codegen_context.dart';
 import 'package:figmine/src/codegen/mode_breakpoints.dart';
+import 'package:figmine/src/codegen/size_class.dart';
 import 'package:figmine/src/codegen/token_dart_types.dart';
 import 'package:figmine/src/codegen/token_index.dart';
 import 'package:figmine/src/naming/dart_identifier.dart';
