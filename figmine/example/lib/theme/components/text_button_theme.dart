@@ -5,4 +5,4 @@ import 'package:material_ui/material_ui.dart';
 TextButtonThemeData createTextButtonTheme(
   AppColorScheme colors,
   TextTheme textTheme,
-) => AppComponentThemes.textButton(colors, textTheme);
+) => AppTextButtonTheme.of(colors, textTheme);

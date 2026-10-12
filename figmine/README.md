@@ -117,25 +117,34 @@ export, and a hot reload shows it in the running app.
 
 ## What gets generated
 
-`lib/theme/tokens` is rewritten on every sync. Never edit it by hand.
+`lib/theme/tokens` is rewritten on every sync. Never edit it by hand. Every
+generated library holds a single class, enum or list, named after it, so
+`AppSemanticLight` lives in `color/semantic/app_semantic_light.g.dart`.
+Import everything at once through `figmine.g.dart`.
 
-- One library per collection with typed constants, aliases kept as
-  references, and Figma descriptions as doc comments.
-- `AppColorScheme`, a `ThemeExtension` with every Material role, extra roles
-  such as `success` and `warning`, and component state colors. Read it with
-  `context.appColorScheme`. Roles Figma does not define are derived, and dark
-  values are derived when the design has only light ones.
+- A folder per collection with a class per group of typed constants,
+  aliases kept as references, and Figma descriptions as doc comments.
+- `AppColorScheme`, a `ThemeExtension` with every Material role and extra
+  roles such as `success` and `warning`. Read it with
+  `context.appColorScheme`. Roles Figma does not define are derived, and
+  dark values are derived when the design has only light ones.
+- A color group per component under `color/states`, such as
+  `AppButtonColors`, read from the scheme as
+  `context.appColorScheme.button.hovered`. The resting colors are `color`
+  and `onColor`; the switch group is `toggle`, since `switch` is a keyword.
 - `AppTypography` with a `TextTheme`.
-- `AppComponentThemes` for filled, outlined and text buttons, inputs, chips,
-  checkboxes, radios, switches, tabs, floating action buttons, navigation
-  bars, bottom sheets, dialogs, snack bars and tooltips, with every state
-  the design shows.
+- A theme class per component under `components/themes`, such as
+  `AppFilledButtonTheme.of(colors, textTheme)`, for filled, outlined and
+  text buttons, inputs, chips, checkboxes, radios, switches, tabs, floating
+  action buttons, navigation bars, bottom sheets, dialogs, snack bars and
+  tooltips, with every state the design shows.
 - `AppComponents` with measured heights, radii and paddings.
 - Shadows as `List<BoxShadow>`, gradients as `Gradient`, durations as
   `Duration`, easing curves as `Curve`, font weights as `FontWeight` and
   flags as `bool` constants.
 - A `Modes` enum for collections with modes beyond light and dark. For
-  breakpoints, `context.appSpacing` picks the mode for the window width.
+  breakpoints, an extension in its own library adds `context.appSpacing`,
+  which picks the mode for the window width.
 - SVG icons with the `FigmineIcon` widget.
 - `FigmineTokenEntry` catalogues of every token, for galleries and tests.
 

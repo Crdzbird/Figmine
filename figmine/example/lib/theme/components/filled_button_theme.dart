@@ -6,4 +6,4 @@ import 'package:material_ui/material_ui.dart';
 FilledButtonThemeData createFilledButtonTheme(
   AppColorScheme colors,
   TextTheme textTheme,
-) => AppComponentThemes.filledButton(colors, textTheme);
+) => AppFilledButtonTheme.of(colors, textTheme);

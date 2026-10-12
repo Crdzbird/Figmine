@@ -1,87 +1,79 @@
-/// Source of the generated filled and outlined button themes and their
-/// state picker.
+import 'package:figmine/src/codegen/themes/theme_spec.dart';
+
+/// Source of the generated filled and outlined button themes.
 abstract final class ButtonThemeSource {
-  /// The members, given the color scheme class [s] and the components
-  /// class [m].
-  static String render(String s, String m) =>
+  /// The themes, given the components class [m] and the state picker
+  /// class [p].
+  static List<ThemeSpec> specs(String m, String p) => [
+    (
+      name: 'FilledButton',
+      type: 'FilledButtonThemeData',
+      text: true,
+      doc: 'Filled buttons: resting, hovered, pressed, focused and disabled.',
+      body:
+          '''
+FilledButtonThemeData(
+  style: ButtonStyle(
+    backgroundColor: WidgetStateProperty.resolveWith(
+      (s) => $p.of(s, c.button.color, c.button.hovered, c.button.pressed,
+          c.button.focused, c.button.disabled),
+    ),
+    foregroundColor: WidgetStateProperty.resolveWith(
+      (s) => $p.of(s, c.button.onColor, c.button.onHovered,
+          c.button.onPressed, c.button.onFocused, c.button.onDisabled),
+    ),
+${_shared(m, 64)}
+  ),
+)''',
+    ),
+    (
+      name: 'OutlinedButton',
+      type: 'OutlinedButtonThemeData',
+      text: true,
+      doc:
+          'Outlined buttons: fill, label and border for resting, hovered, '
+          'pressed, focused and disabled.',
+      body:
+          '''
+OutlinedButtonThemeData(
+  style: ButtonStyle(
+    backgroundColor: WidgetStateProperty.resolveWith(
+      (s) => $p.of(s, c.outlinedButton.color, c.outlinedButton.hovered,
+          c.outlinedButton.pressed, c.outlinedButton.focused,
+          c.outlinedButton.disabled),
+    ),
+    foregroundColor: WidgetStateProperty.resolveWith(
+      (s) => $p.of(s, c.outlinedButton.onColor, c.outlinedButton.onHovered,
+          c.outlinedButton.onPressed, c.outlinedButton.onFocused,
+          c.outlinedButton.onDisabled),
+    ),
+    side: WidgetStateBorderSide.resolveWith(
+      (s) => BorderSide(
+        color: $p.of(s, c.outlinedButton.outline,
+            c.outlinedButton.hoveredOutline, c.outlinedButton.pressedOutline,
+            c.outlinedButton.focusedOutline,
+            c.outlinedButton.disabledOutline),
+      ),
+    ),
+${_shared(m, 64)}
+  ),
+)''',
+    ),
+  ];
+
+  /// The layer, text, size, padding and corners every button shares, at
+  /// least [width] wide.
+  static String _shared(String m, int width) =>
       '''
-  /// Filled buttons: resting, hovered, pressed, focused and disabled.
-  static FilledButtonThemeData filledButton($s c, TextTheme t) =>
-      FilledButtonThemeData(
-        style: ButtonStyle(
-          backgroundColor: WidgetStateProperty.resolveWith(
-            (s) => pick(s, c.button, c.buttonHovered, c.buttonPressed,
-                c.buttonFocused, c.buttonDisabled),
-          ),
-          foregroundColor: WidgetStateProperty.resolveWith(
-            (s) => pick(s, c.onButton, c.onButtonHovered, c.onButtonPressed,
-                c.onButtonFocused, c.onButtonDisabled),
-          ),
-          overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-          textStyle: WidgetStatePropertyAll(t.labelLarge),
-          minimumSize: const WidgetStatePropertyAll(
-            Size(64, $m.buttonHeight),
-          ),
-          padding: const WidgetStatePropertyAll(
-            EdgeInsets.symmetric(horizontal: $m.buttonPaddingHorizontal),
-          ),
-          shape: WidgetStatePropertyAll(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular($m.buttonRadius),
-            ),
-          ),
-        ),
-      );
-
-  /// Outlined buttons: fill, label and border for resting, hovered,
-  /// pressed, focused and disabled.
-  static OutlinedButtonThemeData outlinedButton($s c, TextTheme t) =>
-      OutlinedButtonThemeData(
-        style: ButtonStyle(
-          backgroundColor: WidgetStateProperty.resolveWith(
-            (s) => pick(s, c.outlinedButton, c.outlinedButtonHovered,
-                c.outlinedButtonPressed, c.outlinedButtonFocused,
-                c.outlinedButtonDisabled),
-          ),
-          foregroundColor: WidgetStateProperty.resolveWith(
-            (s) => pick(s, c.onOutlinedButton, c.onOutlinedButtonHovered,
-                c.onOutlinedButtonPressed, c.onOutlinedButtonFocused,
-                c.onOutlinedButtonDisabled),
-          ),
-          side: WidgetStateBorderSide.resolveWith(
-            (s) => BorderSide(
-              color: pick(s, c.outlinedButtonOutline,
-                  c.outlinedButtonHoveredOutline,
-                  c.outlinedButtonPressedOutline,
-                  c.outlinedButtonFocusedOutline,
-                  c.outlinedButtonDisabledOutline),
-            ),
-          ),
-          overlayColor: const WidgetStatePropertyAll(Colors.transparent),
-          textStyle: WidgetStatePropertyAll(t.labelLarge),
-          minimumSize: const WidgetStatePropertyAll(
-            Size(64, $m.buttonHeight),
-          ),
-          padding: const WidgetStatePropertyAll(
-            EdgeInsets.symmetric(horizontal: $m.buttonPaddingHorizontal),
-          ),
-          shape: WidgetStatePropertyAll(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular($m.buttonRadius),
-            ),
-          ),
-        ),
-      );
-
-  /// The color of [states]: disabled first, then pressed, focused and
-  /// hovered, or [rest].
-  static Color pick(Set<WidgetState> states, Color rest, Color hovered,
-      Color pressed, Color focused, Color disabled) {
-    if (states.contains(WidgetState.disabled)) return disabled;
-    if (states.contains(WidgetState.pressed)) return pressed;
-    if (states.contains(WidgetState.focused)) return focused;
-    if (states.contains(WidgetState.hovered)) return hovered;
-    return rest;
-  }
-''';
+    overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+    textStyle: WidgetStatePropertyAll(t.labelLarge),
+    minimumSize: const WidgetStatePropertyAll(Size($width, $m.buttonHeight)),
+    padding: const WidgetStatePropertyAll(
+      EdgeInsets.symmetric(horizontal: $m.buttonPaddingHorizontal),
+    ),
+    shape: WidgetStatePropertyAll(
+      RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular($m.buttonRadius),
+      ),
+    ),''';
 }

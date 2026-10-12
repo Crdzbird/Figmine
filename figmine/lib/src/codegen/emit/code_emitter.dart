@@ -41,7 +41,7 @@ abstract final class CodeEmitter {
     final sources = <String, String>{
       for (final collection in tokens.collections)
         ...CollectionWriter.write(context, index, collection, deprecated: kept),
-      at(FixedFile.colorScheme): ColorSchemeWriter.write(context, fields),
+      ...ColorSchemeWriter.write(context, fields),
       at(FixedFile.textStyles): TypographyWriter.write(
         context,
         tokens.textStyles,
@@ -55,7 +55,7 @@ abstract final class CodeEmitter {
       for (final c in tokens.collections)
         if (ModesWriter.applies(c, config.tokens))
           ...ModesWriter.write(context, index, c),
-      at(FixedFile.componentThemes): ComponentThemesWriter.write(context),
+      ...ComponentThemesWriter.write(context),
       at(FixedFile.catalog): CatalogWriter.write(context, index, tokens),
       if (icons != null)
         at(FixedFile.icons): IconsWriter.write(

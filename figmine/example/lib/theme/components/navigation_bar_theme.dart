@@ -5,4 +5,4 @@ import 'package:material_ui/material_ui.dart';
 NavigationBarThemeData createNavigationBarTheme(
   AppColorScheme colors,
   TextTheme textTheme,
-) => AppComponentThemes.navigationBar(colors, textTheme);
+) => AppNavigationBarTheme.of(colors, textTheme);

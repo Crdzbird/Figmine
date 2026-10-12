@@ -23,7 +23,8 @@ abstract final class ExtensionMethodsWriter {
 
   /// Returns the `lerp` override of [className].
   ///
-  /// Colors interpolate, every other field switches halfway.
+  /// Colors and color groups interpolate, the brightness switches
+  /// halfway.
   static String lerp(String className, List<ExtensionField> fields) {
     final signature =
         '$className lerp(ThemeExtension<$className>? other, '
@@ -37,10 +38,9 @@ abstract final class ExtensionMethodsWriter {
         '  }\n';
   }
 
-  static String _lerpArg(ExtensionField f) {
-    if (f.type == 'Color') {
-      return '${f.name}: Color.lerp(${f.name}, other.${f.name}, t)!';
-    }
-    return '${f.name}: t < 0.5 ? ${f.name} : other.${f.name}';
-  }
+  static String _lerpArg(ExtensionField f) => switch (f.type) {
+    'Color' => '${f.name}: Color.lerp(${f.name}, other.${f.name}, t)!',
+    'Brightness' => '${f.name}: t < 0.5 ? ${f.name} : other.${f.name}',
+    _ => '${f.name}: ${f.type}.lerp(${f.name}, other.${f.name}, t)',
+  };
 }

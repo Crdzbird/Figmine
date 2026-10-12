@@ -29,9 +29,6 @@ final class ScaffoldContext {
   /// Name of the generated component dimensions class.
   String get componentsClass => '${prefix}Components';
 
-  /// Name of the generated component themes class.
-  String get componentThemesClass => '${prefix}ComponentThemes';
-
   /// Name of the generated typography class.
   String get typographyClass => '${prefix}Typography';
 

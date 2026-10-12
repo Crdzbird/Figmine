@@ -3,6 +3,8 @@ import 'package:figmine/src/codegen/emit/file_layout.dart';
 import 'package:figmine/src/codegen/emit/token_index.dart';
 import 'package:figmine/src/codegen/scheme/scheme_fields.dart';
 import 'package:figmine/src/codegen/scheme/scheme_matcher.dart';
+import 'package:figmine/src/codegen/states/state_groups.dart';
+import 'package:figmine/src/codegen/themes/component_themes_writer.dart';
 import 'package:figmine/src/config/figmine_config.dart';
 import 'package:figmine/src/config/project_info.dart';
 import 'package:figmine/src/tokens/token_set.dart';
@@ -40,9 +42,13 @@ abstract final class EmitPlanner {
         context.colorSchemeClass,
         context.typographyClass,
         context.componentsClass,
-        context.componentThemesClass,
         context.iconsClass,
         context.contextExtension,
+        context.statePickerClass,
+        for (final spec in ComponentThemesWriter.specs(context))
+          context.themeClass(spec.name),
+        for (final kind in StateGroups.kinds)
+          StateGroups.className(context.prefix, kind),
       },
     );
     final fields = SchemeFields.resolve(

@@ -5,4 +5,4 @@ import 'package:material_ui/material_ui.dart';
 TooltipThemeData createTooltipTheme(
   AppColorScheme colors,
   TextTheme textTheme,
-) => AppComponentThemes.tooltip(colors, textTheme);
+) => AppTooltipTheme.of(colors, textTheme);

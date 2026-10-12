@@ -6,4 +6,4 @@ import 'package:material_ui/material_ui.dart';
 OutlinedButtonThemeData createOutlinedButtonTheme(
   AppColorScheme colors,
   TextTheme textTheme,
-) => AppComponentThemes.outlinedButton(colors, textTheme);
+) => AppOutlinedButtonTheme.of(colors, textTheme);

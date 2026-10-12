@@ -25,8 +25,14 @@ void main() {
   testWidgets('surfaces use the generated themes', (tester) async {
     await open(tester);
     final theme = Theme.of(tester.element(find.text('Snack bar')));
-    expect(theme.dialogTheme.backgroundColor, AppColorScheme.light.dialog);
-    expect(theme.snackBarTheme.backgroundColor, AppColorScheme.light.snackbar);
+    expect(
+      theme.dialogTheme.backgroundColor,
+      AppColorScheme.light.dialog.color,
+    );
+    expect(
+      theme.snackBarTheme.backgroundColor,
+      AppColorScheme.light.snackbar.color,
+    );
     expect(
       theme.floatingActionButtonTheme.sizeConstraints?.maxWidth,
       AppComponents.fabSize,

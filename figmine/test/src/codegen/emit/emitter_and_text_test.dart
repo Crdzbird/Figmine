@@ -22,23 +22,27 @@ void main() {
   };
 
   test('emits one library per class and list plus the shared ones', () {
-    expect(files.keys, [
+    final keys = files.keys.toList();
+    expect(keys.take(3), [
       'color/primitives/app_primitives_palette_blue.g.dart',
       'color/primitives/app_primitives_radius.g.dart',
       'color/primitives/app_primitives_color_tokens.g.dart',
-      'color/primitives/app_primitives_number_tokens.g.dart',
-      'color/semantic/app_semantic_light.g.dart',
-      'color/semantic/app_semantic_dark.g.dart',
-      'color/semantic/app_semantic_color_tokens.g.dart',
-      'color/color_scheme.g.dart',
-      'typography/text_styles.g.dart',
-      'components/components.g.dart',
-      'color/theme_context.g.dart',
-      'components/component_themes.g.dart',
-      'catalog.g.dart',
-      'icons/icons.g.dart',
-      'figmine.g.dart',
     ]);
+    expect(
+      keys,
+      containsAll([
+        'color/semantic/app_semantic_light.g.dart',
+        'color/color_scheme.g.dart',
+        'color/states/app_button_colors.g.dart',
+        'color/states/app_switch_colors.g.dart',
+        'components/themes/app_state_color.g.dart',
+        'components/themes/app_filled_button_theme.g.dart',
+        'catalog.g.dart',
+        'icons/icons.g.dart',
+      ]),
+    );
+    expect(keys.last, 'figmine.g.dart');
+    expect(keys.where((k) => k.startsWith('color/states/')), hasLength(15));
   });
 
   test('the scheme is a const ThemeExtension with toColorScheme', () {

@@ -22,7 +22,8 @@ final class FileLayout {
 
   final UniqueNamer _paths = UniqueNamer();
 
-  /// Path of a fixed library, or of the folder of deprecated classes.
+  /// Path of a fixed library, or the folder of the component themes and of
+  /// deprecated classes.
   String fixed(FixedFile file) => switch ((layout, file)) {
     (_, FixedFile.barrel) => 'figmine.g.dart',
     (_, FixedFile.deprecated) => 'deprecated',
@@ -35,8 +36,8 @@ final class FileLayout {
       'typography/text_styles.g.dart',
     (OutputLayout.domain, FixedFile.components) =>
       'components/components.g.dart',
-    (OutputLayout.domain, FixedFile.componentThemes) =>
-      'components/component_themes.g.dart',
+    (OutputLayout.domain, FixedFile.componentThemes) => 'components/themes',
+    (OutputLayout.figma, FixedFile.componentThemes) => 'theme/component_themes',
     (OutputLayout.figma, _) =>
       'theme/${DartIdentifier.snake([file.name])}.g.dart',
   };

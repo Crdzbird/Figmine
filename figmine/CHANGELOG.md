@@ -6,8 +6,12 @@
   `comment`, `exporter`, `relay` and `preview`.
 - Tokens from Figma Variables, color and text styles, library and team
   styles, or design token JSON files such as the figmine exporter output.
-- One generated library per collection with typed constants, aliases as
-  references, Figma descriptions and catalogues of `FigmineTokenEntry`.
+- One generated library per class, enum or list: a folder per collection
+  with a class per group of typed constants, aliases as references, Figma
+  descriptions and catalogues of `FigmineTokenEntry`.
+- Component state colors grouped per component, such as
+  `context.appColorScheme.button.hovered`, and a theme class per
+  component, such as `AppFilledButtonTheme`.
 - `AppColorScheme` ThemeExtension with every Material role, extra roles,
   seed derived roles and hand set overrides.
 - Inference from designed screens: color roles, typography, spacing and
@@ -55,10 +59,10 @@
   focused are missing, and fall back to Material state layers.
   Outlined buttons, recognized as labelled buttons with a border apart
   from a light or no fill, get fill, label and border per state, with
-  transparent Material state layers by default. `AppComponentThemes`
-  builds filled button, outlined button, text field and chip themes from
-  them, the scaffold uses it, and `figmine scaffold --force` updates
-  existing projects. The preview shows disabled, focused, error and
+  transparent Material state layers by default. Theme classes such as
+  `AppFilledButtonTheme` build the component themes from them, the
+  scaffold uses them, and `figmine scaffold --force` updates existing
+  projects. The preview shows disabled, focused, error and
   selected states.
 - `figmine adopt` finds hard coded colors, spacings and radii in app code,
   offline from the lock file. It reads how each value is used, such as a

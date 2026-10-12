@@ -5,4 +5,4 @@ import 'package:material_ui/material_ui.dart';
 SnackBarThemeData createSnackBarTheme(
   AppColorScheme colors,
   TextTheme textTheme,
-) => AppComponentThemes.snackBar(colors, textTheme);
+) => AppSnackBarTheme.of(colors, textTheme);

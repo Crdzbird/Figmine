@@ -28,14 +28,47 @@ abstract final class GeneratedSnapshot {
 
     final scheme = await source(FixedFile.colorScheme);
     final name = '${config.output.classPrefix}ColorScheme';
+    final groups = await _groups(
+      p.join(
+        root,
+        config.output.directory,
+        p.dirname(layout.fixed(FixedFile.colorScheme)),
+        'states',
+      ),
+    );
     return (
-      light: SchemeValues.read(scheme, name, lock.symbols, 'light'),
-      dark: SchemeValues.read(scheme, name, lock.symbols, 'dark'),
+      light: SchemeValues.read(
+        scheme,
+        name,
+        lock.symbols,
+        'light',
+        groups: groups,
+      ),
+      dark: SchemeValues.read(
+        scheme,
+        name,
+        lock.symbols,
+        'dark',
+        groups: groups,
+      ),
       components: {
         for (final e in lock.components.entries)
           e.key: ?double.tryParse(e.value),
       },
       text: TextValues.read(await source(FixedFile.textStyles)),
     );
+  }
+
+  static Future<Map<String, String>> _groups(String folder) async {
+    final dir = Directory(folder);
+    if (!dir.existsSync()) return const {};
+    final groups = <String, String>{};
+    await for (final file in dir.list()) {
+      if (file is! File || !file.path.endsWith('.g.dart')) continue;
+      final source = await file.readAsString();
+      final name = RegExp(r'final class (\w+)').firstMatch(source)?.group(1);
+      if (name != null) groups[name] = source;
+    }
+    return groups;
   }
 }

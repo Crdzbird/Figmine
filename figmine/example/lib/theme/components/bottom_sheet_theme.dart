@@ -3,4 +3,4 @@ import 'package:material_ui/material_ui.dart';
 
 /// Bottom sheet styling from the sheets in Figma.
 BottomSheetThemeData createBottomSheetTheme(AppColorScheme colors) =>
-    AppComponentThemes.bottomSheet(colors);
+    AppBottomSheetTheme.of(colors);

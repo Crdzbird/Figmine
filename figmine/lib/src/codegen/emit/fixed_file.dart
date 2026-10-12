@@ -12,7 +12,8 @@ enum FixedFile {
   /// The `AppComponents` dimensions.
   components,
 
-  /// The `AppComponentThemes` builders.
+  /// The folder of the component theme classes, such as
+  /// `AppFilledButtonTheme`.
   componentThemes,
 
   /// The `AppIcons` asset paths.

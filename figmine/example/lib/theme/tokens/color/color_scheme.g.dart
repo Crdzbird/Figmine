@@ -6,6 +6,21 @@ import 'package:figmine_example/theme/tokens/color/primitives/app_primitives_pal
 import 'package:figmine_example/theme/tokens/color/primitives/app_primitives_palette_primary.g.dart';
 import 'package:figmine_example/theme/tokens/color/semantic/app_semantic_dark.g.dart';
 import 'package:figmine_example/theme/tokens/color/semantic/app_semantic_light.g.dart';
+import 'package:figmine_example/theme/tokens/color/states/app_button_colors.g.dart';
+import 'package:figmine_example/theme/tokens/color/states/app_checkbox_colors.g.dart';
+import 'package:figmine_example/theme/tokens/color/states/app_chip_colors.g.dart';
+import 'package:figmine_example/theme/tokens/color/states/app_dialog_colors.g.dart';
+import 'package:figmine_example/theme/tokens/color/states/app_fab_colors.g.dart';
+import 'package:figmine_example/theme/tokens/color/states/app_input_colors.g.dart';
+import 'package:figmine_example/theme/tokens/color/states/app_navigation_bar_colors.g.dart';
+import 'package:figmine_example/theme/tokens/color/states/app_outlined_button_colors.g.dart';
+import 'package:figmine_example/theme/tokens/color/states/app_radio_colors.g.dart';
+import 'package:figmine_example/theme/tokens/color/states/app_sheet_colors.g.dart';
+import 'package:figmine_example/theme/tokens/color/states/app_snackbar_colors.g.dart';
+import 'package:figmine_example/theme/tokens/color/states/app_switch_colors.g.dart';
+import 'package:figmine_example/theme/tokens/color/states/app_tab_colors.g.dart';
+import 'package:figmine_example/theme/tokens/color/states/app_text_button_colors.g.dart';
+import 'package:figmine_example/theme/tokens/color/states/app_tooltip_colors.g.dart';
 import 'package:material_ui/material_ui.dart';
 
 /// The color scheme of the design system: every Material role plus the extra
@@ -65,81 +80,21 @@ final class AppColorScheme extends ThemeExtension<AppColorScheme> {
     required Color surfaceTint,
     required Color success,
     required Color onSuccess,
-    required Color outlinedButton,
-    required Color onOutlinedButton,
-    required Color outlinedButtonOutline,
-    required Color outlinedButtonHovered,
-    required Color onOutlinedButtonHovered,
-    required Color outlinedButtonHoveredOutline,
-    required Color outlinedButtonPressed,
-    required Color onOutlinedButtonPressed,
-    required Color outlinedButtonPressedOutline,
-    required Color outlinedButtonFocused,
-    required Color onOutlinedButtonFocused,
-    required Color outlinedButtonFocusedOutline,
-    required Color outlinedButtonDisabled,
-    required Color onOutlinedButtonDisabled,
-    required Color outlinedButtonDisabledOutline,
-    required Color checkboxSelected,
-    required Color onCheckboxSelected,
-    required Color checkboxOutline,
-    required Color checkboxHoveredOutline,
-    required Color checkboxFocusedOutline,
-    required Color checkboxErrorOutline,
-    required Color checkboxDisabled,
-    required Color checkboxDisabledOutline,
-    required Color radioSelected,
-    required Color radioOutline,
-    required Color radioHoveredOutline,
-    required Color radioDisabled,
-    required Color switchTrackSelected,
-    required Color switchThumbSelected,
-    required Color switchTrack,
-    required Color switchThumb,
-    required Color switchOutline,
-    required Color switchDisabledTrack,
-    required Color tabLabel,
-    required Color tabUnselectedLabel,
-    required Color tabIndicator,
-    required Color onTextButton,
-    required Color textButtonHovered,
-    required Color textButtonPressed,
-    required Color onTextButtonDisabled,
-    required Color fab,
-    required Color onFab,
-    required Color navigationBar,
-    required Color onNavigationBar,
-    required Color sheet,
-    required Color dialog,
-    required Color onDialog,
-    required Color snackbar,
-    required Color onSnackbar,
-    required Color tooltip,
-    required Color onTooltip,
-    required Color button,
-    required Color onButton,
-    required Color buttonHovered,
-    required Color onButtonHovered,
-    required Color buttonPressed,
-    required Color onButtonPressed,
-    required Color buttonFocused,
-    required Color onButtonFocused,
-    required Color buttonDisabled,
-    required Color onButtonDisabled,
-    required Color input,
-    required Color onInput,
-    required Color inputOutline,
-    required Color inputHoveredOutline,
-    required Color inputFocusedOutline,
-    required Color inputErrorOutline,
-    required Color inputDisabled,
-    required Color onInputDisabled,
-    required Color inputDisabledOutline,
-    required Color chip,
-    required Color onChip,
-    required Color chipOutline,
-    required Color chipSelected,
-    required Color onChipSelected,
+    required AppOutlinedButtonColors outlinedButton,
+    required AppCheckboxColors checkbox,
+    required AppRadioColors radio,
+    required AppSwitchColors toggle,
+    required AppTabColors tab,
+    required AppTextButtonColors textButton,
+    required AppFabColors fab,
+    required AppNavigationBarColors navigationBar,
+    required AppSheetColors sheet,
+    required AppDialogColors dialog,
+    required AppSnackbarColors snackbar,
+    required AppTooltipColors tooltip,
+    required AppButtonColors button,
+    required AppInputColors input,
+    required AppChipColors chip,
   }) = AppColorScheme._;
 
   const new _({
@@ -193,80 +148,20 @@ final class AppColorScheme extends ThemeExtension<AppColorScheme> {
     required this.success,
     required this.onSuccess,
     required this.outlinedButton,
-    required this.onOutlinedButton,
-    required this.outlinedButtonOutline,
-    required this.outlinedButtonHovered,
-    required this.onOutlinedButtonHovered,
-    required this.outlinedButtonHoveredOutline,
-    required this.outlinedButtonPressed,
-    required this.onOutlinedButtonPressed,
-    required this.outlinedButtonPressedOutline,
-    required this.outlinedButtonFocused,
-    required this.onOutlinedButtonFocused,
-    required this.outlinedButtonFocusedOutline,
-    required this.outlinedButtonDisabled,
-    required this.onOutlinedButtonDisabled,
-    required this.outlinedButtonDisabledOutline,
-    required this.checkboxSelected,
-    required this.onCheckboxSelected,
-    required this.checkboxOutline,
-    required this.checkboxHoveredOutline,
-    required this.checkboxFocusedOutline,
-    required this.checkboxErrorOutline,
-    required this.checkboxDisabled,
-    required this.checkboxDisabledOutline,
-    required this.radioSelected,
-    required this.radioOutline,
-    required this.radioHoveredOutline,
-    required this.radioDisabled,
-    required this.switchTrackSelected,
-    required this.switchThumbSelected,
-    required this.switchTrack,
-    required this.switchThumb,
-    required this.switchOutline,
-    required this.switchDisabledTrack,
-    required this.tabLabel,
-    required this.tabUnselectedLabel,
-    required this.tabIndicator,
-    required this.onTextButton,
-    required this.textButtonHovered,
-    required this.textButtonPressed,
-    required this.onTextButtonDisabled,
+    required this.checkbox,
+    required this.radio,
+    required this.toggle,
+    required this.tab,
+    required this.textButton,
     required this.fab,
-    required this.onFab,
     required this.navigationBar,
-    required this.onNavigationBar,
     required this.sheet,
     required this.dialog,
-    required this.onDialog,
     required this.snackbar,
-    required this.onSnackbar,
     required this.tooltip,
-    required this.onTooltip,
     required this.button,
-    required this.onButton,
-    required this.buttonHovered,
-    required this.onButtonHovered,
-    required this.buttonPressed,
-    required this.onButtonPressed,
-    required this.buttonFocused,
-    required this.onButtonFocused,
-    required this.buttonDisabled,
-    required this.onButtonDisabled,
     required this.input,
-    required this.onInput,
-    required this.inputOutline,
-    required this.inputHoveredOutline,
-    required this.inputFocusedOutline,
-    required this.inputErrorOutline,
-    required this.inputDisabled,
-    required this.onInputDisabled,
-    required this.inputDisabledOutline,
     required this.chip,
-    required this.onChip,
-    required this.chipOutline,
-    required this.chipSelected,
-    required this.onChipSelected,
   });
 
   /// The scheme for the light theme.
@@ -320,81 +215,21 @@ final class AppColorScheme extends ThemeExtension<AppColorScheme> {
     surfaceTint: AppSemanticLight.primary,
     success: AppSemanticLight.success,
     onSuccess: Color(0xFF000000),
-    outlinedButton: Color(0x00000000),
-    onOutlinedButton: AppSemanticLight.primary,
-    outlinedButtonOutline: AppSemanticLight.outline,
-    outlinedButtonHovered: Color(0x14304FFE),
-    onOutlinedButtonHovered: AppSemanticLight.primary,
-    outlinedButtonHoveredOutline: AppSemanticLight.outline,
-    outlinedButtonPressed: Color(0x1A304FFE),
-    onOutlinedButtonPressed: AppSemanticLight.primary,
-    outlinedButtonPressedOutline: AppSemanticLight.outline,
-    outlinedButtonFocused: Color(0x1A304FFE),
-    onOutlinedButtonFocused: AppSemanticLight.primary,
-    outlinedButtonFocusedOutline: AppSemanticLight.outline,
-    outlinedButtonDisabled: Color(0x00000000),
-    onOutlinedButtonDisabled: Color(0xFFA5A5A6),
-    outlinedButtonDisabledOutline: Color(0xFFE3E3E3),
-    checkboxSelected: AppSemanticLight.primary,
-    onCheckboxSelected: AppSemanticLight.onPrimary,
-    checkboxOutline: AppPrimitivesPaletteNeutral.v70,
-    checkboxHoveredOutline: AppPrimitivesPaletteNeutral.v70,
-    checkboxFocusedOutline: AppPrimitivesPaletteNeutral.v70,
-    checkboxErrorOutline: AppSemanticLight.error,
-    checkboxDisabled: Color(0xFFA5A5A6),
-    checkboxDisabledOutline: Color(0xFFA5A5A6),
-    radioSelected: AppSemanticLight.primary,
-    radioOutline: AppPrimitivesPaletteNeutral.v70,
-    radioHoveredOutline: AppPrimitivesPaletteNeutral.v70,
-    radioDisabled: Color(0xFFA5A5A6),
-    switchTrackSelected: AppSemanticLight.primary,
-    switchThumbSelected: AppSemanticLight.onPrimary,
-    switchTrack: Color(0xFFE2E1EE),
-    switchThumb: AppSemanticLight.outline,
-    switchOutline: AppSemanticLight.outline,
-    switchDisabledTrack: Color(0xFFE3E3E3),
-    tabLabel: AppSemanticLight.primary,
-    tabUnselectedLabel: AppPrimitivesPaletteNeutral.v70,
-    tabIndicator: AppSemanticLight.primary,
-    onTextButton: AppSemanticLight.primary,
-    textButtonHovered: Color(0x14304FFE),
-    textButtonPressed: Color(0x1A304FFE),
-    onTextButtonDisabled: Color(0xFFA5A5A6),
-    fab: AppPrimitivesPalettePrimary.v20,
-    onFab: AppPrimitivesPalettePrimary.v80,
-    navigationBar: AppPrimitivesPaletteNeutral.v20,
-    onNavigationBar: AppPrimitivesPaletteNeutral.v70,
-    sheet: Color(0xFFF3F2FF),
-    dialog: Color(0xFFE8E7F4),
-    onDialog: AppSemanticLight.onSurface,
-    snackbar: AppPrimitivesPaletteNeutral.v80,
-    onSnackbar: Color(0xFFF0EFFD),
-    tooltip: AppPrimitivesPaletteNeutral.v80,
-    onTooltip: Color(0xFFF0EFFD),
-    button: AppSemanticLight.primary,
-    onButton: AppSemanticLight.onPrimary,
-    buttonHovered: Color(0xFF415DFE),
-    onButtonHovered: AppSemanticLight.onPrimary,
-    buttonPressed: Color(0xFF4561FE),
-    onButtonPressed: AppSemanticLight.onPrimary,
-    buttonFocused: Color(0xFF4561FE),
-    onButtonFocused: AppSemanticLight.onPrimary,
-    buttonDisabled: Color(0xFFE3E3E3),
-    onButtonDisabled: Color(0xFFA5A5A6),
-    input: Color(0xFFE2E1EE),
-    onInput: AppSemanticLight.onSurface,
-    inputOutline: AppSemanticLight.outline,
-    inputHoveredOutline: AppSemanticLight.onSurface,
-    inputFocusedOutline: AppSemanticLight.primary,
-    inputErrorOutline: AppSemanticLight.error,
-    inputDisabled: Color(0xFFF6F6F6),
-    onInputDisabled: Color(0xFFA5A5A6),
-    inputDisabledOutline: Color(0xFFE3E3E3),
-    chip: AppSemanticLight.surface,
-    onChip: AppPrimitivesPaletteNeutral.v70,
-    chipOutline: Color(0xFFC6C5D2),
-    chipSelected: Color(0xFFE0E1F9),
-    onChipSelected: Color(0xFF434559),
+    outlinedButton: AppOutlinedButtonColors.light,
+    checkbox: AppCheckboxColors.light,
+    radio: AppRadioColors.light,
+    toggle: AppSwitchColors.light,
+    tab: AppTabColors.light,
+    textButton: AppTextButtonColors.light,
+    fab: AppFabColors.light,
+    navigationBar: AppNavigationBarColors.light,
+    sheet: AppSheetColors.light,
+    dialog: AppDialogColors.light,
+    snackbar: AppSnackbarColors.light,
+    tooltip: AppTooltipColors.light,
+    button: AppButtonColors.light,
+    input: AppInputColors.light,
+    chip: AppChipColors.light,
   );
 
   /// The scheme for the dark theme.
@@ -448,81 +283,21 @@ final class AppColorScheme extends ThemeExtension<AppColorScheme> {
     surfaceTint: AppSemanticDark.primary,
     success: AppSemanticDark.success,
     onSuccess: Color(0xFF000000),
-    outlinedButton: Color(0x00000000),
-    onOutlinedButton: AppSemanticDark.primary,
-    outlinedButtonOutline: AppSemanticDark.outline,
-    outlinedButtonHovered: Color(0x14D9DFFF),
-    onOutlinedButtonHovered: AppSemanticDark.primary,
-    outlinedButtonHoveredOutline: AppSemanticDark.outline,
-    outlinedButtonPressed: Color(0x1AD9DFFF),
-    onOutlinedButtonPressed: AppSemanticDark.primary,
-    outlinedButtonPressedOutline: AppSemanticDark.outline,
-    outlinedButtonFocused: Color(0x1AD9DFFF),
-    onOutlinedButtonFocused: AppSemanticDark.primary,
-    outlinedButtonFocusedOutline: AppSemanticDark.outline,
-    outlinedButtonDisabled: Color(0x00000000),
-    onOutlinedButtonDisabled: Color(0xFF69696B),
-    outlinedButtonDisabledOutline: Color(0xFF2D2D30),
-    checkboxSelected: AppSemanticDark.primary,
-    onCheckboxSelected: AppSemanticDark.onPrimary,
-    checkboxOutline: AppPrimitivesPaletteNeutral.v30,
-    checkboxHoveredOutline: AppPrimitivesPaletteNeutral.v30,
-    checkboxFocusedOutline: AppPrimitivesPaletteNeutral.v30,
-    checkboxErrorOutline: AppSemanticDark.error,
-    checkboxDisabled: Color(0xFF69696B),
-    checkboxDisabledOutline: Color(0xFF69696B),
-    radioSelected: AppSemanticDark.primary,
-    radioOutline: AppPrimitivesPaletteNeutral.v30,
-    radioHoveredOutline: AppPrimitivesPaletteNeutral.v30,
-    radioDisabled: Color(0xFF69696B),
-    switchTrackSelected: AppSemanticDark.primary,
-    switchThumbSelected: AppSemanticDark.onPrimary,
-    switchTrack: AppPrimitivesPaletteNeutral.v80,
-    switchThumb: AppSemanticDark.outline,
-    switchOutline: AppSemanticDark.outline,
-    switchDisabledTrack: Color(0xFF2D2D30),
-    tabLabel: AppSemanticDark.primary,
-    tabUnselectedLabel: AppPrimitivesPaletteNeutral.v30,
-    tabIndicator: AppSemanticDark.primary,
-    onTextButton: AppSemanticDark.primary,
-    textButtonHovered: Color(0x14D9DFFF),
-    textButtonPressed: Color(0x1AD9DFFF),
-    onTextButtonDisabled: Color(0xFF69696B),
-    fab: AppPrimitivesPalettePrimary.v80,
-    onFab: AppPrimitivesPalettePrimary.v20,
-    navigationBar: AppPrimitivesPaletteNeutral.v90,
-    onNavigationBar: AppPrimitivesPaletteNeutral.v30,
-    sheet: Color(0xFF1A1B24),
-    dialog: Color(0xFF292A33),
-    onDialog: AppSemanticDark.onSurface,
-    snackbar: AppPrimitivesPaletteNeutral.v20,
-    onSnackbar: Color(0xFF2F303A),
-    tooltip: AppPrimitivesPaletteNeutral.v20,
-    onTooltip: Color(0xFF2F303A),
-    button: AppSemanticDark.primary,
-    onButton: AppSemanticDark.onPrimary,
-    buttonHovered: Color(0xFFC9D0F4),
-    onButtonHovered: AppSemanticDark.onPrimary,
-    buttonPressed: Color(0xFFC5CCF1),
-    onButtonPressed: AppSemanticDark.onPrimary,
-    buttonFocused: Color(0xFFC5CCF1),
-    onButtonFocused: AppSemanticDark.onPrimary,
-    buttonDisabled: Color(0xFF2D2D30),
-    onButtonDisabled: Color(0xFF69696B),
-    input: AppPrimitivesPaletteNeutral.v80,
-    onInput: AppSemanticDark.onSurface,
-    inputOutline: AppSemanticDark.outline,
-    inputHoveredOutline: AppSemanticDark.onSurface,
-    inputFocusedOutline: AppSemanticDark.primary,
-    inputErrorOutline: AppSemanticDark.error,
-    inputDisabled: Color(0xFF1B1B1E),
-    onInputDisabled: Color(0xFF69696B),
-    inputDisabledOutline: Color(0xFF2D2D30),
-    chip: AppSemanticDark.surface,
-    onChip: AppPrimitivesPaletteNeutral.v30,
-    chipOutline: AppPrimitivesPaletteNeutral.v70,
-    chipSelected: Color(0xFF414659),
-    onChipSelected: Color(0xFFDEE1F9),
+    outlinedButton: AppOutlinedButtonColors.dark,
+    checkbox: AppCheckboxColors.dark,
+    radio: AppRadioColors.dark,
+    toggle: AppSwitchColors.dark,
+    tab: AppTabColors.dark,
+    textButton: AppTextButtonColors.dark,
+    fab: AppFabColors.dark,
+    navigationBar: AppNavigationBarColors.dark,
+    sheet: AppSheetColors.dark,
+    dialog: AppDialogColors.dark,
+    snackbar: AppSnackbarColors.dark,
+    tooltip: AppTooltipColors.dark,
+    button: AppButtonColors.dark,
+    input: AppInputColors.dark,
+    chip: AppChipColors.dark,
   );
 
   /// Whether this is the light or the dark scheme.
@@ -708,230 +483,50 @@ final class AppColorScheme extends ThemeExtension<AppColorScheme> {
   /// Readable text on `success`.
   final Color onSuccess;
 
-  /// Material default: transparent.
-  final Color outlinedButton;
+  /// The colors of the `outlinedButton` component in each state.
+  final AppOutlinedButtonColors outlinedButton;
 
-  /// Material default: `primary`.
-  final Color onOutlinedButton;
+  /// The colors of the `checkbox` component in each state.
+  final AppCheckboxColors checkbox;
 
-  /// Material default: `outline`.
-  final Color outlinedButtonOutline;
+  /// The colors of the `radio` component in each state.
+  final AppRadioColors radio;
 
-  /// Material default: `onOutlinedButton` at 8% on nothing.
-  final Color outlinedButtonHovered;
+  /// The colors of the `switch` component in each state.
+  final AppSwitchColors toggle;
 
-  /// Material default: `onOutlinedButton`.
-  final Color onOutlinedButtonHovered;
+  /// The colors of the `tab` component in each state.
+  final AppTabColors tab;
 
-  /// Material default: `outlinedButtonOutline`.
-  final Color outlinedButtonHoveredOutline;
+  /// The colors of the `textButton` component in each state.
+  final AppTextButtonColors textButton;
 
-  /// Material default: `onOutlinedButton` at 10% on nothing.
-  final Color outlinedButtonPressed;
+  /// The colors of the `fab` component in each state.
+  final AppFabColors fab;
 
-  /// Material default: `onOutlinedButton`.
-  final Color onOutlinedButtonPressed;
+  /// The colors of the `navigationBar` component in each state.
+  final AppNavigationBarColors navigationBar;
 
-  /// Material default: `outlinedButtonOutline`.
-  final Color outlinedButtonPressedOutline;
+  /// The colors of the `sheet` component in each state.
+  final AppSheetColors sheet;
 
-  /// Material default: `onOutlinedButton` at 10% on nothing.
-  final Color outlinedButtonFocused;
+  /// The colors of the `dialog` component in each state.
+  final AppDialogColors dialog;
 
-  /// Material default: `onOutlinedButton`.
-  final Color onOutlinedButtonFocused;
+  /// The colors of the `snackbar` component in each state.
+  final AppSnackbarColors snackbar;
 
-  /// Material default: `outlinedButtonOutline`.
-  final Color outlinedButtonFocusedOutline;
+  /// The colors of the `tooltip` component in each state.
+  final AppTooltipColors tooltip;
 
-  /// Material default: transparent.
-  final Color outlinedButtonDisabled;
+  /// The colors of the `button` component in each state.
+  final AppButtonColors button;
 
-  /// Material default: `surface` with `onSurface` at 38%.
-  final Color onOutlinedButtonDisabled;
+  /// The colors of the `input` component in each state.
+  final AppInputColors input;
 
-  /// Material default: `surface` with `onSurface` at 12%.
-  final Color outlinedButtonDisabledOutline;
-
-  /// Material default: `primary`.
-  final Color checkboxSelected;
-
-  /// Material default: `onPrimary`.
-  final Color onCheckboxSelected;
-
-  /// Material default: `onSurfaceVariant`.
-  final Color checkboxOutline;
-
-  /// Material default: `checkboxOutline`.
-  final Color checkboxHoveredOutline;
-
-  /// Material default: `checkboxOutline`.
-  final Color checkboxFocusedOutline;
-
-  /// Material default: `error`.
-  final Color checkboxErrorOutline;
-
-  /// Material default: `surface` with `onSurface` at 38%.
-  final Color checkboxDisabled;
-
-  /// Material default: `surface` with `onSurface` at 38%.
-  final Color checkboxDisabledOutline;
-
-  /// Material default: `primary`.
-  final Color radioSelected;
-
-  /// Material default: `onSurfaceVariant`.
-  final Color radioOutline;
-
-  /// Material default: `radioOutline`.
-  final Color radioHoveredOutline;
-
-  /// Material default: `surface` with `onSurface` at 38%.
-  final Color radioDisabled;
-
-  /// Material default: `primary`.
-  final Color switchTrackSelected;
-
-  /// Material default: `onPrimary`.
-  final Color switchThumbSelected;
-
-  /// Material default: `surfaceContainerHighest`.
-  final Color switchTrack;
-
-  /// Material default: `outline`.
-  final Color switchThumb;
-
-  /// Material default: `outline`.
-  final Color switchOutline;
-
-  /// Material default: `surface` with `onSurface` at 12%.
-  final Color switchDisabledTrack;
-
-  /// Material default: `primary`.
-  final Color tabLabel;
-
-  /// Material default: `onSurfaceVariant`.
-  final Color tabUnselectedLabel;
-
-  /// Material default: `primary`.
-  final Color tabIndicator;
-
-  /// Material default: `primary`.
-  final Color onTextButton;
-
-  /// Material default: `onTextButton` at 8% on nothing.
-  final Color textButtonHovered;
-
-  /// Material default: `onTextButton` at 10% on nothing.
-  final Color textButtonPressed;
-
-  /// Material default: `surface` with `onSurface` at 38%.
-  final Color onTextButtonDisabled;
-
-  /// Material default: `primaryContainer`.
-  final Color fab;
-
-  /// Material default: `onPrimaryContainer`.
-  final Color onFab;
-
-  /// Material default: `surfaceContainer`.
-  final Color navigationBar;
-
-  /// Material default: `onSurfaceVariant`.
-  final Color onNavigationBar;
-
-  /// Material default: `surfaceContainerLow`.
-  final Color sheet;
-
-  /// Material default: `surfaceContainerHigh`.
-  final Color dialog;
-
-  /// Material default: `onSurface`.
-  final Color onDialog;
-
-  /// Material default: `inverseSurface`.
-  final Color snackbar;
-
-  /// Material default: `onInverseSurface`.
-  final Color onSnackbar;
-
-  /// Material default: `inverseSurface`.
-  final Color tooltip;
-
-  /// Material default: `onInverseSurface`.
-  final Color onTooltip;
-
-  /// Material default: `primary`.
-  final Color button;
-
-  /// Material default: `onPrimary`.
-  final Color onButton;
-
-  /// Material default: `button` with `onButton` at 8%.
-  final Color buttonHovered;
-
-  /// Material default: `onButton`.
-  final Color onButtonHovered;
-
-  /// Material default: `button` with `onButton` at 10%.
-  final Color buttonPressed;
-
-  /// Material default: `onButton`.
-  final Color onButtonPressed;
-
-  /// Material default: `button` with `onButton` at 10%.
-  final Color buttonFocused;
-
-  /// Material default: `onButton`.
-  final Color onButtonFocused;
-
-  /// Material default: `surface` with `onSurface` at 12%.
-  final Color buttonDisabled;
-
-  /// Material default: `surface` with `onSurface` at 38%.
-  final Color onButtonDisabled;
-
-  /// Material default: `surfaceContainerHighest`.
-  final Color input;
-
-  /// Material default: `onSurface`.
-  final Color onInput;
-
-  /// Material default: `outline`.
-  final Color inputOutline;
-
-  /// Material default: `onSurface`.
-  final Color inputHoveredOutline;
-
-  /// Material default: `primary`.
-  final Color inputFocusedOutline;
-
-  /// Material default: `error`.
-  final Color inputErrorOutline;
-
-  /// Material default: `surface` with `onSurface` at 4%.
-  final Color inputDisabled;
-
-  /// Material default: `surface` with `onSurface` at 38%.
-  final Color onInputDisabled;
-
-  /// Material default: `surface` with `onSurface` at 12%.
-  final Color inputDisabledOutline;
-
-  /// Material default: `surface`.
-  final Color chip;
-
-  /// Material default: `onSurfaceVariant`.
-  final Color onChip;
-
-  /// Material default: `outlineVariant`.
-  final Color chipOutline;
-
-  /// Material default: `secondaryContainer`.
-  final Color chipSelected;
-
-  /// Material default: `onSecondaryContainer`.
-  final Color onChipSelected;
+  /// The colors of the `chip` component in each state.
+  final AppChipColors chip;
 
   /// The Material [ColorScheme] with the same roles.
   ColorScheme toColorScheme() => ColorScheme(
@@ -1035,81 +630,21 @@ final class AppColorScheme extends ThemeExtension<AppColorScheme> {
     Color? surfaceTint,
     Color? success,
     Color? onSuccess,
-    Color? outlinedButton,
-    Color? onOutlinedButton,
-    Color? outlinedButtonOutline,
-    Color? outlinedButtonHovered,
-    Color? onOutlinedButtonHovered,
-    Color? outlinedButtonHoveredOutline,
-    Color? outlinedButtonPressed,
-    Color? onOutlinedButtonPressed,
-    Color? outlinedButtonPressedOutline,
-    Color? outlinedButtonFocused,
-    Color? onOutlinedButtonFocused,
-    Color? outlinedButtonFocusedOutline,
-    Color? outlinedButtonDisabled,
-    Color? onOutlinedButtonDisabled,
-    Color? outlinedButtonDisabledOutline,
-    Color? checkboxSelected,
-    Color? onCheckboxSelected,
-    Color? checkboxOutline,
-    Color? checkboxHoveredOutline,
-    Color? checkboxFocusedOutline,
-    Color? checkboxErrorOutline,
-    Color? checkboxDisabled,
-    Color? checkboxDisabledOutline,
-    Color? radioSelected,
-    Color? radioOutline,
-    Color? radioHoveredOutline,
-    Color? radioDisabled,
-    Color? switchTrackSelected,
-    Color? switchThumbSelected,
-    Color? switchTrack,
-    Color? switchThumb,
-    Color? switchOutline,
-    Color? switchDisabledTrack,
-    Color? tabLabel,
-    Color? tabUnselectedLabel,
-    Color? tabIndicator,
-    Color? onTextButton,
-    Color? textButtonHovered,
-    Color? textButtonPressed,
-    Color? onTextButtonDisabled,
-    Color? fab,
-    Color? onFab,
-    Color? navigationBar,
-    Color? onNavigationBar,
-    Color? sheet,
-    Color? dialog,
-    Color? onDialog,
-    Color? snackbar,
-    Color? onSnackbar,
-    Color? tooltip,
-    Color? onTooltip,
-    Color? button,
-    Color? onButton,
-    Color? buttonHovered,
-    Color? onButtonHovered,
-    Color? buttonPressed,
-    Color? onButtonPressed,
-    Color? buttonFocused,
-    Color? onButtonFocused,
-    Color? buttonDisabled,
-    Color? onButtonDisabled,
-    Color? input,
-    Color? onInput,
-    Color? inputOutline,
-    Color? inputHoveredOutline,
-    Color? inputFocusedOutline,
-    Color? inputErrorOutline,
-    Color? inputDisabled,
-    Color? onInputDisabled,
-    Color? inputDisabledOutline,
-    Color? chip,
-    Color? onChip,
-    Color? chipOutline,
-    Color? chipSelected,
-    Color? onChipSelected,
+    AppOutlinedButtonColors? outlinedButton,
+    AppCheckboxColors? checkbox,
+    AppRadioColors? radio,
+    AppSwitchColors? toggle,
+    AppTabColors? tab,
+    AppTextButtonColors? textButton,
+    AppFabColors? fab,
+    AppNavigationBarColors? navigationBar,
+    AppSheetColors? sheet,
+    AppDialogColors? dialog,
+    AppSnackbarColors? snackbar,
+    AppTooltipColors? tooltip,
+    AppButtonColors? button,
+    AppInputColors? input,
+    AppChipColors? chip,
   }) => AppColorScheme(
     brightness: brightness ?? this.brightness,
     primary: primary ?? this.primary,
@@ -1165,92 +700,20 @@ final class AppColorScheme extends ThemeExtension<AppColorScheme> {
     success: success ?? this.success,
     onSuccess: onSuccess ?? this.onSuccess,
     outlinedButton: outlinedButton ?? this.outlinedButton,
-    onOutlinedButton: onOutlinedButton ?? this.onOutlinedButton,
-    outlinedButtonOutline: outlinedButtonOutline ?? this.outlinedButtonOutline,
-    outlinedButtonHovered: outlinedButtonHovered ?? this.outlinedButtonHovered,
-    onOutlinedButtonHovered:
-        onOutlinedButtonHovered ?? this.onOutlinedButtonHovered,
-    outlinedButtonHoveredOutline:
-        outlinedButtonHoveredOutline ?? this.outlinedButtonHoveredOutline,
-    outlinedButtonPressed: outlinedButtonPressed ?? this.outlinedButtonPressed,
-    onOutlinedButtonPressed:
-        onOutlinedButtonPressed ?? this.onOutlinedButtonPressed,
-    outlinedButtonPressedOutline:
-        outlinedButtonPressedOutline ?? this.outlinedButtonPressedOutline,
-    outlinedButtonFocused: outlinedButtonFocused ?? this.outlinedButtonFocused,
-    onOutlinedButtonFocused:
-        onOutlinedButtonFocused ?? this.onOutlinedButtonFocused,
-    outlinedButtonFocusedOutline:
-        outlinedButtonFocusedOutline ?? this.outlinedButtonFocusedOutline,
-    outlinedButtonDisabled:
-        outlinedButtonDisabled ?? this.outlinedButtonDisabled,
-    onOutlinedButtonDisabled:
-        onOutlinedButtonDisabled ?? this.onOutlinedButtonDisabled,
-    outlinedButtonDisabledOutline:
-        outlinedButtonDisabledOutline ?? this.outlinedButtonDisabledOutline,
-    checkboxSelected: checkboxSelected ?? this.checkboxSelected,
-    onCheckboxSelected: onCheckboxSelected ?? this.onCheckboxSelected,
-    checkboxOutline: checkboxOutline ?? this.checkboxOutline,
-    checkboxHoveredOutline:
-        checkboxHoveredOutline ?? this.checkboxHoveredOutline,
-    checkboxFocusedOutline:
-        checkboxFocusedOutline ?? this.checkboxFocusedOutline,
-    checkboxErrorOutline: checkboxErrorOutline ?? this.checkboxErrorOutline,
-    checkboxDisabled: checkboxDisabled ?? this.checkboxDisabled,
-    checkboxDisabledOutline:
-        checkboxDisabledOutline ?? this.checkboxDisabledOutline,
-    radioSelected: radioSelected ?? this.radioSelected,
-    radioOutline: radioOutline ?? this.radioOutline,
-    radioHoveredOutline: radioHoveredOutline ?? this.radioHoveredOutline,
-    radioDisabled: radioDisabled ?? this.radioDisabled,
-    switchTrackSelected: switchTrackSelected ?? this.switchTrackSelected,
-    switchThumbSelected: switchThumbSelected ?? this.switchThumbSelected,
-    switchTrack: switchTrack ?? this.switchTrack,
-    switchThumb: switchThumb ?? this.switchThumb,
-    switchOutline: switchOutline ?? this.switchOutline,
-    switchDisabledTrack: switchDisabledTrack ?? this.switchDisabledTrack,
-    tabLabel: tabLabel ?? this.tabLabel,
-    tabUnselectedLabel: tabUnselectedLabel ?? this.tabUnselectedLabel,
-    tabIndicator: tabIndicator ?? this.tabIndicator,
-    onTextButton: onTextButton ?? this.onTextButton,
-    textButtonHovered: textButtonHovered ?? this.textButtonHovered,
-    textButtonPressed: textButtonPressed ?? this.textButtonPressed,
-    onTextButtonDisabled: onTextButtonDisabled ?? this.onTextButtonDisabled,
+    checkbox: checkbox ?? this.checkbox,
+    radio: radio ?? this.radio,
+    toggle: toggle ?? this.toggle,
+    tab: tab ?? this.tab,
+    textButton: textButton ?? this.textButton,
     fab: fab ?? this.fab,
-    onFab: onFab ?? this.onFab,
     navigationBar: navigationBar ?? this.navigationBar,
-    onNavigationBar: onNavigationBar ?? this.onNavigationBar,
     sheet: sheet ?? this.sheet,
     dialog: dialog ?? this.dialog,
-    onDialog: onDialog ?? this.onDialog,
     snackbar: snackbar ?? this.snackbar,
-    onSnackbar: onSnackbar ?? this.onSnackbar,
     tooltip: tooltip ?? this.tooltip,
-    onTooltip: onTooltip ?? this.onTooltip,
     button: button ?? this.button,
-    onButton: onButton ?? this.onButton,
-    buttonHovered: buttonHovered ?? this.buttonHovered,
-    onButtonHovered: onButtonHovered ?? this.onButtonHovered,
-    buttonPressed: buttonPressed ?? this.buttonPressed,
-    onButtonPressed: onButtonPressed ?? this.onButtonPressed,
-    buttonFocused: buttonFocused ?? this.buttonFocused,
-    onButtonFocused: onButtonFocused ?? this.onButtonFocused,
-    buttonDisabled: buttonDisabled ?? this.buttonDisabled,
-    onButtonDisabled: onButtonDisabled ?? this.onButtonDisabled,
     input: input ?? this.input,
-    onInput: onInput ?? this.onInput,
-    inputOutline: inputOutline ?? this.inputOutline,
-    inputHoveredOutline: inputHoveredOutline ?? this.inputHoveredOutline,
-    inputFocusedOutline: inputFocusedOutline ?? this.inputFocusedOutline,
-    inputErrorOutline: inputErrorOutline ?? this.inputErrorOutline,
-    inputDisabled: inputDisabled ?? this.inputDisabled,
-    onInputDisabled: onInputDisabled ?? this.onInputDisabled,
-    inputDisabledOutline: inputDisabledOutline ?? this.inputDisabledOutline,
     chip: chip ?? this.chip,
-    onChip: onChip ?? this.onChip,
-    chipOutline: chipOutline ?? this.chipOutline,
-    chipSelected: chipSelected ?? this.chipSelected,
-    onChipSelected: onChipSelected ?? this.onChipSelected,
   );
 
   @override
@@ -1386,217 +849,29 @@ final class AppColorScheme extends ThemeExtension<AppColorScheme> {
       surfaceTint: Color.lerp(surfaceTint, other.surfaceTint, t)!,
       success: Color.lerp(success, other.success, t)!,
       onSuccess: Color.lerp(onSuccess, other.onSuccess, t)!,
-      outlinedButton: Color.lerp(outlinedButton, other.outlinedButton, t)!,
-      onOutlinedButton: Color.lerp(
-        onOutlinedButton,
-        other.onOutlinedButton,
+      outlinedButton: AppOutlinedButtonColors.lerp(
+        outlinedButton,
+        other.outlinedButton,
         t,
-      )!,
-      outlinedButtonOutline: Color.lerp(
-        outlinedButtonOutline,
-        other.outlinedButtonOutline,
+      ),
+      checkbox: AppCheckboxColors.lerp(checkbox, other.checkbox, t),
+      radio: AppRadioColors.lerp(radio, other.radio, t),
+      toggle: AppSwitchColors.lerp(toggle, other.toggle, t),
+      tab: AppTabColors.lerp(tab, other.tab, t),
+      textButton: AppTextButtonColors.lerp(textButton, other.textButton, t),
+      fab: AppFabColors.lerp(fab, other.fab, t),
+      navigationBar: AppNavigationBarColors.lerp(
+        navigationBar,
+        other.navigationBar,
         t,
-      )!,
-      outlinedButtonHovered: Color.lerp(
-        outlinedButtonHovered,
-        other.outlinedButtonHovered,
-        t,
-      )!,
-      onOutlinedButtonHovered: Color.lerp(
-        onOutlinedButtonHovered,
-        other.onOutlinedButtonHovered,
-        t,
-      )!,
-      outlinedButtonHoveredOutline: Color.lerp(
-        outlinedButtonHoveredOutline,
-        other.outlinedButtonHoveredOutline,
-        t,
-      )!,
-      outlinedButtonPressed: Color.lerp(
-        outlinedButtonPressed,
-        other.outlinedButtonPressed,
-        t,
-      )!,
-      onOutlinedButtonPressed: Color.lerp(
-        onOutlinedButtonPressed,
-        other.onOutlinedButtonPressed,
-        t,
-      )!,
-      outlinedButtonPressedOutline: Color.lerp(
-        outlinedButtonPressedOutline,
-        other.outlinedButtonPressedOutline,
-        t,
-      )!,
-      outlinedButtonFocused: Color.lerp(
-        outlinedButtonFocused,
-        other.outlinedButtonFocused,
-        t,
-      )!,
-      onOutlinedButtonFocused: Color.lerp(
-        onOutlinedButtonFocused,
-        other.onOutlinedButtonFocused,
-        t,
-      )!,
-      outlinedButtonFocusedOutline: Color.lerp(
-        outlinedButtonFocusedOutline,
-        other.outlinedButtonFocusedOutline,
-        t,
-      )!,
-      outlinedButtonDisabled: Color.lerp(
-        outlinedButtonDisabled,
-        other.outlinedButtonDisabled,
-        t,
-      )!,
-      onOutlinedButtonDisabled: Color.lerp(
-        onOutlinedButtonDisabled,
-        other.onOutlinedButtonDisabled,
-        t,
-      )!,
-      outlinedButtonDisabledOutline: Color.lerp(
-        outlinedButtonDisabledOutline,
-        other.outlinedButtonDisabledOutline,
-        t,
-      )!,
-      checkboxSelected: Color.lerp(
-        checkboxSelected,
-        other.checkboxSelected,
-        t,
-      )!,
-      onCheckboxSelected: Color.lerp(
-        onCheckboxSelected,
-        other.onCheckboxSelected,
-        t,
-      )!,
-      checkboxOutline: Color.lerp(checkboxOutline, other.checkboxOutline, t)!,
-      checkboxHoveredOutline: Color.lerp(
-        checkboxHoveredOutline,
-        other.checkboxHoveredOutline,
-        t,
-      )!,
-      checkboxFocusedOutline: Color.lerp(
-        checkboxFocusedOutline,
-        other.checkboxFocusedOutline,
-        t,
-      )!,
-      checkboxErrorOutline: Color.lerp(
-        checkboxErrorOutline,
-        other.checkboxErrorOutline,
-        t,
-      )!,
-      checkboxDisabled: Color.lerp(
-        checkboxDisabled,
-        other.checkboxDisabled,
-        t,
-      )!,
-      checkboxDisabledOutline: Color.lerp(
-        checkboxDisabledOutline,
-        other.checkboxDisabledOutline,
-        t,
-      )!,
-      radioSelected: Color.lerp(radioSelected, other.radioSelected, t)!,
-      radioOutline: Color.lerp(radioOutline, other.radioOutline, t)!,
-      radioHoveredOutline: Color.lerp(
-        radioHoveredOutline,
-        other.radioHoveredOutline,
-        t,
-      )!,
-      radioDisabled: Color.lerp(radioDisabled, other.radioDisabled, t)!,
-      switchTrackSelected: Color.lerp(
-        switchTrackSelected,
-        other.switchTrackSelected,
-        t,
-      )!,
-      switchThumbSelected: Color.lerp(
-        switchThumbSelected,
-        other.switchThumbSelected,
-        t,
-      )!,
-      switchTrack: Color.lerp(switchTrack, other.switchTrack, t)!,
-      switchThumb: Color.lerp(switchThumb, other.switchThumb, t)!,
-      switchOutline: Color.lerp(switchOutline, other.switchOutline, t)!,
-      switchDisabledTrack: Color.lerp(
-        switchDisabledTrack,
-        other.switchDisabledTrack,
-        t,
-      )!,
-      tabLabel: Color.lerp(tabLabel, other.tabLabel, t)!,
-      tabUnselectedLabel: Color.lerp(
-        tabUnselectedLabel,
-        other.tabUnselectedLabel,
-        t,
-      )!,
-      tabIndicator: Color.lerp(tabIndicator, other.tabIndicator, t)!,
-      onTextButton: Color.lerp(onTextButton, other.onTextButton, t)!,
-      textButtonHovered: Color.lerp(
-        textButtonHovered,
-        other.textButtonHovered,
-        t,
-      )!,
-      textButtonPressed: Color.lerp(
-        textButtonPressed,
-        other.textButtonPressed,
-        t,
-      )!,
-      onTextButtonDisabled: Color.lerp(
-        onTextButtonDisabled,
-        other.onTextButtonDisabled,
-        t,
-      )!,
-      fab: Color.lerp(fab, other.fab, t)!,
-      onFab: Color.lerp(onFab, other.onFab, t)!,
-      navigationBar: Color.lerp(navigationBar, other.navigationBar, t)!,
-      onNavigationBar: Color.lerp(onNavigationBar, other.onNavigationBar, t)!,
-      sheet: Color.lerp(sheet, other.sheet, t)!,
-      dialog: Color.lerp(dialog, other.dialog, t)!,
-      onDialog: Color.lerp(onDialog, other.onDialog, t)!,
-      snackbar: Color.lerp(snackbar, other.snackbar, t)!,
-      onSnackbar: Color.lerp(onSnackbar, other.onSnackbar, t)!,
-      tooltip: Color.lerp(tooltip, other.tooltip, t)!,
-      onTooltip: Color.lerp(onTooltip, other.onTooltip, t)!,
-      button: Color.lerp(button, other.button, t)!,
-      onButton: Color.lerp(onButton, other.onButton, t)!,
-      buttonHovered: Color.lerp(buttonHovered, other.buttonHovered, t)!,
-      onButtonHovered: Color.lerp(onButtonHovered, other.onButtonHovered, t)!,
-      buttonPressed: Color.lerp(buttonPressed, other.buttonPressed, t)!,
-      onButtonPressed: Color.lerp(onButtonPressed, other.onButtonPressed, t)!,
-      buttonFocused: Color.lerp(buttonFocused, other.buttonFocused, t)!,
-      onButtonFocused: Color.lerp(onButtonFocused, other.onButtonFocused, t)!,
-      buttonDisabled: Color.lerp(buttonDisabled, other.buttonDisabled, t)!,
-      onButtonDisabled: Color.lerp(
-        onButtonDisabled,
-        other.onButtonDisabled,
-        t,
-      )!,
-      input: Color.lerp(input, other.input, t)!,
-      onInput: Color.lerp(onInput, other.onInput, t)!,
-      inputOutline: Color.lerp(inputOutline, other.inputOutline, t)!,
-      inputHoveredOutline: Color.lerp(
-        inputHoveredOutline,
-        other.inputHoveredOutline,
-        t,
-      )!,
-      inputFocusedOutline: Color.lerp(
-        inputFocusedOutline,
-        other.inputFocusedOutline,
-        t,
-      )!,
-      inputErrorOutline: Color.lerp(
-        inputErrorOutline,
-        other.inputErrorOutline,
-        t,
-      )!,
-      inputDisabled: Color.lerp(inputDisabled, other.inputDisabled, t)!,
-      onInputDisabled: Color.lerp(onInputDisabled, other.onInputDisabled, t)!,
-      inputDisabledOutline: Color.lerp(
-        inputDisabledOutline,
-        other.inputDisabledOutline,
-        t,
-      )!,
-      chip: Color.lerp(chip, other.chip, t)!,
-      onChip: Color.lerp(onChip, other.onChip, t)!,
-      chipOutline: Color.lerp(chipOutline, other.chipOutline, t)!,
-      chipSelected: Color.lerp(chipSelected, other.chipSelected, t)!,
-      onChipSelected: Color.lerp(onChipSelected, other.onChipSelected, t)!,
+      ),
+      sheet: AppSheetColors.lerp(sheet, other.sheet, t),
+      dialog: AppDialogColors.lerp(dialog, other.dialog, t),
+      snackbar: AppSnackbarColors.lerp(snackbar, other.snackbar, t),
+      tooltip: AppTooltipColors.lerp(tooltip, other.tooltip, t),
+      button: AppButtonColors.lerp(button, other.button, t),
+      input: AppInputColors.lerp(input, other.input, t),
+      chip: AppChipColors.lerp(chip, other.chip, t),
     );
   }
 }

@@ -59,8 +59,11 @@ final class CodegenContext {
   /// Name of the class with component dimensions.
   String get componentsClass => '${prefix}Components';
 
-  /// Name of the component themes class.
-  String get componentThemesClass => '${prefix}ComponentThemes';
+  /// Name of the theme class of the component [name], as `AppChipTheme`.
+  String themeClass(String name) => '$prefix${name}Theme';
+
+  /// Name of the class that picks the color of a set of widget states.
+  String get statePickerClass => '${prefix}StateColor';
 
   /// Name of the icon asset class.
   String get iconsClass => '${prefix}Icons';

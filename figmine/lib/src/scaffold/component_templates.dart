@@ -10,7 +10,7 @@ abstract final class ComponentTemplates {
   static Map<String, String> render(ScaffoldContext c) {
     final s = c.schemeClass;
     final m = c.componentsClass;
-    final t = c.componentThemesClass;
+    final t = c.prefix;
     final head = c.imports([c.material, c.tokens]);
     return {
       'app_bar_theme.dart':
@@ -47,7 +47,7 @@ $head
 /// Chip styling built from the design system: resting and selected colors
 /// from Figma.
 ChipThemeData createChipTheme($s colors, TextTheme textTheme) =>
-    $t.chip(colors, textTheme);
+    ${t}ChipTheme.of(colors, textTheme);
 ''',
       'filled_button_theme.dart':
           '''
@@ -57,7 +57,7 @@ $head
 FilledButtonThemeData createFilledButtonTheme(
   $s colors,
   TextTheme textTheme,
-) => $t.filledButton(colors, textTheme);
+) => ${t}FilledButtonTheme.of(colors, textTheme);
 ''',
       'input_decoration_theme.dart':
           '''
@@ -65,7 +65,7 @@ $head
 /// Text field styling built from the design system: outlines and fills
 /// for each state from Figma.
 InputDecorationThemeData createInputDecorationTheme($s colors) =>
-    $t.inputDecoration(colors);
+    ${t}InputDecorationTheme.of(colors);
 ''',
       'outlined_button_theme.dart':
           '''
@@ -75,7 +75,7 @@ $head
 OutlinedButtonThemeData createOutlinedButtonTheme(
   $s colors,
   TextTheme textTheme,
-) => $t.outlinedButton(colors, textTheme);
+) => ${t}OutlinedButtonTheme.of(colors, textTheme);
 ''',
     };
   }
