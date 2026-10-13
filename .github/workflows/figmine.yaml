@@ -79,7 +79,7 @@ jobs:
         run: dart run figmine preview --output "$RUNNER_TEMP/preview"
 
       - name: Upload the theme preview
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: example-theme-preview
           path: ${{ runner.temp }}/preview
